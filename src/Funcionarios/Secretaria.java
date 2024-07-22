@@ -1,29 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Funcionarios;
 import Dados.Paciente;
 import Dados.Consulta;
-/**
- *
- * @author home
- */
+import java.util.ArrayList;
+
 public class Secretaria {
     private String nome;
-    //LISTA DE PACIENTES
-    private Paciente paciente;
-    private Consulta consulta;
+    private ArrayList<Paciente> pacientes;
+    /* ver se dá pra tirar as listas de pacientes e consultas daqui, 
+    já que elas são criadas somente na main */
+    private ArrayList<Consulta> consultas;
     
     public Secretaria() {  
     }
     
-    public void cadastrarConsulta(Paciente paciente) {
-        this.consulta.setPaciente(paciente);
+    public void cadastrarConsulta(Consulta consulta) {
+        this.consultas.add(consulta);
     }
     
-    public void cadastrarPaciente(Paciente paciente) {
-        this.paciente = paciente; //LISTA DE PACIENTES + PACIENTE
+    public void cadastrarPaciente(Paciente paciente, ArrayList<Paciente> listaPacientes) {
+        listaPacientes.add(paciente);
     }
     
     public void atualizaPacienteNome(Paciente paciente, String nome) {
@@ -56,6 +51,5 @@ public class Secretaria {
     
     public void removerPaciente(Paciente paciente) {
      //LISTA DE PACIENTES - PACIENTE   
-    }
-    
+    }   
 }
