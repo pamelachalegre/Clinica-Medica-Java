@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Dados;
 
-/**
- *
- * @author home
- */
+import java.util.ArrayList;
+
 public class Paciente {
     private String nome;
     private String cpf;
@@ -15,22 +9,24 @@ public class Paciente {
     private char sexo;
     private int idade;
     
-    private String dataNascimento; //data de nascimento
+    private String dataNascimento;
     private String endereco;
     private String telefone;
-    private String email; //mais informações (telefone / email)
+    private String email;
     
     private boolean convenio; // true = convenio | false = particular
-    /*private String numConvenio; */
     private Prontuario prontuario;
     private boolean fumar;
     private boolean beber;
     private boolean colesterol;
     private boolean diabete;
     private boolean doencaCardio;
-    private String cirurgias; // LISTAAAAAAAAAAAAAA
-    private String alergias;
-
+    private ArrayList<String> cirurgias;
+    // documentação: escolhemos o ArrayList porque usa menos memória, mais eficiente,
+    // já que nosso sistema não vai armazenar tantos dados
+    // LinkedList é mais custoso devido à criação dos nós -> por isso não escolhemos
+    private ArrayList<String> alergias; 
+ 
     public Paciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio) {
         this.nome = nome;
         this.cpf = cpf;
@@ -61,7 +57,6 @@ public class Paciente {
     public String getEndereco() {
         return endereco;
     }
-
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
@@ -97,7 +92,6 @@ public class Paciente {
     public String getTelefone() {
         return telefone;
     }
-
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
@@ -105,7 +99,6 @@ public class Paciente {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -117,7 +110,6 @@ public class Paciente {
         this.convenio = convenio;
     }
 
-    
     public Prontuario getProntuario() {
         return prontuario;
     }
@@ -160,18 +152,17 @@ public class Paciente {
         this.doencaCardio = doencaCardio;
     }
 
-    public String getCirurgias() {
+    public ArrayList<String> getCirurgias() {
         return cirurgias;
     }
-    public void setCirurgias(String cirurgias) {
+    public void setCirurgias(ArrayList<String> cirurgias) {
         this.cirurgias = cirurgias;
     }
 
-    public String getAlergias() {
+    public ArrayList<String> getAlergias() {
         return alergias;
     }
-    public void setAlergias(String alergias) {
+    public void setAlergias(ArrayList<String> alergias) {
         this.alergias = alergias;
-    }
-    
+    }   
 }
