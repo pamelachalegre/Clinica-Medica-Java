@@ -1,24 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Execução;
 import Funcionarios.Medico;
 import Funcionarios.Secretaria;
 import Dados.Paciente;
-/**
- *
- * @author guijo
- */
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-        Medico dr_rebola = new Medico();
-        Paciente rebel = new Paciente("NOME", "CPF", "RG", 'S', 20, "NASC", "END", "TEL", "EMAIL", true);
+        Medico dra_Pamela = new Medico();
+        Medico dra_Poli = new Medico();
+        Medico dr_Guilherme = new Medico();
         
-        dr_rebola.cadastrarPaciente(rebel, true, false, true, false);
+        Paciente p_AnaPaula = new Paciente("Ana Paula", "111.222.333-44", "11.222.333-4", 'F', 18, "03/09/2005", "Avenida Maringá, 123", "44 99999-9999", "usuario@exemplo.com", true);
+
+        Paciente anaPaula = new Paciente("Ana Paula", "111.222.333-44", "11.222.333-4", 'F', 18, "03/09/2005", "Avenida Maringá, 123", "44 99999-9999", "usuario@exemplo.com", true);
+
+        ArrayList<Paciente> listaPacientes = new ArrayList();
+        
+        ArrayList<String> cirurgias = new ArrayList();        
+        cirurgias.add("Cirurgia1");
+        cirurgias.add("Cirurgia2");
+        
+        ArrayList<String> alergias = new ArrayList();
+        alergias.add("Alergia1");
+        alergias.add("Alergia2");
+        
+        dra_Pamela.cadastrarPaciente(p_AnaPaula, true, false, true, false, false, cirurgias, alergias);
         
         Secretaria sec = new Secretaria();
         
-        sec.cadastrarPaciente(rebel);
+        sec.cadastrarPaciente(p_AnaPaula, listaPacientes);
+        
+        // mostrar as cirurgias do paciente
+        
     }
 }
