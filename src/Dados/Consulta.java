@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Dados;
 import Funcionarios.Medico;
-/**
- *
- * @author home
- */
+
 public class Consulta {
     private String data;
     private String horario;
@@ -49,4 +43,7 @@ public class Consulta {
     public void setTipoConsulta(char tipoConsulta) {
         this.tipoConsulta = tipoConsulta;
     }
+    
+    // método construtor
+    public Consulta(){}
 }
