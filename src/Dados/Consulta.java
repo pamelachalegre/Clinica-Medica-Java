@@ -1,20 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Dados;
 import Funcionarios.Medico;
-/**
- *
- * @author home
- */
+
 public class Consulta {
+    /*
+    É um POJO com dados de uma consulta a ser realizada. Este objeto é manipulado pelo objeto Secretária no main, que
+    pode definir consultas, colocá-las em uma lista de consultas ou removê-las.
+    */
     private String data;
     private String horario;
     private Medico medico;
     private Paciente paciente;
     private char tipoConsulta;
 
+    //MÉTODO CONSTRUTOR
+    public Consulta(){}
+    
     public String getData() {
         return data;
     }

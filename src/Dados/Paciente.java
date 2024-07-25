@@ -1,47 +1,44 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Dados;
+import java.util.ArrayList;
 
-/**
- *
- * @author home
- */
 public class Paciente {
+    /**
+     * Definido como um POJO, possui diversos atributos que são modificados por meio de sets e gets, outras ações sobre
+     * esses objetos podem ser efetuadas por outros tipos de objeto com métodos que acessam os sets e gets deste.
+     * A utilização de listas para os atriutos de Alergias e Cirurgias se deve a quantidade varávele e mutável desses.
+     * Por esse motivo, utilizamos o Arraylist, que permite uma alocação de memória dinâmica, mas de menor ocupação da memória.
+    */
+    //DADOS CADASTRAIS:
     private String nome;
     private String cpf;
     private String rg;
     private char sexo;
     private int idade;
-    
-    private String dataNascimento; //data de nascimento
+    private String dataNascimento;
     private String endereco;
     private String telefone;
-    private String email; //mais informações (telefone / email)
+    private String email;
     
     private boolean convenio; // true = convenio | false = particular
-    /*private String numConvenio; */
     private Prontuario prontuario;
+    
+    //DADOS DE SAÚDE:
     private boolean fumar;
     private boolean beber;
     private boolean colesterol;
     private boolean diabete;
     private boolean doencaCardio;
-    private String cirurgias; // LISTAAAAAAAAAAAAAA
-    private String alergias;
+    private ArrayList<String> cirurgias;
+    private ArrayList<String> alergias; 
 
-    public Paciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio) {
+    //MÉTODO CONSTRUTOR:
+    public Paciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
         this.sexo = sexo;
         this.idade = idade;
         this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.email = email;
-        this.convenio = convenio;
     }
 
     public String getNome() {
@@ -61,7 +58,6 @@ public class Paciente {
     public String getEndereco() {
         return endereco;
     }
-
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
@@ -97,7 +93,6 @@ public class Paciente {
     public String getTelefone() {
         return telefone;
     }
-
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
@@ -105,7 +100,6 @@ public class Paciente {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -117,7 +111,6 @@ public class Paciente {
         this.convenio = convenio;
     }
 
-    
     public Prontuario getProntuario() {
         return prontuario;
     }
@@ -159,19 +152,27 @@ public class Paciente {
     public void setDoencaCardio(boolean doencaCardio) {
         this.doencaCardio = doencaCardio;
     }
-
-    public String getCirurgias() {
+    /*ARRAYLIST -> POLIMORFISMO DE SOBRECARGA
+    Por conta da natureza atualizável da lista de cirurgias e de alergias, utilizamos o polimorfismo de sobrecarga para
+    atualização de: (1) mudar toda a lista; (2) adicionar um novo elemento à lista existente.
+    */
+    public ArrayList<String> getCirurgias() {
         return cirurgias;
     }
-    public void setCirurgias(String cirurgias) {
-        this.cirurgias = cirurgias;
+    public void setCirurgias(ArrayList<String> cirurgias) {
+        this.cirurgias = cirurgias; //DEFINE UMA LISTA DE CIRURGIAS.
     }
-
-    public String getAlergias() {
-        return alergias;
-    }
-    public void setAlergias(String alergias) {
-        this.alergias = alergias;
+    public void setCirurgias(String cirurgia) {
+        this.cirurgias.add(cirurgia); //ADICIONA UMA NOVA CIRURGIA A LISTA.
     }
     
+    public ArrayList<String> getAlergias() {
+        return alergias;
+    }
+    public void setAlergias(ArrayList<String> alergias) {
+        this.alergias = alergias; //DEFINE UMA LISTA DE ALERGIAS.
+    }
+    public void setAlergias(String alergia) {
+        this.alergias.add(alergia); //ADICIONA UMA ALERGIA A LISTA.
+    }
 }
