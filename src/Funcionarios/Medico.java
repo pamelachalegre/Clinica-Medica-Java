@@ -77,7 +77,7 @@ public class Medico {
     }
     public void atualizaPacienteCirurgias(Paciente paciente, String cirurgia) {
         //adiciona uma nova cirurgia
-        paciente.setCirurgias(cirurgia);
+        paciente.getCirurgias().add(cirurgia);
     }
     public void atualizaPacienteAlergia(Paciente paciente, ArrayList<String> alergias) { 
         //define as alergias do paciente
@@ -85,6 +85,6 @@ public class Medico {
     }
     public void atualizaPacienteAlergia(Paciente paciente, String alergia) { 
         //define as alergias do paciente
-        paciente.setAlergias(alergia);
+        paciente.getAlergias().add(alergia);
     }
-}
+} 

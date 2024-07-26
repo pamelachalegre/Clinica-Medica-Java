@@ -1,6 +1,7 @@
 package Funcionarios;
 import Dados.Paciente;
 import Dados.Consulta;
+import GerenciadorMensagens.GerenciadorMensagens;
 import java.util.ArrayList;
 
 public class Secretaria {
@@ -14,8 +15,9 @@ public class Secretaria {
         this.nome = nome;
     }
     
-    public void cadastrarConsulta(Consulta consulta, ArrayList<Consulta> listaConsultas) {
+    public void cadastrarConsulta(ArrayList<Consulta> listaConsultas, String data, String horario, Medico medico, Paciente paciente, char tipo) {
         //ADICIONA UMA NOVA CONSULTA A LISTA DE CONSULTAS
+        Consulta consulta = new Consulta(data, horario, medico, paciente, tipo);
         listaConsultas.add(consulta);
     }
     
@@ -55,4 +57,9 @@ public class Secretaria {
         //RETIRA O PACIENTE DA LISTA DE PACIENTES
         listaPacientes.remove(paciente);
     }   
+    
+    public void gerenciarMensagens(ArrayList<Consulta> listaConsultas) {
+        GerenciadorMensagens enviar = new GerenciadorMensagens();
+        enviar.enviarMensagem(listaConsultas);
+    }
 }

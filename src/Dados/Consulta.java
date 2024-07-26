@@ -10,11 +10,16 @@ public class Consulta {
     private String horario;
     private Medico medico;
     private Paciente paciente;
-    private char tipoConsulta;
+    private char tipoConsulta; // R = retorno; N = normal
 
     //MÉTODO CONSTRUTOR
-    public Consulta(){}
-    
+    public Consulta(String data, String horario, Medico medico, Paciente paciente, char tipoConsulta){this.data = data;
+        this.horario = horario;
+        this.medico = medico;
+        this.paciente = paciente;
+        this.tipoConsulta = tipoConsulta;
+}
+
     public String getData() {
         return data;
     }
