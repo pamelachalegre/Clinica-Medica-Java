@@ -1,4 +1,4 @@
-package GerenciadorMensagens;
+package Geradores;
 import java.util.ArrayList;
 import Dados.Consulta;
 

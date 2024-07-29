@@ -3,7 +3,7 @@ import Funcionarios.Medico;
 import Funcionarios.Secretaria;
 import Dados.Paciente;
 import Dados.Consulta;
-import GerenciadorMensagens.GerenciadorMensagens;
+import Geradores.GerenciadorMensagens;
 import java.util.ArrayList;
 
 public class Main {
@@ -32,5 +32,6 @@ public class Main {
         
         sec.gerenciarMensagens(listaConsultas);
         
+        dra_Pamela.criarReceita(dra_Pamela, p_Carol, "paracetamol", (float) 1.5, "oral", 5);
     }
 }

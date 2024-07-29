@@ -1,6 +1,9 @@
 package Funcionarios;
 import Dados.Paciente;
-import Dados.Relatorio;
+import Dados.Prontuario;
+import Geradores.Atestado;
+import Geradores.DeclaracaoAcompanhamento;
+import Geradores.Receita;
 import java.util.ArrayList;
 
 public class Medico {
@@ -11,9 +14,6 @@ public class Medico {
     //DADOS PESSOAIS
     private String nome;
     private String crm;
-    
-    private Relatorio novoRelatorio;
-    private ArrayList<Relatorio> relatoriosMes; //LISTA DE RELATÓRIOS MENSAIS.
     
     //MÉTODOS CONSTRUTORES:
     public Medico() {}
@@ -34,10 +34,6 @@ public class Medico {
     }
     public void setCrm(String crm) {
         this.crm = crm;
-    }
-
-    public void fazerRelatorio(String receita, String atestado, String acompanhamento, int clientes) {
-        novoRelatorio = new Relatorio(receita, atestado, acompanhamento, clientes);
     }
     
     public void cadastrarDadosPaciente(Paciente paciente, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean cardio, ArrayList<String> cirurgias, ArrayList<String> alergias) {
@@ -86,5 +82,21 @@ public class Medico {
     public void atualizaPacienteAlergia(Paciente paciente, String alergia) { 
         //define as alergias do paciente
         paciente.getAlergias().add(alergia);
+    }
+    
+    // METODOS DOS RELATORIOS:
+    public void criarReceita(Medico medico, Paciente paciente, String remedio, float dosagem, String modoUso, int vezesDia) {
+        Receita receita = new Receita(medico, paciente, remedio, dosagem, modoUso, vezesDia);
+        receita.imprimeReceita();
+    }
+    
+    public void criarEImprimirAtestado(Medico medico, Paciente paciente, Prontuario prontuario, int diasAfastamento, String dataInicio) {
+        Atestado atestado = new Atestado(medico, paciente, prontuario, diasAfastamento, dataInicio);
+        atestado.imprimeAtestado();
+    }
+    
+    public void gerarDeclaracao(Medico medico, Paciente paciente, Prontuario prontuario, String dataAcompanhamento, String parentescoAcompanhante, String nomeAcompanhante) {
+        DeclaracaoAcompanhamento declaracao = new DeclaracaoAcompanhamento(medico, paciente, prontuario, dataAcompanhamento, parentescoAcompanhante, nomeAcompanhante);
+        declaracao.imprimeDeclaracao();
     }
 } 

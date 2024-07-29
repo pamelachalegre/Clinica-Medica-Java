@@ -1,7 +1,7 @@
 package Funcionarios;
 import Dados.Paciente;
 import Dados.Consulta;
-import GerenciadorMensagens.GerenciadorMensagens;
+import Geradores.GerenciadorMensagens;
 import java.util.ArrayList;
 
 public class Secretaria {

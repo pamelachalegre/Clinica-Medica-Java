@@ -4,13 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Dados/Paciente.java</file>
+            <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Geradores/Receita.java</file>
             <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Funcionarios/Secretaria.java</file>
-            <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/GerenciadorMensagens/GerenciadorMensagens.java</file>
+            <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Geradores/ClientesAtendidos.java</file>
             <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Funcionarios/Medico.java</file>
             <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Execução/Main.java</file>
-            <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Dados/Relatorio.java</file>
+            <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Geradores/GerenciadorMensagens.java</file>
             <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Dados/Consulta.java</file>
             <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Dados/Prontuario.java</file>
+            <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Geradores/Atestado.java</file>
+            <file>file:/C:/Users/chale/OneDrive/Área%20de%20Trabalho/faculdade/ClinicaMedica/src/Geradores/DeclaracaoAcompanhamento.java</file>
         </group>
     </open-files>
 </project-private>
