@@ -32,13 +32,17 @@ public class Paciente {
     private ArrayList<String> alergias; 
 
     //MÉTODO CONSTRUTOR:
-    public Paciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento) {
+    public Paciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
         this.sexo = sexo;
         this.idade = idade;
         this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.email = email;
+        this.convenio = convenio;
     }
 
     public String getNome() {

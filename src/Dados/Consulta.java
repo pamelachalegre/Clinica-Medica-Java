@@ -6,6 +6,7 @@ public class Consulta {
     É um POJO com dados de uma consulta a ser realizada. Este objeto é manipulado pelo objeto Secretária no main, que
     pode definir consultas, colocá-las em uma lista de consultas ou removê-las.
     */
+    private String id;
     private String data;
     private String horario;
     private Medico medico;
@@ -14,11 +15,20 @@ public class Consulta {
 
     //MÉTODO CONSTRUTOR
     public Consulta(String data, String horario, Medico medico, Paciente paciente, char tipoConsulta){this.data = data;
+        this.id = data + horario + medico.getCrm();
         this.horario = horario;
         this.medico = medico;
         this.paciente = paciente;
         this.tipoConsulta = tipoConsulta;
 }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getData() {
         return data;
