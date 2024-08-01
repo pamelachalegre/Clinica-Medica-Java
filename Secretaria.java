@@ -1,6 +1,7 @@
 package Funcionarios;
 import Dados.Paciente;
 import Dados.Consulta;
+import Execução.Busca;
 import GerenciadorMensagens.GerenciadorMensagens;
 import java.util.ArrayList;
 
@@ -25,7 +26,26 @@ public class Secretaria {
         listaConsultas.add(consulta);
     }
     
-    public void cadastrarPaciente(String nome, String cpf, String rg, String sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio, ArrayList<Paciente> listaPacientes) {
+    public void atualizarConsultaDataHora(Consulta consulta, String data, String hora) {
+        consulta.setData(data);
+        consulta.setHorario(hora);
+    }
+    
+    public void removerConsulta(ArrayList<Consulta> listaConsultas, int indice) {
+        listaConsultas.remove(indice);
+        System.out.println("CONSULTA CANCELADA");
+    }
+    
+    
+    /*public void atualizarConsultaMedico(Consulta consulta, Medico medico) {
+        consulta.setMedico(medico);
+    }
+    
+    public void atualizarConsultaPaciente(Consulta consulta, Paciente paciente) {
+        consulta.setPaciente(paciente);
+    }
+    */
+    public void cadastrarPaciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio, ArrayList<Paciente> listaPacientes) {
         //CRIA UM PACIENTE E O ADICIONA NA LISTA DE PACIENTES
         Paciente paciente = new Paciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio);
         listaPacientes.add(paciente);
@@ -35,7 +55,7 @@ public class Secretaria {
     public void atualizarPacienteNome(Paciente paciente, String nome) {
         paciente.setNome(nome);
     }
-    public void atualizarPacienteSexo(Paciente paciente, String sexo) {
+    public void atualizarPacienteSexo(Paciente paciente, char sexo) {
         paciente.setSexo(sexo);
     }
     public void atualizarPacienteIdade(Paciente paciente, int idade) {
@@ -56,17 +76,13 @@ public class Secretaria {
 
     public void removerPaciente(String identificador, ArrayList<Paciente> listaPacientes) {
         //RETIRA O PACIENTE DE IDENTIFICADOR DA LISTA DE PACIENTES
-        int i = 0;
-        while((listaPacientes.get(i).getCpf().equals(identificador))&&(i < listaPacientes.size())){
-            i++;
-        }
-        if(i < listaPacientes.size()) {
+        Busca busca = new Busca();
+        int i = busca.acharCPF(identificador, listaPacientes);
+        if(i != -1) {
             listaPacientes.remove(i);
-            System.out.println("Paciente removido!");
-        } else {
-            System.out.println("Paciente não encontrado!");
+            System.out.println("PACIENTE REMOVIDO!");
         }
-    }   
+    }
     
     public void gerenciarMensagens(ArrayList<Consulta> listaConsultas) {
         GerenciadorMensagens enviar = new GerenciadorMensagens();
