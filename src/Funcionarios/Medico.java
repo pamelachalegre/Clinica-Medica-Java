@@ -1,9 +1,7 @@
 package Funcionarios;
 import Dados.Paciente;
 import Dados.Prontuario;
-import Geradores.Atestado;
-import Geradores.DeclaracaoAcompanhamento;
-import Geradores.Receita;
+import Dados.Consulta;
 import java.util.ArrayList;
 
 public class Medico {
@@ -14,12 +12,15 @@ public class Medico {
     //DADOS PESSOAIS
     private String nome;
     private String crm;
+    private ArrayList<Consulta> Atendimentos;
+    
     
     //MÉTODOS CONSTRUTORES:
     public Medico() {}
     public Medico(String nome, String crm) { //CARACTERISTICAS DO MÉDICO
         this.nome = nome;
         this.crm = crm;
+        this.Atendimentos =  new ArrayList<Consulta>();
     }
     
     //SETS E GETS PARA AS CARACTERISTICAS:
@@ -35,16 +36,26 @@ public class Medico {
     public void setCrm(String crm) {
         this.crm = crm;
     }
+
+    public ArrayList<Consulta> getPacientesAtendidos() {
+        return Atendimentos;
+    }
+
+    public void setPacientesAtendidos(ArrayList<Consulta> atendidos) {
+        this.Atendimentos = atendidos;
+    }
+
     
-    public void cadastrarDadosPaciente(Paciente paciente, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean cardio, ArrayList<String> cirurgias, ArrayList<String> alergias) {
+    public void cadastrarDadosPaciente(Consulta consulta, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean cardio, ArrayList<String> cirurgias, ArrayList<String> alergias) {
         //CADASTRA OS DADOS DE SAÚDE DE UM PACIENTE
-        paciente.setFumar(fumar);
-        paciente.setBeber(beber);
-        paciente.setColesterol(colesterol);
-        paciente.setDiabete(diabete);
-        paciente.setDoencaCardio(cardio);
-        paciente.setCirurgias(cirurgias);
-        paciente.setAlergias(alergias);
+        consulta.getPaciente().setFumar(fumar);
+        consulta.getPaciente().setBeber(beber);
+        consulta.getPaciente().setColesterol(colesterol);
+        consulta.getPaciente().setDiabete(diabete);
+        consulta.getPaciente().setDoencaCardio(cardio);
+        consulta.getPaciente().setCirurgias(cirurgias);
+        consulta.getPaciente().setAlergias(alergias);
+        this.Atendimentos.add(consulta);
     }
     
     //ATUALIZA OS DADOS DA SAÚDE DE UM PACIENTE 'paciente':
@@ -84,19 +95,25 @@ public class Medico {
         paciente.getAlergias().add(alergia);
     }
     
-    // METODOS DOS RELATORIOS:
-    public void criarReceita(Medico medico, Paciente paciente, String remedio, float dosagem, String modoUso, int vezesDia) {
-        Receita receita = new Receita(medico, paciente, remedio, dosagem, modoUso, vezesDia);
-        receita.imprimeReceita();
+    public void cadastrarProntuario(Consulta consulta, String sintomas, String diagnostico, String tratamento) {
+        /*
+        Cadastra o prontuário do paciente.
+        */
+        Prontuario prontuario = new Prontuario(sintomas, diagnostico, tratamento);
+        consulta.getPaciente().setProntuario(prontuario);
     }
     
-    public void criarEImprimirAtestado(Medico medico, Paciente paciente, Prontuario prontuario, int diasAfastamento, String dataInicio) {
-        Atestado atestado = new Atestado(medico, paciente, prontuario, diasAfastamento, dataInicio);
-        atestado.imprimeAtestado();
+    public void atualizaProntuario(Paciente paciente, String atualizacao, char mudanca) {
+        /*
+        Altera algum dado do prontuário do paciente
+        */
+        switch(mudanca) {
+            case 'S' -> paciente.getProntuario().setSintomas(atualizacao);
+            case 'D' -> paciente.getProntuario().setDiagnostico(atualizacao);
+            case 'T' -> paciente.getProntuario().setTratamento(atualizacao);
+            default -> {
+            }
+        }
     }
     
-    public void gerarDeclaracao(Medico medico, Paciente paciente, Prontuario prontuario, String dataAcompanhamento, String parentescoAcompanhante, String nomeAcompanhante) {
-        DeclaracaoAcompanhamento declaracao = new DeclaracaoAcompanhamento(medico, paciente, prontuario, dataAcompanhamento, parentescoAcompanhante, nomeAcompanhante);
-        declaracao.imprimeDeclaracao();
-    }
 } 

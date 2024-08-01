@@ -1,7 +1,8 @@
 package Funcionarios;
 import Dados.Paciente;
 import Dados.Consulta;
-import Geradores.GerenciadorMensagens;
+import Execução.Busca;
+import GerenciadorMensagens.GerenciadorMensagens;
 import java.util.ArrayList;
 
 public class Secretaria {
@@ -9,6 +10,10 @@ public class Secretaria {
      * Objeto identificado pelo atributo nome com métodos que manipulam outros objetos, como 
      */
     private String nome;
+
+    public String getNome() {
+        return nome;
+    }
     
     //CONSTRUTOR -> DEFINE A CARACTERÍSTICA.
     public Secretaria(String nome) {
@@ -21,42 +26,63 @@ public class Secretaria {
         listaConsultas.add(consulta);
     }
     
-    public void cadastrarPaciente(Paciente paciente, String endereco, String telefone, String email, boolean convenio, ArrayList<Paciente> listaPacientes) {
-        //ADICIONA O PACIENTE NA LISTA DE PACIENTES
-        paciente.setEndereco(endereco);
-        paciente.setTelefone(telefone);
-        paciente.setEmail(email);
-        paciente.setConvenio(convenio);
+    public void atualizarConsultaDataHora(Consulta consulta, String data, String hora) {
+        consulta.setData(data);
+        consulta.setHorario(hora);
+    }
+    
+    public void removerConsulta(ArrayList<Consulta> listaConsultas, int indice) {
+        listaConsultas.remove(indice);
+        System.out.println("CONSULTA CANCELADA");
+    }
+    
+    
+    /*public void atualizarConsultaMedico(Consulta consulta, Medico medico) {
+        consulta.setMedico(medico);
+    }
+    
+    public void atualizarConsultaPaciente(Consulta consulta, Paciente paciente) {
+        consulta.setPaciente(paciente);
+    }
+    */
+    public void cadastrarPaciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio, ArrayList<Paciente> listaPacientes) {
+        //CRIA UM PACIENTE E O ADICIONA NA LISTA DE PACIENTES
+        Paciente paciente = new Paciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio);
         listaPacientes.add(paciente);
     }
     
     //MODIFICA OS DADOS DE UM PACIENTE 'paciente':
-    public void atualizaPacienteNome(Paciente paciente, String nome) {
+    public void atualizarPacienteNome(Paciente paciente, String nome) {
         paciente.setNome(nome);
     }
-    public void atualizaPacienteSexo(Paciente paciente, char sexo) {
+    public void atualizarPacienteSexo(Paciente paciente, char sexo) {
         paciente.setSexo(sexo);
     }
-    public void atualizaPacienteIdade(Paciente paciente, int idade) {
+    public void atualizarPacienteIdade(Paciente paciente, int idade) {
         paciente.setIdade(idade);
     }
-    public void atualizaPacienteEndereco(Paciente paciente, String endereco) {
+    public void atualizarPacienteEndereco(Paciente paciente, String endereco) {
         paciente.setEndereco(endereco);
     }
-    public void atualizaPacienteTelefone(Paciente paciente, String telefone) {
+    public void atualizarPacienteTelefone(Paciente paciente, String telefone) {
         paciente.setTelefone(telefone);
     }
-    public void atualizaPacienteEmail(Paciente paciente, String email) {
+    public void atualizarPacienteEmail(Paciente paciente, String email) {
         paciente.setEmail(email);
     }
-    public void atualizaPacienteConvenio(Paciente paciente, boolean conve) {
+    public void atualizarPacienteConvenio(Paciente paciente, boolean conve) {
         paciente.setConvenio(conve);
     }
 
-    public void removerPaciente(Paciente paciente, ArrayList<Paciente> listaPacientes) {
-        //RETIRA O PACIENTE DA LISTA DE PACIENTES
-        listaPacientes.remove(paciente);
-    }   
+    public void removerPaciente(String identificador, ArrayList<Paciente> listaPacientes) {
+        //RETIRA O PACIENTE DE IDENTIFICADOR DA LISTA DE PACIENTES
+        Busca busca = new Busca();
+        int i = busca.acharCPF(identificador, listaPacientes);
+        if(i != -1) {
+            listaPacientes.remove(i);
+            System.out.println("PACIENTE REMOVIDO!");
+        }
+    }
     
     public void gerenciarMensagens(ArrayList<Consulta> listaConsultas) {
         GerenciadorMensagens enviar = new GerenciadorMensagens();
