@@ -33,12 +33,14 @@ public class Main {
         ArrayList<Paciente> listaPacientes = new ArrayList<>();
         Paciente pac1 = new Paciente("Ana Paula", "111.222.333-44", "11.222.333-4", 'F', 18, "03/09/2005", "Avenida Maringá, 123", "44 99999-9999", "usuario@exemplo.com", true);
         listaPacientes.add(pac1);
+        // criar mais alguns pacientes
         
         ArrayList<Consulta> listaConsultas = new ArrayList<>();
         Consulta con1 = new Consulta("14/09/2023", "15:00", listaMedicos.get(0), listaPacientes.get(0), 'N');
         Consulta con2 = new Consulta("02/08/2024", "15:00", listaMedicos.get(1), listaPacientes.get(0), 'N');
         listaConsultas.add(con1);
         listaConsultas.add(con2);
+        // criar mais algumas consultas
         
         Secretaria secretaria = new Secretaria("MARIA GABRIELA"); //única
         
@@ -156,7 +158,7 @@ public class Main {
                 String crm = input.next();
                 int iMed = buscar.acharCRM(crm, listaMedicos);
                 if (iMed != -1) { // o médico existe
-                    Medico medAtual = listaMedicos.get(iMed); // indentificar qual médico é e atribuir na variável *med*
+                    Medico medAtual = listaMedicos.get(iMed);
                     System.out.println("Selecione a ação:\n(1) Cadastrar dados do paciente;\n(2) Atualizar dados do paciente;\n(3) Cadastrar prontuário;\n(4) Atualizar prontuário;\n(5) Remover prontuário;\n(6) Gerar relatório;\n(7) Sair;");
                     int acao = input.nextInt();
                     while(acao != 7) {
@@ -165,7 +167,8 @@ public class Main {
                                 System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx): ");
                                 int iPac = buscar.acharCPF(input.next(), listaPacientes); // acha o íncide do paciente na lista de pacientes
                                 if(iPac != -1) {
-                                    int iCon = buscar.acharConsulta(listaConsultas, listaPacientes.get(iPac));
+                                    Paciente pacAtual = listaPacientes.get(iPac);
+                                    int iCon = buscar.acharConsulta(listaConsultas, pacAtual); //pacAtual é um Paciente, e não uma String de id
                                     System.out.printf("Insira os dados do paciente:\nFuma? ");
                                     boolean fumar = "SIM".equals(input.next().toUpperCase()); //trocar para uma expressão, pois a pessoa não vai inserir true ou false, mas sim ou não.
                                     System.out.println("Bebe álcool? ");
@@ -177,20 +180,22 @@ public class Main {
                                     System.out.println("Possui doença cardiovascular? ");
                                     boolean doencaCardio = "SIM".equals(input.next().toUpperCase());
                                     System.out.println("Possui alguma cirurgia? Se sim, quantas? ");
-                                    int numCirurgias = input.nextInt(); // pega o número de cirurgias pra formar o looping
-                                    ArrayList<String> cirurgias; // arrumar a inserção na lista
-                                    // perguntar quantas cirurgias ja foram feitas
-                                    // fazer um laço com esse número
-                                    // para ir lendo uma String por uma
-                                    // e ir inserindo na lista com o método *setCirurgias*
-                                    /*public void setCirurgias(ArrayList<String> cirurgias) {
-                                        this.cirurgias = cirurgias; //DEFINE UMA LISTA DE CIRURGIAS.
+                                    int numCirurgias = input.nextInt();
+                                    ArrayList<String> cirurgias;
+                                    for (int i = 0; i == numCirurgias; i++) {
+                                        System.out.println("Cirurgia número" + i + ":");
+                                        String cirurgia = input.nextLine();
+                                        pacAtual.setCirurgias(cirurgia);
                                     }
-                                    public void setCirurgias(String cirurgia) {
-                                        this.cirurgias.add(cirurgia); //ADICIONA UMA NOVA CIRURGIA A LISTA.
-                                    }*/
-                                    ArrayList<String> alergias;
-                                    //medAtual.cadastrarDadosPaciente(listaConsultas.get(iCon), fumar, beber, colesterol, diabete, doencaCardio, cirurgias, alergias);
+                                    System.out.println("Possui alguma alergia? Se sim, quantas? ");
+                                    int numAlergias = input.nextInt(); // pega o número de cirurgias pra formar o looping
+                                    ArrayList<String> alergias; // arrumar a inserção na lista
+                                    for (int i = 0; i == numCirurgias; i++) {
+                                        System.out.println("Alergia número" + i + ":");
+                                        String alergia = input.nextLine();
+                                        pacAtual.setAlergias(alergia);
+                                    }
+                                    medAtual.cadastrarDadosPaciente(listaConsultas.get(iCon), fumar, beber, colesterol, diabete, doencaCardio, cirurgias, alergias);
                                 }
                                 break;
                             case 2: /*Iniciar consulta - atualizar dados do paciente*/
