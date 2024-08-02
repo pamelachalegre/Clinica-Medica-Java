@@ -19,8 +19,7 @@ public class Medico {
     private String nome;
     private String crm;
     private ArrayList<Consulta> Atendimentos;
-    
-    
+   
     //MÉTODOS CONSTRUTORES:
     public Medico() {}
     public Medico(String nome, String crm) { //CARACTERISTICAS DO MÉDICO
@@ -36,6 +35,7 @@ public class Medico {
     public void setNome(String nome) {
         this.nome = nome;
     }
+   
     public String getCrm() {
         return crm;
     }
@@ -46,19 +46,17 @@ public class Medico {
     public ArrayList<Consulta> getPacientesAtendidos() {
         return Atendimentos;
     }
-
     public void setPacientesAtendidos(ArrayList<Consulta> atendidos) {
         this.Atendimentos = atendidos;
     }
-
     
-    public void cadastrarDadosPaciente(Consulta consulta, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean cardio, ArrayList<String> cirurgias, ArrayList<String> alergias) {
+    public void cadastrarDadosPaciente(Consulta consulta, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean doencaCardio, ArrayList<String> cirurgias, ArrayList<String> alergias) {
         //CADASTRA OS DADOS DE SAÚDE DE UM PACIENTE
         consulta.getPaciente().setFumar(fumar);
         consulta.getPaciente().setBeber(beber);
         consulta.getPaciente().setColesterol(colesterol);
         consulta.getPaciente().setDiabete(diabete);
-        consulta.getPaciente().setDoencaCardio(cardio);
+        consulta.getPaciente().setDoencaCardio(doencaCardio);
         consulta.getPaciente().setCirurgias(cirurgias);
         consulta.getPaciente().setAlergias(alergias);
         this.Atendimentos.add(consulta);
@@ -157,4 +155,4 @@ public class Medico {
         }
         return numPacientes; // Retorna o numero de pacientes unicos atendidos
     }
-} 
+}
