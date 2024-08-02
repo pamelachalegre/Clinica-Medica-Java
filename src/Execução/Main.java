@@ -75,7 +75,7 @@ public class Main {
                         boolean convenio = input.nextBoolean();
                         sec.cadastrarPaciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio, listaPacientes);
                         break;
-                    case 2:
+                    case 2: /*Alteração de paciente já existente*/
                         System.out.println("Insira o CPF (xxx.xxx.xxx-xx) do paciente a ser alterado: ");
                         int i = buscar.acharCPF(input.next(), listaPacientes); //indice do paciente a ser alterado na lista
                         if(i != -1) {
@@ -140,19 +140,64 @@ public class Main {
                 System.out.println("SELECIONE UMA AÇÃO:\n(1) Cadastrar paciente\n(2) Atualizar dados de um paciente;\n(3) Remover paciente;\n(4) Cadastrar nova consulta;\n(5) Atualizar consulta;\n(6) Remover consulta;\n(7) Gerenciar consultas do dia seguinte;\n(8) Sair;");
                 acao = input.nextInt();
             }
-        } else {
+        } 
+        else {
             if ("MEDICO".equals(usuario.toUpperCase())) {
-                System.out.println("----------MODO MÉDICO-----------");
-                System.out.println("INSIRA SEU CRM:");
+                System.out.println("----------MODO MÉDICO-----------\nINSIRA SEU CRM: ");
                 //Achando o objeto medico correto
-                String crm = input.next();
+                String crm = input.nextLine();
+                int iMed = buscar.acharCRM(crm, listaMedicos);
+                if (iMed != -1) { // o médico existe
+                    // indentificar qual médico é e atribuir na variável *med*
+                    System.out.println("Selecione a ação:\n(1) Iniciar consulta - cadastrar dados do paciente;\n(2) Iniciar consulta - atualizar dados do paciente;\n(3) Sair;");
+                    int acao = input.nextInt();
+                    while(acao != 3) {
+                        switch(acao) {
+                            case 1: /*Iniciar consulta - cadastrar dados do paciente*/
+                                // identificacao de qual paciente é
+                                // ainda não consegui fazer
+                                // pensei em usar a achar cpf
+                                System.out.printf("Insira os dados do paciente:\nFuma? ");
+                                boolean fumar = input.nextBoolean();
+                                System.out.println("Bebe álcool? ");
+                                boolean beber = input.nextBoolean();                                
+                                System.out.println("Possui colesterol alto? ");
+                                boolean colesterol = input.nextBoolean();
+                                System.out.println("Possui diabetes? ");
+                                boolean diabete = input.nextBoolean();
+                                System.out.println("Possui doença cardiovascular? ");
+                                boolean doencaCardio = input.nextBoolean();
+                                System.out.println("Possui alguma cirurgia? ");
+                                ArrayList<String> cirurgias = input.next(); // arrumar a inserção na lista
+                                // perguntar quantas cirurgias ja foram feitas
+                                // fazer um laço com esse número
+                                // para ir lendo uma String por uma
+                                // e ir inserindo na lista com o método *setCirurgias*
+                                 public void setCirurgias(ArrayList<String> cirurgias) {
+                                    this.cirurgias = cirurgias; //DEFINE UMA LISTA DE CIRURGIAS.
+                                }
+                                public void setCirurgias(String cirurgia) {
+                                    this.cirurgias.add(cirurgia); //ADICIONA UMA NOVA CIRURGIA A LISTA.
+                                }
+                                
                 
-                //achar o medico certo na lista de médicos ????
+                                med.cadastrarDadosPaciente(Consulta consulta, fumar, beber, colesterol, diabete, doencaCardio, cirurgias, ArrayList<String> alergias) {
+
+                                
+                            case 2: /*Iniciar consulta - atualizar dados do paciente*/
+                                
+                            default: /*Sair*/
+                        }
+                    }
                 
-                System.out.println("Selecione a ação:\n(1) Iniciar consulta - coletar dados do paciente;\n(2) Iniciar consulta - atualizar dados do paciente;");
-                             
-            } else {
-                System.out.println("usuário inválido");
+                }
+                else {
+                    System.out.println("Médico não encontrado");
+                }
+                                             
+            }
+            else {
+                System.out.println("Usuário inválido");
             }
         }
                 
