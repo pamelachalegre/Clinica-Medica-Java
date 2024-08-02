@@ -23,6 +23,7 @@ public class Atestado {
     public Medico getMedico() {
         return medico;
     }
+
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
@@ -30,6 +31,7 @@ public class Atestado {
     public Paciente getPaciente() {
         return paciente;
     }
+
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
@@ -37,6 +39,7 @@ public class Atestado {
     public Prontuario getProntuario() {
         return prontuario;
     }
+
     public void setProntuario(Prontuario prontuario) {
         this.prontuario = prontuario;
     }
@@ -44,6 +47,7 @@ public class Atestado {
     public int getDiasAfastamento() {
         return diasAfastamento;
     }
+
     public void setDiasAfastamento(int diasAfastamento) {
         this.diasAfastamento = diasAfastamento;
     }
@@ -51,6 +55,7 @@ public class Atestado {
     public String getDataInicio() {
         return dataInicio;
     }
+
     public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }

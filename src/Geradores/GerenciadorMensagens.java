@@ -1,30 +1,40 @@
 package Geradores;
 import java.util.ArrayList;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import Dados.Consulta;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 public class GerenciadorMensagens {
-    private ArrayList<Consulta> listaConsultasAmanha;
-    private Consulta consulta;
+    private ArrayList<Consulta> consultasAmanha;
+    /**
+     * Envia uma mensagem para o paciente, avisando-o da consulta no dia seguinte.
+     * Define se a pessoa tem ou não email/telefone, enviando as mensagens em correspondência a esses dados.
+     * @param listaConsultasAmanha 
+     */
     
-    public void enviarMensagem(ArrayList<Consulta> listaConsultasAmanha) {
+    private void enviarMensagem(ArrayList<Consulta> listaConsultasAmanha) {
         for(int i = 0; i < listaConsultasAmanha.size(); i++) {
-            Consulta consulta = listaConsultasAmanha.get(i);
-            String mail = consulta.getPaciente().getEmail();
-            String tel = consulta.getPaciente().getTelefone();
+            Consulta consul = listaConsultasAmanha.get(i);       
+            String mail = consul.getPaciente().getEmail();
+            String tel = consul.getPaciente().getTelefone();
             if (mail != "") {
                 System.out.println("---------MENSAGEM: EMAIL-------\n-> " + mail);
-                System.out.println("Paciente " + consulta.getPaciente().getNome() + " sua consulta é amanhã, " + consulta.getData() 
-                    + ", às " + consulta.getHorario() + "\nAguardamos você!");
+                System.out.println("Paciente " + consul.getPaciente().getNome() + " sua consulta é amanhã, " + consul.getData() 
+                    + ", às " + consul.getHorario() + "\nAguardamos você!");
             } if (tel != "") {
                 System.out.println("---------MENSAGEM: TELEFONE-------\n" + tel);
-                System.out.println("Paciente " + consulta.getPaciente().getNome() + " sua consulta é amanhã, " + consulta.getData() 
-                    + ", às " + consulta.getHorario() + "\nAguardamos você!");
+                System.out.println("Paciente " + consul.getPaciente().getNome() + " sua consulta é amanhã, " + consul.getData() 
+                    + ", às " + consul.getHorario() + "\nAguardamos você!");
             }
         }
     }
-    public void gerenciarMensagens(ArrayList<Consulta> listaConsultas) {
+    
+        public void gerenciarMensagens(ArrayList<Consulta> listaConsultas) {
         LocalDate hoje = LocalDate.now(); // Obtém a data de hoje
         LocalDate amanha = hoje.plusDays(1); // Obtém a data de amanhã
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato de data que será usado para analisar as datas das consultas
@@ -38,4 +48,5 @@ public class GerenciadorMensagens {
         }
         enviarMensagem(listaConsultasAmanha);  
     }
+    
 }
