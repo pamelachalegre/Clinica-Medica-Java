@@ -51,20 +51,51 @@ public class Secretaria {
         listaPacientes.add(paciente);
     }
     
+    public void atualizarPaciente(Paciente paciente, char campo, String novoDado) {
+        switch(campo){
+            case 'N':
+                this.atualizarPacienteNome(paciente, novoDado);
+                System.out.printf("Dado alterado!");
+                break;
+            case 'S':
+                this.atualizarPacienteSexo(paciente, novoDado.charAt(0));
+                System.out.println("Dado alterado!");
+            case 'I':
+                int novaIdade = Integer.parseInt(novoDado); //
+                this.atualizarPacienteIdade(paciente, novaIdade);
+                System.out.printf("Dado alterado!");
+                break;
+            case 'E':
+                this.atualizarPacienteEndereco(paciente, novoDado);
+            case 'T':
+                this.atualizarPacienteTelefone(paciente, novoDado);
+                System.out.printf("Dado alterado!");
+            case 'M':
+                this.atualizarPacienteEmail(paciente, novoDado);
+                System.out.printf("Dado alterado!");
+            case 'C':
+                boolean novoConvenio = "CONVENIO".equals(novoDado.toUpperCase()); //se for novoDado for convenio, retorna true
+                this.atualizarPacienteConvenio(paciente, novoConvenio);
+            default:
+                System.out.println("Campo inválido!");
+        }
+    }
+    
+    
     //MODIFICA OS DADOS DE UM PACIENTE 'paciente':
-    public void atualizarPacienteNome(Paciente paciente, String nome) {
+    private void atualizarPacienteNome(Paciente paciente, String nome) {
         paciente.setNome(nome);
     }
-    public void atualizarPacienteSexo(Paciente paciente, char sexo) {
+    private void atualizarPacienteSexo(Paciente paciente, char sexo) {
         paciente.setSexo(sexo);
     }
-    public void atualizarPacienteIdade(Paciente paciente, int idade) {
+    private void atualizarPacienteIdade(Paciente paciente, int idade) {
         paciente.setIdade(idade);
     }
-    public void atualizarPacienteEndereco(Paciente paciente, String endereco) {
+    private void atualizarPacienteEndereco(Paciente paciente, String endereco) {
         paciente.setEndereco(endereco);
     }
-    public void atualizarPacienteTelefone(Paciente paciente, String telefone) {
+    private void atualizarPacienteTelefone(Paciente paciente, String telefone) {
         paciente.setTelefone(telefone);
     }
     public void atualizarPacienteEmail(Paciente paciente, String email) {
