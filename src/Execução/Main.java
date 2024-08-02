@@ -49,7 +49,7 @@ public class Main {
         String usuario = input.nextLine().toUpperCase();
         if("SECRETARIA".equals(usuario)) {
             System.out.printf("-------------MODO SECRETÁRIA-------------\nInsira seu nome: ");
-            if(input.next().toUpperCase() == secretaria.getNome()) {
+            if(input.nextLine().toUpperCase().equals(secretaria.getNome())) {
                 System.out.println("O que deseja fazer:\n(1) Cadastrar paciente\n(2) Atualizar dados de um paciente;\n(3) Remover paciente;\n(4) Cadastrar nova consulta;\n(5) Atualizar consulta;\n(6) Remover consulta;\n(7) Gerenciar consultas do dia seguinte;\n(8) Sair;");
                 int acao = input.nextInt();
                 while(acao != 8) {
