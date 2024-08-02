@@ -1,7 +1,7 @@
 package Funcionarios;
 import Dados.Paciente;
 import Dados.Consulta;
-import Execução.Busca;
+import Auxiliar.Busca;
 import Geradores.GerenciadorMensagens;
 import java.util.ArrayList;
 
@@ -29,22 +29,15 @@ public class Secretaria {
     public void atualizarConsultaDataHora(Consulta consulta, String data, String hora) {
         consulta.setData(data);
         consulta.setHorario(hora);
+        consulta.setId(data + hora + consulta.getMedico().getCrm()); // a mudança da data e hora da consulta muda o id dela
+        System.out.println("CONSULTA REMARCADA!");
     }
     
     public void removerConsulta(ArrayList<Consulta> listaConsultas, int indice) {
         listaConsultas.remove(indice);
-        System.out.println("CONSULTA CANCELADA");
+        System.out.println("CONSULTA CANCELADA!");
     }
     
-    
-    /*public void atualizarConsultaMedico(Consulta consulta, Medico medico) {
-        consulta.setMedico(medico);
-    }
-    
-    public void atualizarConsultaPaciente(Consulta consulta, Paciente paciente) {
-        consulta.setPaciente(paciente);
-    }
-    */
     public void cadastrarPaciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio, ArrayList<Paciente> listaPacientes) {
         //CRIA UM PACIENTE E O ADICIONA NA LISTA DE PACIENTES
         Paciente paciente = new Paciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio);
@@ -55,11 +48,11 @@ public class Secretaria {
         switch(campo){
             case 'N':
                 this.atualizarPacienteNome(paciente, novoDado);
-                System.out.printf("Dado alterado!");
+                System.out.printf("DADO ALTERADO!");
                 break;
             case 'S':
                 this.atualizarPacienteSexo(paciente, novoDado.charAt(0));
-                System.out.println("Dado alterado!");
+                System.out.println("DADO ALTERADO!");
             case 'I':
                 int novaIdade = Integer.parseInt(novoDado); //
                 this.atualizarPacienteIdade(paciente, novaIdade);
@@ -69,15 +62,15 @@ public class Secretaria {
                 this.atualizarPacienteEndereco(paciente, novoDado);
             case 'T':
                 this.atualizarPacienteTelefone(paciente, novoDado);
-                System.out.printf("Dado alterado!");
+                System.out.printf("DADO ALTERADO!");
             case 'M':
                 this.atualizarPacienteEmail(paciente, novoDado);
-                System.out.printf("Dado alterado!");
+                System.out.printf("DADO ALTERADO!");
             case 'C':
                 boolean novoConvenio = "CONVENIO".equals(novoDado.toUpperCase()); //se for novoDado for convenio, retorna true
                 this.atualizarPacienteConvenio(paciente, novoConvenio);
             default:
-                System.out.println("Campo inválido!");
+                System.out.println("CAMPO INVÁLIDO!");
         }
     }
     
