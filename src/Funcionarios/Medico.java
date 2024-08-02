@@ -2,7 +2,13 @@ package Funcionarios;
 import Dados.Paciente;
 import Dados.Prontuario;
 import Dados.Consulta;
+import Geradores.Atestado;
+import Geradores.DeclaracaoAcompanhamento;
+import Geradores.Receita;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Medico {
     /**
@@ -116,4 +122,39 @@ public class Medico {
         }
     }
     
+    // METODOS DOS RELATORIOS:
+    public void criarReceita(Medico medico, Paciente paciente, String remedio, float dosagem, String modoUso, int vezesDia) {
+        Receita receita = new Receita(medico, paciente, remedio, dosagem, modoUso, vezesDia);
+        receita.imprimeReceita();
+    }
+
+    public void criarEImprimirAtestado(Medico medico, Paciente paciente, Prontuario prontuario, int diasAfastamento, String dataInicio) {
+        Atestado atestado = new Atestado(medico, paciente, prontuario, diasAfastamento, dataInicio);
+        atestado.imprimeAtestado();
+    }
+
+    public void gerarDeclaracao(Medico medico, Paciente paciente, Prontuario prontuario, String dataAcompanhamento, String parentescoAcompanhante, String nomeAcompanhante) {
+        DeclaracaoAcompanhamento declaracao = new DeclaracaoAcompanhamento(medico, paciente, prontuario, dataAcompanhamento, parentescoAcompanhante, nomeAcompanhante);
+        declaracao.imprimeDeclaracao();
+    }
+    
+    public int clientesAtendidos(List<Consulta> listaConsultas, int mes, int ano) {
+        List<String> pacientesUnicos = new ArrayList<>(); // Lista para armazenar CPFs unicos
+        int numPacientes = 0; // Contador do numero de pacientes iniciando em 0
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        for (Consulta consulta : listaConsultas) {
+            LocalDate dataConsulta = LocalDate.parse(consulta.getData(), formatter); // Converte a String da data para LocalDate
+
+            if (dataConsulta.getMonthValue() == mes && dataConsulta.getYear() == ano) {  // Verifica se o mês e o ano da consulta são iguais aos fornecidos
+                String cpf = consulta.getPaciente().getCpf();
+
+                if (pacientesUnicos.contains(cpf) == false) {  // Verifica se o CPF ja esta na lista de pacientes unicos
+                    pacientesUnicos.add(cpf);  // Se nao estiver, adiciona o CPF a lista de pacientes unicos e incrementa o contador
+                    numPacientes++;
+                }
+            }
+        }
+        return numPacientes; // Retorna o numero de pacientes unicos atendidos
+    }
 } 

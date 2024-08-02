@@ -1,5 +1,7 @@
 package Geradores;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import Dados.Consulta;
 
 public class GerenciadorMensagens {
@@ -22,5 +24,18 @@ public class GerenciadorMensagens {
             }
         }
     }
-    
+    public void gerenciarMensagens(ArrayList<Consulta> listaConsultas) {
+        LocalDate hoje = LocalDate.now(); // Obtém a data de hoje
+        LocalDate amanha = hoje.plusDays(1); // Obtém a data de amanhã
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato de data que será usado para analisar as datas das consultas
+        ArrayList<Consulta> listaConsultasAmanha = new ArrayList<>(); 
+
+        for (Consulta consulta : listaConsultas) {
+            LocalDate dataConsulta = LocalDate.parse(consulta.getData(), formatter); // Converte a data da consulta de String para LocalDate usando o formato definido
+            if (dataConsulta.equals(amanha)) { // Verifica se a data da consulta é igual a amanhã
+                listaConsultasAmanha.add(consulta); // Se for, adiciona a consulta à lista de consultas que ocorrerão amanhã
+            }
+        }
+        enviarMensagem(listaConsultasAmanha);  
+    }
 }

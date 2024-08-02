@@ -3,7 +3,6 @@ import Funcionarios.Medico;
 import Funcionarios.Secretaria;
 import Dados.Paciente;
 import Dados.Consulta;
-import GerenciadorMensagens.GerenciadorMensagens;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,7 +32,7 @@ public class Main {
         listaPacientes.add(pac1);
         
         ArrayList<Consulta> listaConsultas = new ArrayList<>();
-        Consulta con1 = new Consulta("14/09/2023", "15:00", listaMedicos.get(0), listaPacientes.get(0), 'N');
+        Consulta con1 = new Consulta("02/08/2024", "15:00", listaMedicos.get(0), listaPacientes.get(0), 'N');
         listaConsultas.add(con1);
         
         Busca buscar = new Busca();
@@ -51,15 +50,15 @@ public class Main {
                     case 1: /*Cadastro de um novo paciente*/
                         System.out.println("Insira os dados do paciente:\nNome:");
                         String nome = input.next();
-                        System.out.println("CPF:");
+                        System.out.println("CPF (Digite usando ponto e traço):");
                         String cpf = input.next();
-                        System.out.println("RG:");
+                        System.out.println("RG (Digite usando ponto e traço):");
                         String rg = input.next();
                         System.out.println("Sexo:");
                         char sexo = input.next().charAt(0);
                         System.out.println("Idade:");
                         int idade = input.nextInt();
-                        System.out.println("Data De Nascimento:");
+                        System.out.println("Data De Nascimento DD/MM/AAAA:");
                         String dataNascimento = input.next();
                         System.out.println("Endereço:");
                         String endereco = input.next();
@@ -72,9 +71,9 @@ public class Main {
                         sec.cadastrarPaciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio, listaPacientes);
                         break;
                     case 2:
-                        System.out.println("Insira o CPF do paciente a ser alterado: ");
+                        System.out.println("Insira o CPF do paciente a ser alterado usando ponto e traço: ");
                         int i = buscar.acharCPF(input.next(), listaPacientes);
-                        System.out.println("Insira o campo a ser alterado: ");
+                        System.out.println("Insira o campo a ser alterado (Opções: NOME - ENDEREÇO - TELEFONE - EMAIL - CONVÊNIO): ");
                         String atributo = input.next();
                         System.out.println("Insira o novo dado:");
                         if(atributo.equals("NOME")) {
@@ -88,7 +87,7 @@ public class Main {
                         }
                         break;
                     case 3: /*Exclusão de um paciente. Utiliza-se o CPF como identificador único.*/
-                        System.out.println("Insira o CPF do paciente a ser removido:");
+                        System.out.println("Insira o CPF do paciente a ser removido usando ponto e traço:");
                         String identificador = input.next();
                         sec.removerPaciente(identificador, listaPacientes);
                         break;
@@ -99,7 +98,7 @@ public class Main {
                         String hora = input.next();
                         System.out.println("CRM do médico:");
                         String crm = input.next();
-                        System.out.println("CPF do paciente:");
+                        System.out.println("CPF do paciente (Digite usando ponto e traço):");
                         cpf = input.next();
                         System.out.println("Tipo da consulta:");
                         char tipo = input.next().charAt(0);

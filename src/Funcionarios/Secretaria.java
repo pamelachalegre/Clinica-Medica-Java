@@ -2,7 +2,7 @@ package Funcionarios;
 import Dados.Paciente;
 import Dados.Consulta;
 import Execução.Busca;
-import GerenciadorMensagens.GerenciadorMensagens;
+import Geradores.GerenciadorMensagens;
 import java.util.ArrayList;
 
 public class Secretaria {
@@ -86,6 +86,6 @@ public class Secretaria {
     
     public void gerenciarMensagens(ArrayList<Consulta> listaConsultas) {
         GerenciadorMensagens enviar = new GerenciadorMensagens();
-        enviar.enviarMensagem(listaConsultas);
+        enviar.gerenciarMensagens(listaConsultas);
     }
 }
