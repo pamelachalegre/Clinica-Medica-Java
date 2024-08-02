@@ -1,4 +1,5 @@
 package Execução;
+import Auxiliar.Busca;
 import Funcionarios.Medico;
 import Funcionarios.Secretaria;
 import Dados.Paciente;
@@ -8,8 +9,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        /*
+        /**
         Inicialização de um armazenamento anterior de médicos, pacientes e consultas que podem ser alterados durante a execução.
+        * Inicialização de uma secretária -> única e de único acesso possível.
+        * Iniciaização do elemento para buscas nas listas.
         */
         ArrayList<Medico> listaMedicos = new ArrayList<>();
         Medico med1 = new Medico("MEREDITH GREY", "28930");
@@ -37,169 +40,186 @@ public class Main {
         listaConsultas.add(con1);
         listaConsultas.add(con2);
         
+        Secretaria secretaria = new Secretaria("MARIA GABRIELA"); //única
+        
         Busca buscar = new Busca();
         
         Scanner input = new Scanner(System.in);
         System.out.printf("INSIRA O TIPO DE USUÁRIO: ");
-        String usuario = input.nextLine();
-        if("SECRETARIA".equals(usuario.toUpperCase())) {
-            System.out.printf("-------------MODO SECRETÁRIA-------------\nINSIRA SEU NOME: ");
-            Secretaria sec = new Secretaria(input.nextLine());
-            System.out.println(sec.getNome());
-            System.out.println("SELECIONE UMA AÇÃO:\n(1) Cadastrar paciente\n(2) Atualizar dados de um paciente;\n(3) Remover paciente;\n(4) Cadastrar nova consulta;\n(5) Atualizar consulta;\n(6) Remover consulta;\n(7) Gerenciar consultas do dia seguinte;\n(8) Sair;");
-            int acao = input.nextInt();
-            while(acao != 8) {
-                switch(acao) {
-                    case 1: /*Cadastro de um novo paciente*/
-                        input.nextLine();
-                        System.out.printf("Insira os dados do paciente:\nNome: ");
-                        String nome = input.nextLine();
-                        System.out.println("CPF (xxx.xxx.xxx-xx):");
-                        String cpf = input.next();
-                        System.out.println("RG (xx.xxx.xxx-x):");
-                        String rg = input.next();
-                        System.out.println("Sexo:");
-                        char sexo = input.next().charAt(0);
-                        System.out.println("Idade:");
-                        int idade = input.nextInt();
-                        System.out.println("Data De Nascimento:");
-                        String dataNascimento = input.next();
-                        System.out.println("Endereço:");
-                        input.nextLine();
-                        String endereco = input.nextLine();
-                        System.out.println("Telefone:");
-                        String telefone = input.next();
-                        System.out.println("E-mail:");
-                        String email = input.next();
-                        System.out.println("Convênio:");
-                        boolean convenio = input.nextBoolean();
-                        sec.cadastrarPaciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio, listaPacientes);
-                        break;
-                    case 2: /*Alteração de paciente já existente*/
-                        System.out.println("Insira o CPF (xxx.xxx.xxx-xx) do paciente a ser alterado: ");
-                        int i = buscar.acharCPF(input.next(), listaPacientes); //indice do paciente a ser alterado na lista
-                        if(i != -1) {
-                            System.out.println("Campo de alteração: 'N' - nome; 'S' - sexo; 'I' - idade; 'E' - endereço; 'T' - telefone; 'M' - email; 'C' - convênio.\nDigite uma das opções mostradas:");
-                            char atributo = input.next().charAt(0);
-                            System.out.printf("Insira o novo dado: ");
-                            input.nextLine(); // pega os espaços sobressalentes dos Scanners anteriores.
-                            String novoDado = input.nextLine();
-                            sec.atualizarPaciente(listaPacientes.get(i), atributo, novoDado);
-                        }
-                        break;
-                    case 3: /*Exclusão de um paciente. Utiliza-se o CPF como identificador único.*/
-                        System.out.println("Insira o CPF (xxx.xxx.xxx-xx) do paciente a ser removido:");
-                        String identificador = input.next();
-                        sec.removerPaciente(identificador, listaPacientes);
-                        break;
-                    case 4: /*Cadastrar uma nova consulta -> Marcar uma nova consulta*/
-                        System.out.println("Insira os dados da consulta:\nData:");
-                        String data = input.next();
-                        System.out.println("Horário:");
-                        String hora = input.next();
-                        System.out.println("CRM do médico:");
-                        String crm = input.next();
-                        System.out.println("CPF do paciente (xxx.xxx.xxx-xx):");
-                        cpf = input.next();
-                        System.out.println("Tipo da consulta:");
-                        char tipo = input.next().charAt(0);
-                        int iMed = buscar.acharCRM(crm, listaMedicos); /*Acha os índices dos objetos desejados*/
-                        int iPac = buscar.acharCPF(cpf, listaPacientes);
-                        if((iMed != -1)&&(iPac != -1)) { //SE médico E paciente existirem
-                            sec.cadastrarConsulta(listaConsultas, data, hora, listaMedicos.get(iMed), listaPacientes.get(iPac), tipo);
-                        }
-                        break;
-                    case 5: //as unicas atualizações possíveis são data e horário, caso troque-se o médico ou paciente, cria-se uma nova consulta.
-                        System.out.println("Insira a data, o horário e o CRM do médico da consulta (sem espaços):");
-                        String id = input.next();
-                        int iCon = buscar.acharConsulta(listaConsultas, id);
-                        if(iCon != -1) {
-                            System.out.println("Insira nova data:");
-                            data = input.next();
-                            System.out.println("Insira novo horário:");
-                            hora = input.next();
-                            sec.atualizarConsultaDataHora(listaConsultas.get(iCon), data, hora);
-                            System.out.println("Consulta remarcada!");
-                        }
-                        break;
-                    case 6:
-                        System.out.println("Insira a data, horário e o CRM do médico da consulta (sem espaços):");
-                        id = input.next();
-                        iCon = buscar.acharConsulta(listaConsultas, id);
-                        if(iCon != -1) {
-                            sec.removerConsulta(listaConsultas, iCon);
-                        }
-                        break;
-                    case 7: /*Lidar com as consultas do dia seguinte -> chamar o gerenciador de mensagens*/
-                        sec.gerenciarMensagens(listaConsultas);
-                        break;
-                    default:
-                        System.out.println("Método inválido.");
-                        break;
+        String usuario = input.nextLine().toUpperCase();
+        if("SECRETARIA".equals(usuario)) {
+            System.out.printf("-------------MODO SECRETÁRIA-------------\nInsira seu nome: ");
+            if(input.next().toUpperCase() == secretaria.getNome()) {
+                System.out.println("O que deseja fazer:\n(1) Cadastrar paciente\n(2) Atualizar dados de um paciente;\n(3) Remover paciente;\n(4) Cadastrar nova consulta;\n(5) Atualizar consulta;\n(6) Remover consulta;\n(7) Gerenciar consultas do dia seguinte;\n(8) Sair;");
+                int acao = input.nextInt();
+                while(acao != 8) {
+                    switch(acao) {
+                        case 1: /*Cadastro de um novo paciente*/
+                            input.nextLine();
+                            System.out.printf("Insira os dados do paciente:\nNome: ");
+                            String nome = input.nextLine();
+                            System.out.println("CPF (xxx.xxx.xxx-xx):");
+                            String cpf = input.next();
+                            System.out.println("RG (xx.xxx.xxx-x):");
+                            String rg = input.next();
+                            System.out.println("Sexo:");
+                            char sexo = input.next().charAt(0);
+                            System.out.println("Idade:");
+                            int idade = input.nextInt();
+                            System.out.println("Data De Nascimento:");
+                            String dataNascimento = input.next();
+                            System.out.println("Endereço:");
+                            input.nextLine();
+                            String endereco = input.nextLine();
+                            System.out.println("Telefone:");
+                            String telefone = input.next();
+                            System.out.println("E-mail:");
+                            String email = input.next();
+                            System.out.println("Convênio:");
+                            boolean convenio = ("SIM".equals(input.next().toUpperCase())); // se a pessoa responder sim, conveio é true
+                            secretaria.cadastrarPaciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio, listaPacientes);
+                            break;
+                        case 2:
+                            System.out.println("Insira o CPF (xxx.xxx.xxx-xx) do paciente a ser alterado: ");
+                            int i = buscar.acharCPF(input.next(), listaPacientes); //indice do paciente a ser alterado na lista
+                            if(i != -1) {
+                                System.out.println("Campo de alteração: 'N' - nome; 'S' - sexo; 'I' - idade; 'E' - endereço; 'T' - telefone; 'M' - email; 'C' - convênio.\nDigite uma das opções mostradas:");
+                                char atributo = input.next().charAt(0);
+                                System.out.printf("Insira o novo dado: ");
+                                input.nextLine(); // pega os espaços sobressalentes dos Scanners anteriores.
+                                String novoDado = input.nextLine();
+                                secretaria.atualizarPaciente(listaPacientes.get(i), atributo, novoDado);
+                            }
+                            break;
+                        case 3: /*Exclusão de um paciente. Utiliza-se o CPF como identificador único.*/
+                            System.out.println("Insira o CPF (xxx.xxx.xxx-xx) do paciente a ser removido:");
+                            String identificador = input.next();
+                            secretaria.removerPaciente(identificador, listaPacientes);
+                            break;
+                        case 4: /*Cadastrar uma nova consulta -> Marcar uma nova consulta*/
+                            System.out.println("Insira os dados da consulta:\nData:");
+                            String data = input.next();
+                            System.out.println("Horário:");
+                            String hora = input.next();
+                            System.out.println("CRM do médico:");
+                            String crm = input.next();
+                            System.out.println("CPF do paciente (xxx.xxx.xxx-xx):");
+                            cpf = input.next();
+                            System.out.println("Tipo da consulta:");
+                            char tipo = input.next().charAt(0);
+                            int iMed = buscar.acharCRM(crm, listaMedicos); /*Acha os índices dos objetos desejados*/
+                            int iPac = buscar.acharCPF(cpf, listaPacientes);
+                            if((iMed != -1)&&(iPac != -1)) { //SE médico E paciente existirem
+                                secretaria.cadastrarConsulta(listaConsultas, data, hora, listaMedicos.get(iMed), listaPacientes.get(iPac), tipo);
+                            }
+                            break;
+                        case 5: //as unicas atualizações possíveis são data e horário, caso troque-se o médico ou paciente, cria-se uma nova consulta.
+                            System.out.println("Insira a data, o horário e o CRM do médico da consulta (sem espaços):");
+                            String id = input.next();
+                            int iCon = buscar.acharConsulta(listaConsultas, id);
+                            if(iCon != -1) {
+                                System.out.println("Insira nova data:");
+                                data = input.next();
+                                System.out.println(data);
+                                System.out.println("Insira novo horário:");
+                                hora = input.next();
+                                System.out.println(hora);
+                                secretaria.atualizarConsultaDataHora(listaConsultas.get(iCon), data, hora);
+                            }
+                            break;
+                        case 6:
+                            System.out.println("Insira a data, horário e o CRM do médico da consulta (sem espaços):");
+                            id = input.next();
+                            iCon = buscar.acharConsulta(listaConsultas, id);
+                            if(iCon != -1) {
+                                secretaria.removerConsulta(listaConsultas, iCon);
+                            }
+                            break;
+                        case 7: /*Lidar com as consultas do dia seguinte -> chamar o gerenciador de mensagens*/
+                            secretaria.gerenciarMensagens(listaConsultas);
+                            break;
+                        default:
+                            System.out.println("OPÇÃO INVÁLIDA!");
+                            break;
+                    }
+                    System.out.println("SELECIONE UMA AÇÃO:\n(1) Cadastrar paciente\n(2) Atualizar dados de um paciente;\n(3) Remover paciente;\n(4) Cadastrar nova consulta;\n(5) Atualizar consulta;\n(6) Remover consulta;\n(7) Gerenciar consultas do dia seguinte;\n(8) Sair;");
+                    acao = input.nextInt();
                 }
-                System.out.println("SELECIONE UMA AÇÃO:\n(1) Cadastrar paciente\n(2) Atualizar dados de um paciente;\n(3) Remover paciente;\n(4) Cadastrar nova consulta;\n(5) Atualizar consulta;\n(6) Remover consulta;\n(7) Gerenciar consultas do dia seguinte;\n(8) Sair;");
-                acao = input.nextInt();
+            } else {
+                System.out.println("USUÁRIO INVÁLIDO!");
             }
         } 
-        else {
-            if ("MEDICO".equals(usuario.toUpperCase())) {
-                System.out.println("----------MODO MÉDICO-----------\nINSIRA SEU CRM: ");
+        else {// se o usuário digitado não for SECRETARIA.
+            if ("MEDICO".equals(usuario)) {
+                System.out.println("----------MODO MÉDICO-----------\nInsira seu CRM: ");
                 //Achando o objeto medico correto
-                String crm = input.nextLine();
+                String crm = input.next();
                 int iMed = buscar.acharCRM(crm, listaMedicos);
                 if (iMed != -1) { // o médico existe
-                    // indentificar qual médico é e atribuir na variável *med*
-                    System.out.println("Selecione a ação:\n(1) Iniciar consulta - cadastrar dados do paciente;\n(2) Iniciar consulta - atualizar dados do paciente;\n(3) Sair;");
+                    Medico medAtual = listaMedicos.get(iMed); // indentificar qual médico é e atribuir na variável *med*
+                    System.out.println("Selecione a ação:\n(1) Cadastrar dados do paciente;\n(2) Atualizar dados do paciente;\n(3) Cadastrar prontuário;\n(4) Atualizar prontuário;\n(5) Remover prontuário;\n(6) Gerar relatório;\n(7) Sair;");
                     int acao = input.nextInt();
-                    while(acao != 3) {
+                    while(acao != 7) {
                         switch(acao) {
                             case 1: /*Iniciar consulta - cadastrar dados do paciente*/
-                                // identificacao de qual paciente é
-                                // ainda não consegui fazer
-                                // pensei em usar a achar cpf
-                                System.out.printf("Insira os dados do paciente:\nFuma? ");
-                                boolean fumar = input.nextBoolean();
-                                System.out.println("Bebe álcool? ");
-                                boolean beber = input.nextBoolean();                                
-                                System.out.println("Possui colesterol alto? ");
-                                boolean colesterol = input.nextBoolean();
-                                System.out.println("Possui diabetes? ");
-                                boolean diabete = input.nextBoolean();
-                                System.out.println("Possui doença cardiovascular? ");
-                                boolean doencaCardio = input.nextBoolean();
-                                System.out.println("Possui alguma cirurgia? ");
-                                ArrayList<String> cirurgias = input.next(); // arrumar a inserção na lista
-                                // perguntar quantas cirurgias ja foram feitas
-                                // fazer um laço com esse número
-                                // para ir lendo uma String por uma
-                                // e ir inserindo na lista com o método *setCirurgias*
-                                 public void setCirurgias(ArrayList<String> cirurgias) {
-                                    this.cirurgias = cirurgias; //DEFINE UMA LISTA DE CIRURGIAS.
+                                System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx): ");
+                                int iPac = buscar.acharCPF(input.next(), listaPacientes); // acha o íncide do paciente na lista de pacientes
+                                if(iPac != -1) {
+                                    int iCon = buscar.acharConsulta(listaConsultas, listaPacientes.get(iPac));
+                                    System.out.printf("Insira os dados do paciente:\nFuma? ");
+                                    boolean fumar = "SIM".equals(input.next().toUpperCase()); //trocar para uma expressão, pois a pessoa não vai inserir true ou false, mas sim ou não.
+                                    System.out.println("Bebe álcool? ");
+                                    boolean beber = "SIM".equals(input.next().toUpperCase());                                
+                                    System.out.println("Possui colesterol alto? ");
+                                    boolean colesterol = "SIM".equals(input.next().toUpperCase());
+                                    System.out.println("Possui diabetes? ");
+                                    boolean diabete = "SIM".equals(input.next().toUpperCase());
+                                    System.out.println("Possui doença cardiovascular? ");
+                                    boolean doencaCardio = "SIM".equals(input.next().toUpperCase());
+                                    System.out.println("Possui alguma cirurgia? Se sim, quantas? ");
+                                    int numCirurgias = input.nextInt(); // pega o número de cirurgias pra formar o looping
+                                    ArrayList<String> cirurgias; // arrumar a inserção na lista
+                                    // perguntar quantas cirurgias ja foram feitas
+                                    // fazer um laço com esse número
+                                    // para ir lendo uma String por uma
+                                    // e ir inserindo na lista com o método *setCirurgias*
+                                    /*public void setCirurgias(ArrayList<String> cirurgias) {
+                                        this.cirurgias = cirurgias; //DEFINE UMA LISTA DE CIRURGIAS.
+                                    }
+                                    public void setCirurgias(String cirurgia) {
+                                        this.cirurgias.add(cirurgia); //ADICIONA UMA NOVA CIRURGIA A LISTA.
+                                    }*/
+                                    ArrayList<String> alergias;
+                                    //medAtual.cadastrarDadosPaciente(listaConsultas.get(iCon), fumar, beber, colesterol, diabete, doencaCardio, cirurgias, alergias);
                                 }
-                                public void setCirurgias(String cirurgia) {
-                                    this.cirurgias.add(cirurgia); //ADICIONA UMA NOVA CIRURGIA A LISTA.
-                                }
-                                
-                
-                                med.cadastrarDadosPaciente(Consulta consulta, fumar, beber, colesterol, diabete, doencaCardio, cirurgias, ArrayList<String> alergias) {
-
-                                
+                                break;
                             case 2: /*Iniciar consulta - atualizar dados do paciente*/
+                                break;
+                            case 3: /*Cadastrar prontuário*/
+                                System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
+                                iPac = buscar.acharCPF(input.next(), listaPacientes);
+                                break;
+                            case 4: /*Atualizar prontuário*/
+                                break;
+                            case 5: /*Remover prontuário*/
+                                System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
+                                iPac = buscar.acharCPF(input.next(), listaPacientes);
                                 
-                            default: /*Sair*/
-                        }
+                                break;
+                            case 6: /*Gerar relatório*/
+                                System.out.println("Qual relatório será gerado? (OPÇÕES - 'A': Atestado, 'D': Declaração de Acompanhamento, 'R': Receita, 'N': Número de clientes atendidos):");
+                                char relatorio = input.next().charAt(0);
+                                //switch pra escolher qual tipo e qual tipo chamar -> pegar as informações específicas dentro do switch.
+                                break;
+                            default:
+                                System.out.println("OPÇÃO INVÁLIDA!");
+                        } //enquanto não digitar 7 -> saida, o while continua
+                        System.out.println("Selecione a ação:\n(1) Cadastrar dados do paciente;\n(2) Atualizar dados do paciente;\n(3) Cadastrar prontuário;\n(4) Atualizar prontuário;\n(5) Remover prontuário;\n(6) Gerar relatório;\n(7) Sair;");
+                        acao = input.nextInt();
                     }
+                }
                 
-                }
-                else {
-                    System.out.println("Médico não encontrado");
-                }
-                                             
-            }
-            else {
-                System.out.println("Usuário inválido");
             }
         }
-                
     }
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Execução;
+package Auxiliar;
 import Dados.Paciente;
 import Dados.Consulta;
 import Funcionarios.Medico;
@@ -20,7 +20,7 @@ public class Busca {
         if(i < listaPacientes.size()) {
             return i;
         } else {
-            System.out.println("Paciente não encontrado!");
+            System.out.println("PACIENTE NÃO ENCONTRADO!");
             return -1;
         }
     }
@@ -33,7 +33,7 @@ public class Busca {
         if(i < listaMedicos.size()) {
             return i; //retorna a posição do médico correto na lista.
         } else {
-            System.out.println("Médico não encontrado!");
+            System.out.println("MÉDICO NÃO ENCONTRADO!");
             return -1;
         }
     }
@@ -46,8 +46,22 @@ public class Busca {
         if(i < listaConsultas.size()) {
             return i; //retorna a posição do médico correto na lista.
         } else {
-            System.out.println("Consulta não encontrada!");
+            System.out.println("CONSULTA NÃO ENCONTRADA!");
             return -1;
         }
     }
+    
+    public int acharConsulta(ArrayList<Consulta> listaConsultas, Paciente paciente) {
+        int i = 0;
+        while((i < listaConsultas.size())&&(paciente != listaConsultas.get(i).getPaciente())){
+            i++;
+        }
+        if(i < listaConsultas.size()) {
+            return i; //retorna a posição do médico correto na lista.
+        } else {
+            System.out.println("CONSULTA NÃO ENCONTRADA!");
+            return -1;
+        }
+    }
+    
 }
