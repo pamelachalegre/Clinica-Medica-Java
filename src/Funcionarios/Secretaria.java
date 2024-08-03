@@ -1,7 +1,7 @@
 package Funcionarios;
 import Dados.Paciente;
 import Dados.Consulta;
-import Execução.Busca;
+import Auxilia.Busca;
 import Geradores.GerenciadorMensagens;
 import java.util.ArrayList;
 

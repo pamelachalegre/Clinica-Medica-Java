@@ -1,4 +1,4 @@
-package Auxiliar;
+package Auxilia;
 import Dados.Paciente;
 import Dados.Consulta;
 import Funcionarios.Medico;

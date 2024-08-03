@@ -1,5 +1,5 @@
 package Execução;
-import Auxiliar.Busca;
+import Auxilia.Busca;
 import Funcionarios.Medico;
 import Funcionarios.Secretaria;
 import Dados.Paciente;
@@ -31,18 +31,38 @@ public class Main {
         listaMedicos.add(med7);
 
         ArrayList<Paciente> listaPacientes = new ArrayList<>();
-        Paciente pac1 = new Paciente("Ana Paula", "111.222.333-44", "11.222.333-4", 'F', 18, "03/09/2005", "Avenida Maringá, 123", "44 99999-9999", "usuario@exemplo.com", true);
+        Paciente pac1 = new Paciente("ANA PAULA", "111.222.333-44", "11.222.333-4", 'F', 18, "03/09/2005", "Avenida Maringá, 123", "44 99999-9999", "usuario@exemplo.com", true);
+        Paciente pac2 = new Paciente("CARLOS SILVA", "222.333.444-55", "22.333.444-5", 'M', 25, "15/02/1999", "Rua das Flores, 456", "44 88888-8888", "carlos@exemplo.com", true);
+        Paciente pac3 = new Paciente("MARIA SOUZA", "333.444.555-66", "33.444.555-6", 'F', 30, "07/11/1993", "Avenida Central, 789", "44 77777-7777", "maria@exemplo.com", true);
+        Paciente pac4 = new Paciente("JOÃO OLIVEIRA", "444.555.666-77", "44.555.666-7", 'M', 40, "23/05/1983", "Rua Nova, 101", "44 66666-6666", "joao@exemplo.com", true);
+        Paciente pac5 = new Paciente("FERNANDA LIMA", "555.666.777-88", "55.666.777-8", 'F', 35, "12/08/1988", "Avenida Paulista, 202", "44 55555-5555", "fernanda@exemplo.com", true);
+        Paciente pac6 = new Paciente("PAULO MENDES", "666.777.888-99", "66.777.888-9", 'M', 28, "30/01/1996", "Rua Principal, 303", "44 44444-4444", "paulo@exemplo.com", true);
+        Paciente pac7 = new Paciente("JULIANA COSTA", "777.888.999-00", "77.888.999-0", 'F', 22, "19/06/2001", "Avenida Secundária, 404", "44 33333-3333", "juliana@exemplo.com", true);
         listaPacientes.add(pac1);
-        // criar mais alguns pacientes
+        listaPacientes.add(pac2);
+        listaPacientes.add(pac3);
+        listaPacientes.add(pac4);
+        listaPacientes.add(pac5);
+        listaPacientes.add(pac6);
+        listaPacientes.add(pac7);
         
         ArrayList<Consulta> listaConsultas = new ArrayList<>();
         Consulta con1 = new Consulta("14/09/2023", "15:00", listaMedicos.get(0), listaPacientes.get(0), 'N');
         Consulta con2 = new Consulta("02/08/2024", "15:00", listaMedicos.get(1), listaPacientes.get(0), 'N');
+        Consulta con3 = new Consulta("05/10/2023", "10:00", listaMedicos.get(2), listaPacientes.get(1), 'N');
+        Consulta con4 = new Consulta("16/11/2023", "11:00", listaMedicos.get(3), listaPacientes.get(2), 'N');
+        Consulta con5 = new Consulta("28/12/2023", "14:00", listaMedicos.get(4), listaPacientes.get(3), 'R');
+        Consulta con6 = new Consulta("07/01/2024", "09:00", listaMedicos.get(5), listaPacientes.get(4), 'R');
+        Consulta con7 = new Consulta("18/02/2024", "13:00", listaMedicos.get(6), listaPacientes.get(5), 'R');
         listaConsultas.add(con1);
         listaConsultas.add(con2);
-        // criar mais algumas consultas
+        listaConsultas.add(con3);
+        listaConsultas.add(con4);
+        listaConsultas.add(con5);
+        listaConsultas.add(con6);
+        listaConsultas.add(con7);
         
-        Secretaria secretaria = new Secretaria("MARIA GABRIELA"); //única
+        Secretaria secretaria = new Secretaria("MARIA GABRIELA"); // unica
         
         Busca buscar = new Busca();
         
@@ -181,7 +201,7 @@ public class Main {
                                     boolean doencaCardio = "SIM".equals(input.next().toUpperCase());
                                     System.out.println("Possui alguma cirurgia? Se sim, quantas? ");
                                     int numCirurgias = input.nextInt();
-                                    ArrayList<String> cirurgias;
+                                    ArrayList<String> cirurgias = new ArrayList<>();
                                     for (int i = 0; i == numCirurgias; i++) {
                                         System.out.println("Cirurgia número" + i + ":");
                                         String cirurgia = input.nextLine();
@@ -189,7 +209,7 @@ public class Main {
                                     }
                                     System.out.println("Possui alguma alergia? Se sim, quantas? ");
                                     int numAlergias = input.nextInt();
-                                    ArrayList<String> alergias;
+                                    ArrayList<String> alergias = new ArrayList<>();
                                     for (int i = 0; i == numAlergias; i++) {
                                         System.out.println("Alergia número" + i + ":");
                                         String alergia = input.nextLine();
