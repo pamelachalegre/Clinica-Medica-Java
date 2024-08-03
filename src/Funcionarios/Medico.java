@@ -15,7 +15,7 @@ public class Medico {
      * Objeto identificado pelos atributos nome e crm, mas possui métodos para manipular outros objetos, como gerar um
      * novo objeto Relatório e modificar características de um objeto Paciente.
      */
-    //DADOS PESSOAIS
+    //DADOS PESSOAIS:
     private String nome;
     private String crm;
     private ArrayList<Consulta> Atendimentos;
@@ -147,7 +147,7 @@ public class Medico {
         consulta.getPaciente().setProntuario(prontuario);
     }
     
-    public void atualizaProntuario(Paciente paciente, String atualizacao, char mudanca) {
+    public void atualizarProntuario(Paciente paciente, String atualizacao, char mudanca) {
         /*
         Altera algum dado do prontuário do paciente
         */
@@ -158,6 +158,12 @@ public class Medico {
             default -> {
             }
         }
+    }
+    
+    public void removerProntuario(Paciente paciente) {
+        paciente.getProntuario().setSintomas(null);
+        paciente.getProntuario().setDiagnostico(null);
+        paciente.getProntuario().setTratamento(null);
     }
     
     // METODOS DOS RELATORIOS:
