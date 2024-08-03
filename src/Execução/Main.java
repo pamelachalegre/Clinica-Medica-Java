@@ -4,6 +4,7 @@ import Funcionarios.Medico;
 import Funcionarios.Secretaria;
 import Dados.Paciente;
 import Dados.Consulta;
+import Dados.Prontuario;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -188,7 +189,7 @@ public class Main {
                                 int iPac = buscar.acharCPF(input.next(), listaPacientes); // acha o íncide do paciente na lista de pacientes
                                 if(iPac != -1) {
                                     Paciente pacAtual = listaPacientes.get(iPac);
-                                    int iCon = buscar.acharConsulta(listaConsultas, pacAtual); //pacAtual é um Paciente, e não uma String de id
+                                    int iCon = buscar.acharConsulta(listaConsultas, pacAtual);
                                     System.out.printf("Insira os dados do paciente:\nFuma? ");
                                     boolean fumar = "SIM".equals(input.next().toUpperCase()); //trocar para uma expressão, pois a pessoa não vai inserir true ou false, mas sim ou não.
                                     System.out.println("Bebe álcool? ");
@@ -217,10 +218,11 @@ public class Main {
                                     }
                                     medAtual.cadastrarDadosPaciente(listaConsultas.get(iCon), fumar, beber, colesterol, diabete, doencaCardio, cirurgias, alergias);
                                 }
+                                System.out.println("PACIENTE CADASTRADO COM SUCESSO!");
                                 break;
                             case 2: /*Iniciar consulta - atualizar dados do paciente*/
                                 System.out.println("Insira o CPF (xxx.xxx.xxx-xx) do paciente a ser alterado: ");
-                                int i = buscar.acharCPF(input.next(), listaPacientes); //indice do paciente a ser alterado na lista
+                                int i = buscar.acharCPF(input.next(), listaPacientes);
                                 if(i != -1) {
                                     System.out.println("Campo de alteração: 'F' - fumar; 'B' - beber; 'C' - colesterol alto; 'D' - diabetes; 'H' - doença cardio; 'S' - cirurgias; 'A' - alergias.\nDigite uma das opções mostradas:");
                                     char atributo = input.next().charAt(0);
@@ -230,12 +232,44 @@ public class Main {
                                     Paciente pacAtual = listaPacientes.get(i);
                                     medAtual.atualizarPaciente(pacAtual, atributo, novoDado);
                                 }
+                                System.out.println("DADOS DO PACIENTE ATUALIZADOS COM SUCESSO!");
                                 break;
                             case 3: /*Cadastrar prontuário*/
                                 System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
                                 iPac = buscar.acharCPF(input.next(), listaPacientes);
+                                Paciente pacAtual = listaPacientes.get(iPac);
+                                int iCon = buscar.acharConsulta(listaConsultas, pacAtual);
+                                System.out.println("Quais são os sintomas? ");
+                                String sintomas = input.nextLine();
+                                System.out.println("Qual é o diagnóstico? ");
+                                String diagnostico = input.nextLine();
+                                System.out.println("Qual é o tratamento? ");
+                                String tratamento = input.nextLine();
+                                medAtual.cadastrarProntuario(listaConsultas.get(iCon), sintomas, diagnostico, tratamento);
+                                System.out.println("PRONTUÁRIO CADASTRADO COM SUCESSO!");
                                 break;
                             case 4: /*Atualizar prontuário*/
+                                System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
+                                iPac = buscar.acharCPF(input.next(), listaPacientes);
+                                // aqui ainda tem que 'entrar' no paciente certo
+                                public void atualizaProntuario(Paciente paciente, String atualizacao, char mudanca) {
+                                    /*
+                                    Altera algum dado do prontuário do paciente
+                                    */
+                                    switch(mudanca) {
+                                        case 'S' -> paciente.getProntuario().setSintomas(atualizacao);
+                                        case 'D' -> paciente.getProntuario().setDiagnostico(atualizacao);
+                                        case 'T' -> paciente.getProntuario().setTratamento(atualizacao);
+                                        default -> {
+                                        }
+                                    }
+                                System.out.println("Quais são os sintomas? ");
+                                String sintomas = input.nextLine();
+                                System.out.println("Qual é o diagnóstico? ");
+                                String diagnostico = input.nextLine();
+                                System.out.println("Qual é o tratamento? ");
+                                String tratamento = input.nextLine();
+                                System.out.println("PRONTUÁRIO ATUALIZADO COM SUCESSO!");
                                 break;
                             case 5: /*Remover prontuário*/
                                 System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
@@ -246,6 +280,7 @@ public class Main {
                                 System.out.println("Qual relatório será gerado? (OPÇÕES - 'A': Atestado, 'D': Declaração de Acompanhamento, 'R': Receita, 'N': Número de clientes atendidos):");
                                 char relatorio = input.next().charAt(0);
                                 //switch pra escolher qual tipo e qual tipo chamar -> pegar as informações específicas dentro do switch.
+                                
                                 break;
                             default:
                                 System.out.println("OPÇÃO INVÁLIDA!");
