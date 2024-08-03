@@ -240,6 +240,7 @@ public class Main {
                                 Paciente pacAtual = listaPacientes.get(iPac);
                                 int iCon = buscar.acharConsulta(listaConsultas, pacAtual);
                                 System.out.println("Quais são os sintomas? ");
+                                input.nextLine(); //pega quebras de linha sobressalentes
                                 String sintomas = input.nextLine();
                                 System.out.println("Qual é o diagnóstico? ");
                                 String diagnostico = input.nextLine();
@@ -271,8 +272,56 @@ public class Main {
                             case 6: /*Gerar relatório*/
                                 System.out.println("Qual relatório será gerado? (OPÇÕES - 'A': Atestado, 'D': Declaração de Acompanhamento, 'R': Receita, 'N': Número de clientes atendidos):");
                                 char relatorio = input.next().charAt(0);
-                                //switch pra escolher qual tipo e qual tipo chamar -> pegar as informações específicas dentro do switch.
-                                
+                                switch(relatorio){
+                                    case 'A':
+                                        System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
+                                        iPac = buscar.acharCPF(input.next(), listaPacientes);
+                                        pacAtual = listaPacientes.get(iPac);
+                                        System.out.println("Quantos dias de afastamento?");
+                                        int dias = input.nextInt();
+                                        System.out.println("Qual a data de início?");
+                                        String dataInicio = input.next();
+                                        medAtual.criarEImprimirAtestado(medAtual, pacAtual, pacAtual.getProntuario(), dias, dataInicio);
+                                        break;
+                                    case 'D':
+                                        System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
+                                        iPac = buscar.acharCPF(input.next(), listaPacientes);
+                                        pacAtual = listaPacientes.get(iPac);
+                                        System.out.println("Insira a data:");
+                                        String data = input.next();
+                                        System.out.println("Insira o nome do acompanhante:");
+                                        input.nextLine(); //pega quebras de linha sobressalentes
+                                        String acompanhante = input.nextLine();
+                                        System.out.println("Qual o parentesco do acompanhante?");
+                                        String parentesco = input.next();                                      
+                                        medAtual.gerarDeclaracao(medAtual, pacAtual, pacAtual.getProntuario(), data, parentesco, acompanhante);
+                                        break;
+                                    case 'R':
+                                        System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
+                                        iPac = buscar.acharCPF(input.next(), listaPacientes);
+                                        pacAtual = listaPacientes.get(iPac);
+                                        System.out.println("Qual o remédio?");
+                                        input.nextLine(); //pega quebras de linha sobressalentes
+                                        String remedio = input.nextLine();
+                                        System.out.println("Qual a dosagem?");
+                                        float dose = input.nextFloat();
+                                        input.nextLine(); //pega quebras de linha sobressalentes
+                                        String uso = input.nextLine();
+                                        System.out.println("Quantas vezes ao dia?");
+                                        int vezes = input.nextInt();
+                                        medAtual.criarReceita(medAtual, pacAtual, remedio, dose, uso, vezes);
+                                        break;
+                                    case 'N':
+                                        System.out.println("Insira o ano desejado (XXXX):");
+                                        int ano = input.nextInt();
+                                        System.out.println("Insira o mês (1 - 12):");
+                                        int mes = input.nextInt();
+                                        medAtual.clientesAtendidos(medAtual.getPacientesAtendidos(), mes, ano);
+                                        break;
+                                    default:
+                                        System.out.println("CAMPO INVÁLIDO!");
+                                        break;
+                                }
                                 break;
                             default:
                                 System.out.println("OPÇÃO INVÁLIDA!");
@@ -281,7 +330,8 @@ public class Main {
                         acao = input.nextInt();
                     }
                 }
-                
+            } else {
+                System.out.println("USUÁRIO INVÁLIDO!");
             }
         }
     }
