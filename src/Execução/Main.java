@@ -251,30 +251,22 @@ public class Main {
                             case 4: /*Atualizar prontuário*/
                                 System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
                                 iPac = buscar.acharCPF(input.next(), listaPacientes);
-                                // aqui ainda tem que 'entrar' no paciente certo
-                                public void atualizaProntuario(Paciente paciente, String atualizacao, char mudanca) {
-                                    /*
-                                    Altera algum dado do prontuário do paciente
-                                    */
-                                    switch(mudanca) {
-                                        case 'S' -> paciente.getProntuario().setSintomas(atualizacao);
-                                        case 'D' -> paciente.getProntuario().setDiagnostico(atualizacao);
-                                        case 'T' -> paciente.getProntuario().setTratamento(atualizacao);
-                                        default -> {
-                                        }
-                                    }
-                                System.out.println("Quais são os sintomas? ");
-                                String sintomas = input.nextLine();
-                                System.out.println("Qual é o diagnóstico? ");
-                                String diagnostico = input.nextLine();
-                                System.out.println("Qual é o tratamento? ");
-                                String tratamento = input.nextLine();
+                                pacAtual = listaPacientes.get(iPac);
+                                iCon = buscar.acharConsulta(listaConsultas, pacAtual);
+                                System.out.println("Campo de alteração: 'S' - sintomas; 'D' - diagnostico; 'T' - tratamento\nDigite uma das opções mostradas:");
+                                char mudanca = input.next().charAt(0);
+                                System.out.printf("Insira o novo dado: ");
+                                input.nextLine(); // pega os espaços sobressalentes dos Scanners anteriores
+                                String atualizacao = input.nextLine();
+                                medAtual.atualizarProntuario(pacAtual, atualizacao, mudanca);
                                 System.out.println("PRONTUÁRIO ATUALIZADO COM SUCESSO!");
                                 break;
                             case 5: /*Remover prontuário*/
                                 System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
                                 iPac = buscar.acharCPF(input.next(), listaPacientes);
-                                
+                                pacAtual = listaPacientes.get(iPac);
+                                medAtual.removerProntuario(pacAtual);
+                                System.out.println("PRONTUÁRIO REMOVIDO COM SUCESSO!");
                                 break;
                             case 6: /*Gerar relatório*/
                                 System.out.println("Qual relatório será gerado? (OPÇÕES - 'A': Atestado, 'D': Declaração de Acompanhamento, 'R': Receita, 'N': Número de clientes atendidos):");
