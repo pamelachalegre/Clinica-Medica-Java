@@ -188,9 +188,9 @@ public class Main {
                                         pacAtual.setCirurgias(cirurgia);
                                     }
                                     System.out.println("Possui alguma alergia? Se sim, quantas? ");
-                                    int numAlergias = input.nextInt(); // pega o número de cirurgias pra formar o looping
-                                    ArrayList<String> alergias; // arrumar a inserção na lista
-                                    for (int i = 0; i == numCirurgias; i++) {
+                                    int numAlergias = input.nextInt();
+                                    ArrayList<String> alergias;
+                                    for (int i = 0; i == numAlergias; i++) {
                                         System.out.println("Alergia número" + i + ":");
                                         String alergia = input.nextLine();
                                         pacAtual.setAlergias(alergia);
@@ -199,6 +199,17 @@ public class Main {
                                 }
                                 break;
                             case 2: /*Iniciar consulta - atualizar dados do paciente*/
+                                System.out.println("Insira o CPF (xxx.xxx.xxx-xx) do paciente a ser alterado: ");
+                                int i = buscar.acharCPF(input.next(), listaPacientes); //indice do paciente a ser alterado na lista
+                                if(i != -1) {
+                                    System.out.println("Campo de alteração: 'F' - fumar; 'B' - beber; 'C' - colesterol alto; 'D' - diabetes; 'H' - doença cardio; 'S' - cirurgias; 'A' - alergias.\nDigite uma das opções mostradas:");
+                                    char atributo = input.next().charAt(0);
+                                    System.out.printf("Insira o novo dado: ");
+                                    input.nextLine(); // pega os espaços sobressalentes dos Scanners anteriores.
+                                    String novoDado = input.nextLine();
+                                    Paciente pacAtual = listaPacientes.get(i);
+                                    medAtual.atualizarPaciente(pacAtual, atributo, novoDado);
+                                }
                                 break;
                             case 3: /*Cadastrar prontuário*/
                                 System.out.println("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
