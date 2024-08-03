@@ -75,8 +75,8 @@ public class Medico {
     public void atualizaPacienteDiabete(Paciente paciente, boolean diabete) {
         paciente.setDiabete(diabete);
     }
-    public void atualizaPacienteDoencaCardio(Paciente paciente, boolean cardio) {
-        paciente.setDoencaCardio(cardio);
+    public void atualizaPacienteDoencaCardio(Paciente paciente, boolean doencaCardio) {
+        paciente.setDoencaCardio(doencaCardio);
     }
     /*
     Por conta do polimorfismo de sobreposição aplicado aos sets dos atributos 'cirurgias' e 'alergias' do Paciente, há
@@ -97,6 +97,46 @@ public class Medico {
     public void atualizaPacienteAlergia(Paciente paciente, String alergia) { 
         //define as alergias do paciente
         paciente.getAlergias().add(alergia);
+    }
+    
+    public void atualizarPaciente(Paciente paciente, char campo, String novoDado) {
+        switch(campo){
+            case 'F':
+                boolean fumar = "SIM".equals(novoDado.toUpperCase());                                
+                this.atualizaPacienteFuma(paciente, fumar);
+                System.out.printf("Dado alterado!");
+                break;
+            case 'B':
+                boolean beber = "SIM".equals(novoDado.toUpperCase());                                
+                this.atualizaPacienteBebe(paciente, beber);
+                System.out.println("Dado alterado!");
+                break;
+            case 'C':
+                boolean colesterol = "SIM".equals(novoDado.toUpperCase());
+                this.atualizaPacienteColesterol(paciente, colesterol);
+                System.out.println("Dado alterado!");
+                break;
+            case 'D':
+                boolean diabete = "SIM".equals(novoDado.toUpperCase());
+                this.atualizaPacienteDiabete(paciente, diabete);
+                System.out.printf("Dado alterado!");
+                break;
+            case 'H': // heart
+                boolean doencaCardio = "SIM".equals(novoDado.toUpperCase());
+                this.atualizaPacienteDoencaCardio(paciente, doencaCardio);
+                System.out.printf("Dado alterado!");
+                break;
+            case 'S': // surgery
+                this.atualizaPacienteCirurgias(paciente, novoDado);
+                System.out.printf("Dado alterado!");
+                break;
+            case 'A':
+                this.atualizaPacienteAlergia(paciente, novoDado);
+                System.out.printf("Dado alterado!");
+                break;
+            default:
+                System.out.println("Campo inválido!");
+        }
     }
     
     public void cadastrarProntuario(Consulta consulta, String sintomas, String diagnostico, String tratamento) {
