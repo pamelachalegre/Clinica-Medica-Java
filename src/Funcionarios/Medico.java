@@ -20,14 +20,15 @@ public class Medico extends Funcionario {
     private String crm;
     private ArrayList<Consulta> atendimentos;
     
-    //Método construtor:    
+    // Método construtor:
+    public Medico(){}
     public Medico(String nome, String cpf, float salario, ArrayList<Consulta> listaConsultas, ArrayList<Paciente> listaPacientes, String crm, ArrayList<Consulta> atendimentos) {
         super(nome, cpf, salario, listaConsultas, listaPacientes);
         this.crm = crm;
         this.atendimentos =  new ArrayList<Consulta>();
     }
 
-    //Sets e Gets para os atributos:
+    // Sets e Gets para os atributos:
     public String getCrm() {
         return crm;
     }
@@ -189,7 +190,7 @@ public class Medico extends Funcionario {
                 }
             }
         }
-        // Retorna o numero de pacientes únicos atendidos
+        // Retorna o numero de pacientes unicos atendidos
         return numPacientes;
     }
 }
