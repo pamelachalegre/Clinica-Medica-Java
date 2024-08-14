@@ -1,27 +1,26 @@
 package Funcionarios;
+import Auxilia.Busca;
 import Dados.Paciente;
 import Dados.Consulta;
-import Auxilia.Busca;
 import Geradores.GerenciadorMensagens;
 import java.util.ArrayList;
 
-public class Secretaria {
-    /**
-     * Objeto identificado pelo atributo nome com métodos que manipulam outros objetos, como 
-     */
-    private String nome;
-
-    public String getNome() {
-        return nome;
+public class Secretaria extends Funcionario {
+    /*
+    Objeto que herda as características de *Funcionario*.
+    Possui métodos para manipular outros objetos, como *Relatorio* e *Paciente*. 
+    Também é capaz de criar os objetos *Atestado*, *DeclaracaoAcompanhamento*,
+    e *Receita*.
+    */
+    
+    // Métodos construtores:
+    public Secretaria() {}
+    public Secretaria(String nome, String cpf, double salario, ArrayList<Consulta> listaConsultas, ArrayList<Paciente> listaPacientes) {
+        super(nome, cpf, salario, listaConsultas, listaPacientes);
     }
     
-    //CONSTRUTOR -> DEFINE A CARACTERÍSTICA
-    public Secretaria(String nome) {
-        this.nome = nome;
-    }
-    
-    public void cadastrarConsulta(ArrayList<Consulta> listaConsultas, String data, String horario, Medico medico, Paciente paciente, char tipo) {
-        //ADICIONA UMA NOVA CONSULTA A LISTA DE CONSULTAS
+    public void cadastrarConsulta(String data, String horario, Medico medico, Paciente paciente, char tipo) {
+        // Cria uma nova consulta e adiciona na lista de consultas
         Consulta consulta = new Consulta(data, horario, medico, paciente, tipo);
         listaConsultas.add(consulta);
     }
@@ -31,21 +30,21 @@ public class Secretaria {
         consulta.setHorario(hora);
     }
     
-    public void removerConsulta(ArrayList<Consulta> listaConsultas, int indice) {
+    public void removerConsulta(int indice) {
         listaConsultas.remove(indice);
         System.out.println("CONSULTA CANCELADA");
     }
-    
-    
-    /*public void atualizarConsultaMedico(Consulta consulta, Medico medico) {
+  
+    /*
+    public void atualizarConsultaMedico(Consulta consulta, Medico medico) {
         consulta.setMedico(medico);
     }
-    
     public void atualizarConsultaPaciente(Consulta consulta, Paciente paciente) {
         consulta.setPaciente(paciente);
     }
     */
-    public void cadastrarPaciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio, ArrayList<Paciente> listaPacientes) {
+    
+    public void cadastrarPaciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio) {
         //CRIA UM PACIENTE E O ADICIONA NA LISTA DE PACIENTES
         Paciente paciente = new Paciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio);
         listaPacientes.add(paciente);
@@ -79,7 +78,8 @@ public class Secretaria {
                 System.out.printf("Dado alterado!");
                 break;
             case 'C':
-                boolean novoConvenio = "CONVENIO".equals(novoDado.toUpperCase()); //se for novoDado for convenio, retorna true
+                boolean novoConvenio = "CONVENIO".equals(novoDado.toUpperCase());
+                // se o *novoDado* for convenio, retorna true
                 this.atualizarPacienteConvenio(paciente, novoConvenio);
                 System.out.printf("Dado alterado!");
                 break;
@@ -111,17 +111,18 @@ public class Secretaria {
         paciente.setConvenio(conve);
     }
 
-    public void removerPaciente(String identificador, ArrayList<Paciente> listaPacientes) {
+    public void removerPaciente(String identificador) {
         //RETIRA O PACIENTE DE IDENTIFICADOR DA LISTA DE PACIENTES
         Busca busca = new Busca();
-        int i = busca.acharCPF(identificador, listaPacientes);
+        String cpf = identificador;
+        int i = busca.acharCPF(cpf, listaPacientes);
         if(i != -1) {
             listaPacientes.remove(i);
             System.out.println("PACIENTE REMOVIDO!");
         }
     }
     
-    public void gerenciarMensagens(ArrayList<Consulta> listaConsultas) {
+    public void gerenciarMensagens() {
         GerenciadorMensagens enviar = new GerenciadorMensagens();
         enviar.gerenciarMensagens(listaConsultas);
     }
