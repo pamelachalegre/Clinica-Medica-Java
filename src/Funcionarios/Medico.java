@@ -21,8 +21,8 @@ public class Medico extends Funcionario {
     private ArrayList<Consulta> atendimentos;
     
     // Método construtor:
-    public Medico(){}
-    public Medico(String nome, String cpf, float salario, ArrayList<Consulta> listaConsultas, ArrayList<Paciente> listaPacientes, String crm, ArrayList<Consulta> atendimentos) {
+    public Medico() {}
+    public Medico(String nome, String cpf, double salario, ArrayList<Consulta> listaConsultas, ArrayList<Paciente> listaPacientes, String crm, ArrayList<Consulta> atendimentos) {
         super(nome, cpf, salario, listaConsultas, listaPacientes);
         this.crm = crm;
         this.atendimentos =  new ArrayList<Consulta>();
