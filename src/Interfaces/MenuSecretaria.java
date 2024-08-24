@@ -9,7 +9,7 @@ package Interfaces;
  * @author home
  */
 public class MenuSecretaria extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form MenuSecretaria
      */
@@ -64,6 +64,11 @@ public class MenuSecretaria extends javax.swing.JFrame {
 
         jButton4.setBackground(new java.awt.Color(224, 188, 255));
         jButton4.setText("Nova Consulta");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarConsulta(evt);
+            }
+        });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 240, -1));
 
         jButton5.setBackground(new java.awt.Color(224, 188, 255));
@@ -76,6 +81,11 @@ public class MenuSecretaria extends javax.swing.JFrame {
 
         jButton7.setBackground(new java.awt.Color(224, 188, 255));
         jButton7.setText("Gerenciar Consultas - Dia Seguinte");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gerenciarMensagens(evt);
+            }
+        });
         getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 240, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -97,7 +107,8 @@ public class MenuSecretaria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPaciente
-        // TODO add your handling code here:
+        setVisible(false);
+        new CadastroPaciente().setVisible(true);
     }//GEN-LAST:event_cadastrarPaciente
 
     private void sair(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sair
@@ -107,6 +118,17 @@ public class MenuSecretaria extends javax.swing.JFrame {
         setVisible(false);
         new MenuPrincipal().setVisible(true);
     }//GEN-LAST:event_sair
+
+    private void cadastrarConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarConsulta
+        // TODO add your handling code here:
+        setVisible(false);
+        new NovaConsulta().setVisible(true);
+    }//GEN-LAST:event_cadastrarConsulta
+
+    private void gerenciarMensagens(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarMensagens
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_gerenciarMensagens
 
 
 
