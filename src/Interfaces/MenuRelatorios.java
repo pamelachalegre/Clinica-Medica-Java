@@ -74,8 +74,7 @@ public class MenuRelatorios extends javax.swing.JFrame {
 
     private void cancelarRelatorio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarRelatorio
         // TODO add your handling code here:
-        setVisible(false);
-        new MenuMedico().setVisible(true);
+        dispose();
     }//GEN-LAST:event_cancelarRelatorio
 
     /**

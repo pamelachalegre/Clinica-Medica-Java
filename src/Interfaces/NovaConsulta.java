@@ -4,12 +4,14 @@
  */
 package Interfaces;
 
+import Funcionarios.Secretaria;
+
 /**
  *
  * @author home
  */
 public class NovaConsulta extends javax.swing.JFrame {
-
+    Secretaria sec;
     /**
      * Creates new form NovaConsulta
      */
@@ -32,14 +34,15 @@ public class NovaConsulta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        data = new javax.swing.JTextField();
+        hora = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jTextField3 = new javax.swing.JTextField();
+        retorno = new javax.swing.JCheckBox();
+        cpfPaciente = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        crmMedico = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clinica Medica");
@@ -55,20 +58,17 @@ public class NovaConsulta extends javax.swing.JFrame {
 
         jLabel3.setText("Horário:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, 20));
+        getContentPane().add(data, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 110, -1));
+        getContentPane().add(hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 120, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 180, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 110, -1));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 120, -1));
-
-        jLabel4.setText("Médico:");
+        jLabel4.setText("Médico (CRM):");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, 20));
 
-        jCheckBox1.setText("Consulta de retorno");
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 230, -1));
+        retorno.setText("Consulta de retorno");
+        getContentPane().add(retorno, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
+        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 230, -1));
 
-        jLabel5.setText("Paciente (nome completo):");
+        jLabel5.setText("Paciente (CPF):");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, 20));
 
         jButton1.setBackground(new java.awt.Color(224, 188, 255));
@@ -78,30 +78,51 @@ public class NovaConsulta extends javax.swing.JFrame {
                 cadastrarConsulta(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
+
+        jButton2.setForeground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarCadastro(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        getContentPane().add(crmMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrarConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarConsulta
         // TODO add your handling code here:
+        sec = new Secretaria();
+        
+        //BUSCAR crmMedico no banco de dados.
+        
+        //sec.cadastrarConsulta(data.getText(), hora.getText(), crmMedico.getText(), cpfPaciente.getText(), retorno.isSelected());
     }//GEN-LAST:event_cadastrarConsulta
+
+    private void cancelarCadastro(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCadastro
+        // TODO add your handling code here:
+        dispose(); //setVisivble(false); ????
+    }//GEN-LAST:event_cancelarCadastro
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cpfPaciente;
+    private javax.swing.JTextField crmMedico;
+    private javax.swing.JTextField data;
+    private javax.swing.JTextField hora;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JCheckBox retorno;
     // End of variables declaration//GEN-END:variables
 }

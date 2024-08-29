@@ -4,18 +4,22 @@
  */
 package Interfaces;
 
+import Funcionarios.Secretaria;
+
 /**
  *
  * @author home
  */
 public class CadastroPaciente extends javax.swing.JFrame {
-
+    
+    private Secretaria sec;
+    
     /**
      * Creates new form CadastroPaciente
      */
     public CadastroPaciente() {
         initComponents();
-        setSize(640, 480);
+        setSize(540, 450);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
     }
@@ -33,24 +37,24 @@ public class CadastroPaciente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        nome = new javax.swing.JTextField();
+        cpf = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        rg = new javax.swing.JTextField();
+        idade = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        telefone = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField8 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        endereco = new javax.swing.JTextField();
+        feminino = new javax.swing.JRadioButton();
+        masculino = new javax.swing.JRadioButton();
+        dataNascimento = new javax.swing.JTextField();
+        convenio = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -61,61 +65,61 @@ public class CadastroPaciente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(165, 107, 255));
         jLabel1.setText("CADASTRO - PACIENTE");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Nome completo:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 100, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 100, 20));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("CPF (xxx.xxx.xxx-xx):");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, 20));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 300, -1));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 300, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 20));
+        getContentPane().add(nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 300, -1));
+        getContentPane().add(cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 300, -1));
 
         jLabel4.setText("Data de Nascimento:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, -1, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, 20));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Endereço:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 60, 20));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 300, -1));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 50, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 60, 20));
+        getContentPane().add(rg, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 300, -1));
+        getContentPane().add(idade, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 50, -1));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Telefone:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 60, 20));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 60, 20));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("E-mail:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 60, 20));
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 300, -1));
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 300, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 60, 20));
+        getContentPane().add(telefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 300, -1));
+        getContentPane().add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 300, -1));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("RG (xx.xxx.xxx-x):");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 100, 20));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 100, 20));
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Sexo:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 100, 20));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 100, 20));
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Idade:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 100, 20));
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 300, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 100, 20));
+        getContentPane().add(endereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 300, -1));
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Feminino");
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, -1));
+        buttonGroup1.add(feminino);
+        feminino.setText("Feminino");
+        getContentPane().add(feminino, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Masculino");
-        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
-        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 110, -1));
+        buttonGroup1.add(masculino);
+        masculino.setText("Masculino");
+        getContentPane().add(masculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, -1, -1));
+        getContentPane().add(dataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 110, -1));
 
-        jCheckBox1.setText("Paciente de convênio");
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 140, -1));
+        convenio.setText("Paciente de convênio");
+        getContentPane().add(convenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 140, -1));
 
         jButton1.setBackground(new java.awt.Color(224, 188, 255));
         jButton1.setText("Salvar");
@@ -124,7 +128,7 @@ public class CadastroPaciente extends javax.swing.JFrame {
                 cadastrarPaciente(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, -1, -1));
 
         jButton2.setForeground(new java.awt.Color(255, 0, 0));
         jButton2.setText("Cancelar");
@@ -133,40 +137,66 @@ public class CadastroPaciente extends javax.swing.JFrame {
                 cancelarCadastro(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPaciente
-
-        String nome = jTextField1.getText();
-        String cpf = jTextField2.getText();
-        String rg = jTextField3.getText();
-        
-        String idade = jTextField4.getText();
-        String dataNasc = jTextField8.getText();
-        String endereco = jTextField7.getText();
-        String telefone = jTextField5.getText();
-        String email = jTextField6.getText();
-        
+        /*
+        Envia os dados inseridos do paciente para a secretária executar o cadastro dele no banco de dados da clínica.
+        */
+        sec = new Secretaria();
+        int idadeInt = Integer.parseInt(idade.getText());
+        char sexo = 'N'; //Inicia como 'N' para "não informado"
+        if (feminino.isSelected()) { //Verifica se o sexo escolhido foi o botão FEMININO
+            sexo = 'F';
+        } else {
+            if(masculino.isSelected()) { //Verifica se foi o botão MASCULINO
+                sexo = 'M';
+            }
+        }
+        //OBJETO SECRETÁRIA CADASTRA O PACIENTE NO BANCO DE DADOS
+        sec.cadastrarPaciente(nome.getText(), cpf.getText(), rg.getText(), sexo, idadeInt, dataNascimento.getText(), endereco.getText(), telefone.getText(), email.getText(), convenio.isSelected());
+        limparCampos();
     }//GEN-LAST:event_cadastrarPaciente
 
     private void cancelarCadastro(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCadastro
         // TODO add your handling code here:
-        setVisible(false);
-        new MenuSecretaria().setVisible(true);
+        dispose(); //setVisible(false); ???
     }//GEN-LAST:event_cancelarCadastro
 
+    private void limparCampos() {
+        /*
+        LIMPA TODOS OS CAMPOS PARA O CADASTRO DE UM NOVO PACIENTE.
+        */
+        nome.setText(null);
+        cpf.setText(null);
+        rg.setText(null);
+        buttonGroup1.clearSelection();
+        idade.setText(null);
+        dataNascimento.setText(null);
+        endereco.setText(null);
+        telefone.setText(null);
+        email.setText(null);
+        convenio.setSelected(false);
+    }
+    
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox convenio;
+    private javax.swing.JTextField cpf;
+    private javax.swing.JTextField dataNascimento;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField endereco;
+    private javax.swing.JRadioButton feminino;
+    private javax.swing.JTextField idade;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -177,15 +207,9 @@ public class CadastroPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JRadioButton masculino;
+    private javax.swing.JTextField nome;
+    private javax.swing.JTextField rg;
+    private javax.swing.JTextField telefone;
     // End of variables declaration//GEN-END:variables
 }

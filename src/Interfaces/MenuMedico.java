@@ -94,13 +94,12 @@ public class MenuMedico extends javax.swing.JFrame {
         /*
         Volta para o menu principal -> "saindo" do login do usuário.
         */
-        setVisible(false);
+        dispose();
         new MenuPrincipal().setVisible(true);
     }//GEN-LAST:event_sair
 
     private void gerarRelatorio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerarRelatorio
         // TODO add your handling code here:
-        setVisible(false);
         new MenuRelatorios().setVisible(true);
     }//GEN-LAST:event_gerarRelatorio
 

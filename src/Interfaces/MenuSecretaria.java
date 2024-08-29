@@ -4,12 +4,15 @@
  */
 package Interfaces;
 
+import Funcionarios.Secretaria;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author home
  */
 public class MenuSecretaria extends javax.swing.JFrame {
-    
+    Secretaria sec;
     /**
      * Creates new form MenuSecretaria
      */
@@ -29,6 +32,7 @@ public class MenuSecretaria extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -38,6 +42,8 @@ public class MenuSecretaria extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clinica Medica");
@@ -56,10 +62,20 @@ public class MenuSecretaria extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(224, 188, 255));
         jButton2.setText("Remover Paciente");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removerPaciente(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 240, -1));
 
         jButton3.setBackground(new java.awt.Color(224, 188, 255));
         jButton3.setText("Atualizar Dados - Paciente");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarPaciente(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 240, -1));
 
         jButton4.setBackground(new java.awt.Color(224, 188, 255));
@@ -73,10 +89,20 @@ public class MenuSecretaria extends javax.swing.JFrame {
 
         jButton5.setBackground(new java.awt.Color(224, 188, 255));
         jButton5.setText("Atualizar Data e Hora - Consulta");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarConsulta(evt);
+            }
+        });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 240, -1));
 
         jButton6.setBackground(new java.awt.Color(224, 188, 255));
-        jButton6.setText("Remover Consulta");
+        jButton6.setText("Cancelar Consulta");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarConsulta(evt);
+            }
+        });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 240, -1));
 
         jButton7.setBackground(new java.awt.Color(224, 188, 255));
@@ -91,7 +117,7 @@ public class MenuSecretaria extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(165, 107, 255));
         jLabel1.setText("MENU SECRETÁRIA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 170, 50));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 170, 50));
 
         jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton8.setForeground(new java.awt.Color(255, 0, 0));
@@ -106,11 +132,6 @@ public class MenuSecretaria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cadastrarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPaciente
-        setVisible(false);
-        new CadastroPaciente().setVisible(true);
-    }//GEN-LAST:event_cadastrarPaciente
-
     private void sair(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sair
         /*
         Volta para o menu principal -> "saindo" do login do usuário.
@@ -119,16 +140,57 @@ public class MenuSecretaria extends javax.swing.JFrame {
         new MenuPrincipal().setVisible(true);
     }//GEN-LAST:event_sair
 
+    private void gerenciarMensagens(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarMensagens
+        /*
+        Gerencia as mensagens e exibe uma mensagem de "Mensagens gerenciadas!".
+        */
+        sec = new Secretaria();
+        sec.gerenciarMensagens(); // secretária gerencia as mensagens do dia seguinte a "hoje".
+        
+        JOptionPane.showMessageDialog(null, "Mensagens gerenciadas com sucesso e enviadas aos pacientes!", "Gerenciador de Mensagens", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_gerenciarMensagens
+
     private void cadastrarConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarConsulta
-        // TODO add your handling code here:
-        setVisible(false);
+        /*
+        Leva à tela de cadastro de uma nova consulta.
+        */
         new NovaConsulta().setVisible(true);
     }//GEN-LAST:event_cadastrarConsulta
 
-    private void gerenciarMensagens(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarMensagens
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_gerenciarMensagens
+    private void cadastrarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPaciente
+        /*
+        Leva à tela de cadastro de um novo paciente.
+        */
+        new CadastroPaciente().setVisible(true);
+    }//GEN-LAST:event_cadastrarPaciente
+
+    private void atualizarConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarConsulta
+        /*
+        Leva à tela de atuzalização da data e hora de uma consulta.
+        */
+        new AtualizaConsulta().setVisible(true);
+    }//GEN-LAST:event_atualizarConsulta
+
+    private void atualizarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarPaciente
+        /*
+        Leva à tela de atualização dos dados de um paciente.
+        */
+        new AtualizaDadosPaciente().setVisible(true);
+    }//GEN-LAST:event_atualizarPaciente
+
+    private void removerPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerPaciente
+        /*
+        Leva à tela de remoção de paciente.
+        */
+        new RemovePaciente().setVisible(true);
+    }//GEN-LAST:event_removerPaciente
+
+    private void cancelarConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarConsulta
+        /*
+        Leva à tela de cancelamento de consulta
+        */
+        new CancelaConsulta().setVisible(true);
+    }//GEN-LAST:event_cancelarConsulta
 
 
 
@@ -142,5 +204,6 @@ public class MenuSecretaria extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
