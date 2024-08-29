@@ -26,93 +26,46 @@ public class Secretaria extends Funcionario {
     }
     
     public void atualizarConsultaDataHora(Consulta consulta, String data, String hora) {
+        /*
+        Atualiza a data e o horário de uma consulta. 
+        Mudanças de médico ou paciente levam ao cancelamento da consulta e marcação de uma nova.
+        */
         consulta.setData(data);
         consulta.setHorario(hora);
     }
     
-    public void removerConsulta(int indice) {
+    public void removerConsulta(String identificador) {
+        Busca busca = new Busca();
+        int indice = busca.acharConsulta(listaConsultas, identificador);
+        
         listaConsultas.remove(indice);
         System.out.println("CONSULTA CANCELADA");
     }
   
-    /*
-    public void atualizarConsultaMedico(Consulta consulta, Medico medico) {
-        consulta.setMedico(medico);
-    }
-    public void atualizarConsultaPaciente(Consulta consulta, Paciente paciente) {
-        consulta.setPaciente(paciente);
-    }
-    */
-    
     public void cadastrarPaciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio) {
         //CRIA UM PACIENTE E O ADICIONA NA LISTA DE PACIENTES
         Paciente paciente = new Paciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio);
         listaPacientes.add(paciente);
     }
     
-    public void atualizarPaciente(Paciente paciente, char campo, String novoDado) {
-        switch(campo){
-            case 'N':
-                this.atualizarPacienteNome(paciente, novoDado);
-                System.out.printf("Dado alterado!");
-                break;
-            case 'S':
-                this.atualizarPacienteSexo(paciente, novoDado.charAt(0));
-                System.out.println("Dado alterado!");
-                break;
-            case 'I':
-                int novaIdade = Integer.parseInt(novoDado);
-                this.atualizarPacienteIdade(paciente, novaIdade);
-                System.out.printf("Dado alterado!");
-                break;
-            case 'E':
-                this.atualizarPacienteEndereco(paciente, novoDado);
-                System.out.printf("Dado alterado!");
-                break;
-            case 'T':
-                this.atualizarPacienteTelefone(paciente, novoDado);
-                System.out.printf("Dado alterado!");
-                break;
-            case 'M':
-                this.atualizarPacienteEmail(paciente, novoDado);
-                System.out.printf("Dado alterado!");
-                break;
-            case 'C':
-                boolean novoConvenio = "CONVENIO".equals(novoDado.toUpperCase());
-                // se o *novoDado* for convenio, retorna true
-                this.atualizarPacienteConvenio(paciente, novoConvenio);
-                System.out.printf("Dado alterado!");
-                break;
-            default:
-                System.out.println("Campo inválido!");
-        }
-    }
-    
-    //MODIFICA OS DADOS DE UM PACIENTE 'paciente':
-    private void atualizarPacienteNome(Paciente paciente, String nome) {
+    public void atualizarPaciente(Paciente paciente, String nome, char sexo, int idade, String endereco, String telefone, String email, boolean conve) {
+        /*
+        Atualiza os dados atuaizáveis de um paciente -> sempre atualiza todos os campos, MESMO QUE o valor inserido não tenha sido alterado.
+        Os campos não precisam ser todos atualizados obrigatóriamente, podendo manter o mesmo valor de antes da atualização.
+        */
         paciente.setNome(nome);
-    }
-    private void atualizarPacienteSexo(Paciente paciente, char sexo) {
         paciente.setSexo(sexo);
-    }
-    private void atualizarPacienteIdade(Paciente paciente, int idade) {
         paciente.setIdade(idade);
-    }
-    private void atualizarPacienteEndereco(Paciente paciente, String endereco) {
         paciente.setEndereco(endereco);
-    }
-    private void atualizarPacienteTelefone(Paciente paciente, String telefone) {
         paciente.setTelefone(telefone);
-    }
-    public void atualizarPacienteEmail(Paciente paciente, String email) {
         paciente.setEmail(email);
-    }
-    public void atualizarPacienteConvenio(Paciente paciente, boolean conve) {
         paciente.setConvenio(conve);
     }
 
     public void removerPaciente(String identificador) {
-        //RETIRA O PACIENTE DE IDENTIFICADOR DA LISTA DE PACIENTES
+        /*
+        RETIRA O PACIENTE DE IDENTIFICADOR DA LISTA DE PACIENTES
+        */
         Busca busca = new Busca();
         String cpf = identificador;
         int i = busca.acharCPF(cpf, listaPacientes);
@@ -123,6 +76,9 @@ public class Secretaria extends Funcionario {
     }
     
     public void gerenciarMensagens() {
+        /*
+        Usa o gerenciador de mensagens para gerenciar as consultas do dia seguinte.
+        */
         GerenciadorMensagens enviar = new GerenciadorMensagens();
         enviar.gerenciarMensagens(listaConsultas);
     }
