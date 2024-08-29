@@ -15,7 +15,7 @@ public class Consulta {
 
     //MÉTODO CONSTRUTOR
     public Consulta(String data, String horario, Medico medico, Paciente paciente, char tipoConsulta){this.data = data;
-        this.id = data + horario + medico.getCrm();
+        this.id = data + horario + paciente.getCpf();
         this.horario = horario;
         this.medico = medico;
         this.paciente = paciente;
