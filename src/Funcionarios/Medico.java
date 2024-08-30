@@ -1,4 +1,5 @@
 package Funcionarios;
+import Auxilia.Busca;
 import Dados.Paciente;
 import Dados.Prontuario;
 import Dados.Consulta;
@@ -40,8 +41,12 @@ public class Medico extends Funcionario {
         this.atendimentos = atendidos;
     }
     
-    public void cadastrarDadosPaciente(Consulta consulta, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean doencaCardio, ArrayList<String> cirurgias, ArrayList<String> alergias) {
+    public void cadastrarDadosPaciente(String identificador, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean doencaCardio, ArrayList<String> cirurgias, ArrayList<String> alergias) {
         // Cadastra os dados de saúde de um objeto *Paciente*
+        Busca buscar = new Busca();
+        int iCon = buscar.acharConsulta(listaConsultas, identificador);
+        Consulta consulta = listaConsultas.get(iCon);
+        
         consulta.getPaciente().setFumar(fumar);
         consulta.getPaciente().setBeber(beber);
         consulta.getPaciente().setColesterol(colesterol);
@@ -130,10 +135,15 @@ public class Medico extends Funcionario {
     }
     
     // Métodos do prontuário:
-    public void cadastrarProntuario(Consulta consulta, String sintomas, String diagnostico, String tratamento) {
+    public void cadastrarProntuario(String cpf, String sintomas, String diagnostico, String tratamento) {
         // Cadastra o prontuário do paciente
         Prontuario prontuario = new Prontuario(sintomas, diagnostico, tratamento);
-        consulta.getPaciente().setProntuario(prontuario);
+        //TROCAR PRO BANCO DE DADOS
+        Busca buscar = new Busca();
+        int iPac = buscar.acharCPF(cpf, listaPacientes);
+        Paciente paciente = listaPacientes.get(iPac);
+        //TROCAR PRO BANCO DE DADOS
+        paciente.setProntuario(prontuario);
     }
     public void atualizarProntuario(Paciente paciente, char campo, String novoDado) {
         // Altera algum dado do prontuário do paciente
