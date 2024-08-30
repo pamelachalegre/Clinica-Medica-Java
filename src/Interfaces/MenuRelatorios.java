@@ -4,12 +4,14 @@
  */
 package Interfaces;
 
+import Funcionarios.Medico;
+
 /**
  *
  * @author home
  */
 public class MenuRelatorios extends javax.swing.JFrame {
-
+    Medico med;
     /**
      * Creates new form GerarRelatorios
      */
@@ -37,28 +39,34 @@ public class MenuRelatorios extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(107, 211, 255));
         jLabel1.setText("RELATÓRIOS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 40));
 
         jButton1.setBackground(new java.awt.Color(179, 242, 255));
         jButton1.setText("Atestado");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 210, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 210, -1));
 
         jButton2.setBackground(new java.awt.Color(179, 242, 255));
         jButton2.setText("Declaração de Acompanhamento");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 210, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 210, -1));
 
         jButton3.setBackground(new java.awt.Color(179, 242, 255));
         jButton3.setText("Receita");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 210, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 210, -1));
 
         jButton4.setBackground(new java.awt.Color(179, 242, 255));
         jButton4.setText("Relação de clientes atendidos");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 210, -1));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientesAtendidos(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 210, -1));
 
         jButton5.setForeground(new java.awt.Color(255, 0, 0));
         jButton5.setText("Cancelar");
@@ -67,15 +75,23 @@ public class MenuRelatorios extends javax.swing.JFrame {
                 cancelarRelatorio(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarRelatorio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarRelatorio
-        // TODO add your handling code here:
+        /*
+        Cancela a ação.
+        */
         dispose();
     }//GEN-LAST:event_cancelarRelatorio
+
+    private void clientesAtendidos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesAtendidos
+        // TODO add your handling code here:
+        med = new Medico();
+        //med.clientesAtendidos(listaConsultas, WIDTH, ABORT);
+    }//GEN-LAST:event_clientesAtendidos
 
     /**
      * @param args the command line arguments

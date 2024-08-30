@@ -17,7 +17,7 @@ public class CancelaConsulta extends javax.swing.JFrame {
      */
     public CancelaConsulta() {
         initComponents();
-        setSize(400, 220);
+        setSize(440, 240);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
     }
@@ -38,6 +38,7 @@ public class CancelaConsulta extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -45,7 +46,7 @@ public class CancelaConsulta extends javax.swing.JFrame {
         jLabel1.setText("CANCELAMENTO - CONSULTA");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
-        jLabel2.setText("Insira a data, o horário e o CPF do paciente da consulta (sem espaços):");
+        jLabel2.setText("Insira a data, o horário e o CRM do medico da consulta (sem espaços):");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 370, -1));
 
@@ -56,7 +57,7 @@ public class CancelaConsulta extends javax.swing.JFrame {
                 cancelar(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(224, 188, 255));
         jButton2.setText("Cancelar Consulta");
@@ -65,7 +66,7 @@ public class CancelaConsulta extends javax.swing.JFrame {
                 removerConsulta(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

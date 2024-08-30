@@ -12,18 +12,15 @@ import javax.swing.JOptionPane;
  * @author home
  */
 public class AtualizaConsulta extends javax.swing.JFrame {
-    String identificarConsulta;
     Secretaria sec;
     /**
      * Creates new form AtualizaConsulta
      */
     public AtualizaConsulta() {
         initComponents();
-        setSize(480, 200);
+        setSize(480, 260);
         setLocationRelativeTo(null);
-        getContentPane().setBackground(java.awt.Color.white);
-        this.identificarConsulta = JOptionPane.showInputDialog(null, "Insira a data, o horário e o CRM do médico da consulta (sem espaços):", "Identificar Consulta", JOptionPane.QUESTION_MESSAGE);
-        
+        getContentPane().setBackground(java.awt.Color.white);     
     }
 
     /**
@@ -42,6 +39,8 @@ public class AtualizaConsulta extends javax.swing.JFrame {
         hora = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        identificaConsulta = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clinica Medica");
@@ -53,12 +52,12 @@ public class AtualizaConsulta extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
 
         jLabel2.setText("Nova Data:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
 
         jLabel3.setText("Novo Horário:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, -1, 20));
-        getContentPane().add(data, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 120, -1));
-        getContentPane().add(hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 130, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, 20));
+        getContentPane().add(data, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 120, -1));
+        getContentPane().add(hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 130, -1));
 
         jButton1.setBackground(new java.awt.Color(224, 188, 255));
         jButton1.setText("Atualizar");
@@ -67,7 +66,7 @@ public class AtualizaConsulta extends javax.swing.JFrame {
                 atualizarDados(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, -1));
 
         jButton2.setForeground(new java.awt.Color(255, 0, 0));
         jButton2.setText("Cancelar");
@@ -76,7 +75,11 @@ public class AtualizaConsulta extends javax.swing.JFrame {
                 cancelar(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
+
+        jLabel4.setText("Insira a data, o horário e o CRM do médico da consulta (sem espaços):");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, 20));
+        getContentPane().add(identificaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 200, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -85,7 +88,7 @@ public class AtualizaConsulta extends javax.swing.JFrame {
         /*
         Atualiza a data e a hora da consulta escolhida.
         */
-        // IDENTIFICAR A CONSULTA PELO this.identificarConsulta e buscar no banco de dados.
+        // IDENTIFICAR A CONSULTA PELO identificaConsulta e buscar no banco de dados.
         
         sec = new Secretaria();
         
@@ -105,10 +108,12 @@ public class AtualizaConsulta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField data;
     private javax.swing.JTextField hora;
+    private javax.swing.JTextField identificaConsulta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

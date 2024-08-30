@@ -136,7 +136,7 @@ public class MenuSecretaria extends javax.swing.JFrame {
         /*
         Volta para o menu principal -> "saindo" do login do usuário.
         */
-        setVisible(false);
+        dispose();
         new MenuPrincipal().setVisible(true);
     }//GEN-LAST:event_sair
 

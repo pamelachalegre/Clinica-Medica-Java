@@ -30,9 +30,9 @@ public class MenuMedico extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        CadastraFichaMédica = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        CadastrarProntuario = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -48,17 +48,27 @@ public class MenuMedico extends javax.swing.JFrame {
         jLabel1.setText("MENU MÉDICO");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 130, 60));
 
-        jButton1.setBackground(new java.awt.Color(179, 242, 255));
-        jButton1.setText("Cadastrar Ficha Médica");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 240, -1));
+        CadastraFichaMédica.setBackground(new java.awt.Color(179, 242, 255));
+        CadastraFichaMédica.setText("Cadastrar Ficha Médica");
+        CadastraFichaMédica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarFichaMédicaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(CadastraFichaMédica, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 240, -1));
 
         jButton2.setBackground(new java.awt.Color(179, 242, 255));
         jButton2.setText("Atualizar Ficha Médica");
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 240, -1));
 
-        jButton3.setBackground(new java.awt.Color(179, 242, 255));
-        jButton3.setText("Cadastrar Prontuário");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 240, -1));
+        CadastrarProntuario.setBackground(new java.awt.Color(179, 242, 255));
+        CadastrarProntuario.setText("Cadastrar Prontuário");
+        CadastrarProntuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarProntuarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(CadastrarProntuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 240, -1));
 
         jButton4.setBackground(new java.awt.Color(179, 242, 255));
         jButton4.setText("Atualizar Prontuário");
@@ -99,18 +109,34 @@ public class MenuMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_sair
 
     private void gerarRelatorio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerarRelatorio
-        // TODO add your handling code here:
+        /*
+        Leva ao menu de relatórios que podem ser gerados.
+        */
         new MenuRelatorios().setVisible(true);
     }//GEN-LAST:event_gerarRelatorio
+
+    private void cadastrarFichaMédicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarFichaMédicaActionPerformed
+        /*
+        Leva à tela de cadastro da ficha médica de um paciente.
+        */
+        new CadastraDadosSaudePaciente().setVisible(true);
+    }//GEN-LAST:event_cadastrarFichaMédicaActionPerformed
+
+    private void cadastrarProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarProntuarioActionPerformed
+        /*
+        Leva à tela de cadastro do prontuário de um paciente.
+        */
+        new CadastraProntuario().setVisible(true);
+    }//GEN-LAST:event_cadastrarProntuarioActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton CadastraFichaMédica;
+    private javax.swing.JButton CadastrarProntuario;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
