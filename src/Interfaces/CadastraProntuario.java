@@ -15,8 +15,10 @@ public class CadastraProntuario extends javax.swing.JFrame {
     
     /**
      * Creates new form CadastroProntuário
+     * @param med
      */
-    public CadastraProntuario() {
+    public CadastraProntuario(Medico med) {
+        this.med = med;
         initComponents();
         setSize(640, 430);
         setLocationRelativeTo(null);
@@ -98,7 +100,6 @@ public class CadastraProntuario extends javax.swing.JFrame {
         /*
         O médico cadastra o prontuário do paciente com as informações inseridas nos campos.
         */
-        med = new Medico();
         med.cadastrarProntuario(cpfPaciente.getText(), sintomas.getText(), diagnostico.getText(), tratamento.getText());
         dispose();
     }//GEN-LAST:event_salvarActionPerformed

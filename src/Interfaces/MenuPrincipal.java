@@ -4,6 +4,9 @@
  */
 package Interfaces;
 
+import Funcionarios.Medico;
+import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author home
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    EntityManager em;
     /**
      * Creates new form MenuPrincipal
      */
@@ -20,6 +23,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setSize(540, 300);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
+        this.em = em; //traz o gerenciador de entidades
     }
 
     /**
@@ -70,7 +74,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         String nome = JOptionPane.showInputDialog(null, "Insira o usuário:", "Identificação",JOptionPane.QUESTION_MESSAGE);
         
         if ("MARIA GABRIELA".equals(nome.toUpperCase())) { // Se o nome da secretária estiver correto:
-            setVisible(false); //A tela do menu principal é invisibilizada
+            dispose(); //A tela do menu principal é invisibilizada
             new MenuSecretaria().setVisible(true); // A tela do menu da secreetária passa a ser a visível
         } else { // Se não:
             JOptionPane.showMessageDialog(null, "Usuário desconhecido!", "Identificação", JOptionPane.WARNING_MESSAGE);
@@ -79,12 +83,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSecretaria
 
     private void acharMedico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acharMedico
-
+        /*
+        Recupera o objeto CadastroMedico correto do Banco de Dados e instancia o médico correto para ações.
+        */
         String crm = JOptionPane.showInputDialog(null, "Insira seu CRM:", "Identificação",JOptionPane.QUESTION_MESSAGE);
         
+        //Query query = new Query();
+        
         if ("2893".equals(crm)) { // Buscar o CRM no banco de dados -> se encontrar:
-            setVisible(false);
-            new MenuMedico().setVisible(true); //vai ao menu de médicos
+            dispose(); //IDDEIA: PASSAR O MEDICO CORRETO COMO PRAÊMTRO DA CRIAÇÃO DO MENU.
+            Medico med = new Medico();
+            new MenuMedico(med).setVisible(true); //vai ao menu de médicos
         } else {// Se não:
             JOptionPane.showMessageDialog(null, "Usuário desconhecido! CRM inválido.", "Identificação", JOptionPane.WARNING_MESSAGE);
         }
@@ -116,10 +125,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new MenuPrincipal().setVisible(true);
             }
         });

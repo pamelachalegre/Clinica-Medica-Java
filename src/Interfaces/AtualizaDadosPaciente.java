@@ -173,7 +173,7 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
         this.cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente:", "Identificar Paciente", JOptionPane.QUESTION_MESSAGE);
         
         //buscar o paciente do cpf e colocar o paciente retornado em pac e colocar suas informações nos campos.
-        
+        pac = new Paciente("ANA PAULA", "111.222.333-44", "11.222.333-4", 'F', 18, "03/09/2005", "Avenida Maringá, 123", "44 99999-9999", "usuario@exemplo.com", true);
         //Iniciando os campos com as informações do paciente:
         nomeNovo.setText(pac.getNome());
         idadeNovo.setText(pac.getIdade() + ""); // Transforma o inteiro em string para o campo de texto.

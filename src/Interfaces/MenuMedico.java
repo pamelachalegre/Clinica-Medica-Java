@@ -4,16 +4,20 @@
  */
 package Interfaces;
 
+import Funcionarios.Medico;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author home
  */
 public class MenuMedico extends javax.swing.JFrame {
-
+    Medico med;
     /**
      * Creates new form MenuMedico
      */
-    public MenuMedico() {
+    public MenuMedico(Medico med) {
+        this.med = med;
         initComponents();
         setSize(640, 450);
         setLocationRelativeTo(null);
@@ -30,12 +34,12 @@ public class MenuMedico extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        CadastraFichaMédica = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        CadastrarProntuario = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        cadastraFichaMedica = new javax.swing.JButton();
+        atualizaFichaMedica = new javax.swing.JButton();
+        cadastrarProntuario = new javax.swing.JButton();
+        atualizaProntuario = new javax.swing.JButton();
+        removeProntuario = new javax.swing.JButton();
+        geraRelatorios = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,44 +52,49 @@ public class MenuMedico extends javax.swing.JFrame {
         jLabel1.setText("MENU MÉDICO");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 130, 60));
 
-        CadastraFichaMédica.setBackground(new java.awt.Color(179, 242, 255));
-        CadastraFichaMédica.setText("Cadastrar Ficha Médica");
-        CadastraFichaMédica.addActionListener(new java.awt.event.ActionListener() {
+        cadastraFichaMedica.setBackground(new java.awt.Color(179, 242, 255));
+        cadastraFichaMedica.setText("Cadastrar Ficha Médica");
+        cadastraFichaMedica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadastrarFichaMédicaActionPerformed(evt);
             }
         });
-        getContentPane().add(CadastraFichaMédica, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 240, -1));
+        getContentPane().add(cadastraFichaMedica, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 240, -1));
 
-        jButton2.setBackground(new java.awt.Color(179, 242, 255));
-        jButton2.setText("Atualizar Ficha Médica");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 240, -1));
+        atualizaFichaMedica.setBackground(new java.awt.Color(179, 242, 255));
+        atualizaFichaMedica.setText("Atualizar Ficha Médica");
+        getContentPane().add(atualizaFichaMedica, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 240, -1));
 
-        CadastrarProntuario.setBackground(new java.awt.Color(179, 242, 255));
-        CadastrarProntuario.setText("Cadastrar Prontuário");
-        CadastrarProntuario.addActionListener(new java.awt.event.ActionListener() {
+        cadastrarProntuario.setBackground(new java.awt.Color(179, 242, 255));
+        cadastrarProntuario.setText("Cadastrar Prontuário");
+        cadastrarProntuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadastrarProntuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(CadastrarProntuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 240, -1));
+        getContentPane().add(cadastrarProntuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 240, -1));
 
-        jButton4.setBackground(new java.awt.Color(179, 242, 255));
-        jButton4.setText("Atualizar Prontuário");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 240, -1));
+        atualizaProntuario.setBackground(new java.awt.Color(179, 242, 255));
+        atualizaProntuario.setText("Atualizar Prontuário");
+        getContentPane().add(atualizaProntuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 240, -1));
 
-        jButton5.setBackground(new java.awt.Color(179, 242, 255));
-        jButton5.setText("Remover Prontuário");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 240, -1));
+        removeProntuario.setBackground(new java.awt.Color(179, 242, 255));
+        removeProntuario.setText("Remover Prontuário");
+        removeProntuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removerProntuario(evt);
+            }
+        });
+        getContentPane().add(removeProntuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 240, -1));
 
-        jButton6.setBackground(new java.awt.Color(179, 242, 255));
-        jButton6.setText("Gerar Relatório");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        geraRelatorios.setBackground(new java.awt.Color(179, 242, 255));
+        geraRelatorios.setText("Gerar Relatório");
+        geraRelatorios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gerarRelatorio(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 240, -1));
+        getContentPane().add(geraRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 240, -1));
 
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 0, 0));
@@ -112,35 +121,44 @@ public class MenuMedico extends javax.swing.JFrame {
         /*
         Leva ao menu de relatórios que podem ser gerados.
         */
-        new MenuRelatorios().setVisible(true);
+        new MenuRelatorios(med).setVisible(true);
     }//GEN-LAST:event_gerarRelatorio
 
     private void cadastrarFichaMédicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarFichaMédicaActionPerformed
         /*
         Leva à tela de cadastro da ficha médica de um paciente.
         */
-        new CadastraDadosSaudePaciente().setVisible(true);
+        new CadastraDadosSaudePaciente(med).setVisible(true);
     }//GEN-LAST:event_cadastrarFichaMédicaActionPerformed
 
     private void cadastrarProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarProntuarioActionPerformed
         /*
         Leva à tela de cadastro do prontuário de um paciente.
         */
-        new CadastraProntuario().setVisible(true);
+        new CadastraProntuario(med).setVisible(true);
     }//GEN-LAST:event_cadastrarProntuarioActionPerformed
+
+    private void removerProntuario(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerProntuario
+        /*
+        O médico remove o prontuário de um paciente a partir do seu CPF.
+        */
+        String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
+                
+        med.removerProntuario(cpf);
+    }//GEN-LAST:event_removerProntuario
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CadastraFichaMédica;
-    private javax.swing.JButton CadastrarProntuario;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton atualizaFichaMedica;
+    private javax.swing.JButton atualizaProntuario;
+    private javax.swing.JButton cadastraFichaMedica;
+    private javax.swing.JButton cadastrarProntuario;
+    private javax.swing.JButton geraRelatorios;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton removeProntuario;
     // End of variables declaration//GEN-END:variables
 }

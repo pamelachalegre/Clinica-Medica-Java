@@ -14,8 +14,10 @@ public class MenuRelatorios extends javax.swing.JFrame {
     Medico med;
     /**
      * Creates new form GerarRelatorios
+     * @param med
      */
-    public MenuRelatorios() {
+    public MenuRelatorios(Medico med) {
+        this.med = med;
         initComponents();
         setSize(300, 300); //tamanho fixo da janela
         setLocationRelativeTo(null); //abertura no meio da tela
@@ -49,14 +51,29 @@ public class MenuRelatorios extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(179, 242, 255));
         jButton1.setText("Atestado");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gerarAtestado(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 210, -1));
 
         jButton2.setBackground(new java.awt.Color(179, 242, 255));
         jButton2.setText("Declaração de Acompanhamento");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gerarDeclaracao(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 210, -1));
 
         jButton3.setBackground(new java.awt.Color(179, 242, 255));
         jButton3.setText("Receita");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gerarReceita(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 210, -1));
 
         jButton4.setBackground(new java.awt.Color(179, 242, 255));
@@ -88,10 +105,32 @@ public class MenuRelatorios extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarRelatorio
 
     private void clientesAtendidos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesAtendidos
-        // TODO add your handling code here:
-        med = new Medico();
-        //med.clientesAtendidos(listaConsultas, WIDTH, ABORT);
+        /*
+        Leva à tela para consulta do número de clientes atendidos.
+        */
+        new TelaClientesAtendidos(med).setVisible(true);
     }//GEN-LAST:event_clientesAtendidos
+
+    private void gerarAtestado(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerarAtestado
+        /*
+        Leva à tela de atestados.
+        */
+        new TelaAtestado(med).setVisible(true);
+    }//GEN-LAST:event_gerarAtestado
+
+    private void gerarDeclaracao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerarDeclaracao
+        /*
+        Leva à tela de declarações de acompanhamento.
+        */
+        new TelaDeclaracao(med).setVisible(true);
+    }//GEN-LAST:event_gerarDeclaracao
+
+    private void gerarReceita(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerarReceita
+        /*
+        Leva à tela de receitas.
+        */
+        new TelaReceita(med).setVisible(true);
+    }//GEN-LAST:event_gerarReceita
 
     /**
      * @param args the command line arguments
