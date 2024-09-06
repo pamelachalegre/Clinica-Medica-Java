@@ -1,40 +1,57 @@
 package Dados;
-import Funcionarios.Medico;
+import Funcionarios.CadastroMedico;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+
+@Entity
 public class Consulta {
     /*
     É um POJO com dados de uma consulta a ser realizada. Este objeto é manipulado pelo objeto Secretária no main, que
     pode definir consultas, colocá-las em uma lista de consultas ou removê-las.
     */
-    private String id;
-    private String data;
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
+    
+    private String identificador; //para buscar uma consulta
+    private String dataConsulta;
     private String horario;
-    private Medico medico;
-    private Paciente paciente;
     private char tipoConsulta; // R = retorno; N = normal
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private CadastroMedico medico;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Paciente paciente;
+    
 
     //MÉTODO CONSTRUTOR
-    public Consulta(String data, String horario, Medico medico, Paciente paciente, char tipoConsulta){this.data = data;
-        this.id = data + horario + paciente.getCpf();
+    public Consulta(String data, String horario, CadastroMedico medico, Paciente paciente, char tipoConsulta){
+        this.identificador = data + horario + medico.getCrm();
+        this.dataConsulta = data;
         this.horario = horario;
         this.medico = medico;
         this.paciente = paciente;
         this.tipoConsulta = tipoConsulta;
 }
 
-    public String getId() {
-        return id;
+    public String getIdentificador() {
+        return identificador;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdentificador(String id) {
+        this.identificador = id;
     }
 
     public String getData() {
-        return data;
+        return dataConsulta;
     }
     public void setData(String data) {
-        this.data = data;
+        this.dataConsulta = data;
     }
 
     public String getHorario() {
@@ -44,10 +61,10 @@ public class Consulta {
         this.horario = horario;
     }
 
-    public Medico getMedico() {
+    public CadastroMedico getMedico() {
         return medico;
     }
-    public void setMedico(Medico medico) {
+    public void setMedico(CadastroMedico medico) {
         this.medico = medico;
     }
 

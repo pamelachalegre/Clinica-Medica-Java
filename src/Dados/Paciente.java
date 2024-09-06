@@ -1,6 +1,13 @@
 package Dados;
-import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Paciente {
     /**
      * Definido como um POJO, possui diversos atributos que são modificados por meio de sets e gets, outras ações sobre
@@ -9,7 +16,14 @@ public class Paciente {
      * Por esse motivo, utilizamos o Arraylist, que permite uma alocação de memória dinâmica, mas de menor ocupação da memória.
     */
     //DADOS CADASTRAIS:
+    //@Id @GeneratedValue(strategy = GenerationType.AUTO)
+    //private Integer id;
+
     private String nome;
+    
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
+    
     private String cpf;
     private String rg;
     private char sexo;
@@ -18,8 +32,9 @@ public class Paciente {
     private String endereco;
     private String telefone;
     private String email;
-    
     private boolean convenio; // true = convenio | false = particular
+    
+    @OneToOne(cascade = CascadeType.ALL)
     private Prontuario prontuario;
     
     //DADOS DE SAÚDE:
@@ -28,8 +43,10 @@ public class Paciente {
     private boolean colesterol;
     private boolean diabete;
     private boolean doencaCardio;
-    private ArrayList<String> cirurgias;
-    private ArrayList<String> alergias; 
+    private String cirurgias;
+    private String alergias; 
+
+    public Paciente() {    }
 
     //MÉTODO CONSTRUTOR:
     public Paciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio) {
@@ -156,27 +173,20 @@ public class Paciente {
     public void setDoencaCardio(boolean doencaCardio) {
         this.doencaCardio = doencaCardio;
     }
-    /*ARRAYLIST -> POLIMORFISMO DE SOBRECARGA
-    Por conta da natureza atualizável da lista de cirurgias e de alergias, utilizamos o polimorfismo de sobrecarga para
-    atualização de: (1) mudar toda a lista; (2) adicionar um novo elemento à lista existente.
-    */
-    public ArrayList<String> getCirurgias() {
+    
+    public String getCirurgias() {
         return cirurgias;
     }
-    public void setCirurgias(ArrayList<String> cirurgias) {
-        this.cirurgias = cirurgias; //DEFINE UMA LISTA DE CIRURGIAS.
-    }
+    
     public void setCirurgias(String cirurgia) {
-        this.cirurgias.add(cirurgia); //ADICIONA UMA NOVA CIRURGIA A LISTA.
+        this.cirurgias = cirurgia; //SETA AS NOVAS CIRURGIAS.
     }
     
-    public ArrayList<String> getAlergias() {
+    public String getAlergias() {
         return alergias;
     }
-    public void setAlergias(ArrayList<String> alergias) {
-        this.alergias = alergias; //DEFINE UMA LISTA DE ALERGIAS.
-    }
+    
     public void setAlergias(String alergia) {
-        this.alergias.add(alergia); //ADICIONA UMA ALERGIA A LISTA.
+        this.alergias = alergia; //SETA AS NOVAS ALERGIAS.
     }
 }
