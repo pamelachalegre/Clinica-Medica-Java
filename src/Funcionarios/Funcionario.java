@@ -3,9 +3,11 @@ import Dados.Consulta;
 import Dados.Paciente;
 import java.util.ArrayList;
 
-public class Funcionario {
+public abstract class Funcionario {
     private String nome, cpf;
     private double salario;
+
+    
     public ArrayList<Consulta> listaConsultas;
     public ArrayList<Paciente> listaPacientes;
 
@@ -54,5 +56,12 @@ public class Funcionario {
         this.salario = salario;
         this.listaConsultas = listaConsultas;
         this.listaPacientes = listaPacientes;
-    }   
+    }
+    
+    public Funcionario(String nome, String cpf, double salario) {
+        super();
+        this.nome = nome;
+        this.cpf = cpf;
+        this.salario = salario;
+    }
 }

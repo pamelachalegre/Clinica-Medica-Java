@@ -19,7 +19,7 @@ public class Secretaria extends Funcionario {
         super(nome, cpf, salario, listaConsultas, listaPacientes);
     }
     
-    public void cadastrarConsulta(String data, String horario, Medico medico, Paciente paciente, char tipo) {
+    public void cadastrarConsulta(String data, String horario, CadastroMedico medico, Paciente paciente, char tipo) {
         // Cria uma nova consulta e adiciona na lista de consultas
         Consulta consulta = new Consulta(data, horario, medico, paciente, tipo);
         listaConsultas.add(consulta);

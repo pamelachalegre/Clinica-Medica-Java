@@ -26,7 +26,7 @@ public class Medico extends Funcionario {
     public Medico(String nome, String cpf, double salario, ArrayList<Consulta> listaConsultas, ArrayList<Paciente> listaPacientes, String crm, ArrayList<Consulta> atendimentos) {
         super(nome, cpf, salario, listaConsultas, listaPacientes);
         this.crm = crm;
-        this.atendimentos =  new ArrayList<Consulta>();
+        this.atendimentos = new ArrayList<>();
     }
 
     // Sets e Gets para os atributos:
@@ -41,7 +41,7 @@ public class Medico extends Funcionario {
         this.atendimentos = atendidos;
     }
     
-    public void cadastrarDadosPaciente(String identificador, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean doencaCardio, ArrayList<String> cirurgias, ArrayList<String> alergias) {
+    public void cadastrarDadosPaciente(String identificador, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean doencaCardio, String cirurgias, String alergias) {
         // Cadastra os dados de saúde de um objeto *Paciente*
         Busca buscar = new Busca();
         int iCon = buscar.acharConsulta(listaConsultas, identificador);
@@ -74,25 +74,14 @@ public class Medico extends Funcionario {
         paciente.setDoencaCardio(doencaCardio);
     }
     
-    /*
-    Por conta do polimorfismo de sobreposição aplicado aos sets dos atributos 'cirurgias' e 'alergias' do Paciente, 
-    há também um polimorfismo nos métodos para a atualização desses dados por parte do Médico.
-    */
-    public void atualizaPacienteCirurgias(Paciente paciente, ArrayList<String> cirurgias) {
-        // Define uma lista de cirurgias para o paciente
-        paciente.setCirurgias(cirurgias);
-    }
     public void atualizaPacienteCirurgias(Paciente paciente, String cirurgia) {
         // Adiciona uma nova cirurgia
-        paciente.getCirurgias().add(cirurgia);
+        paciente.setCirurgias(cirurgia);
     }
-    public void atualizaPacienteAlergia(Paciente paciente, ArrayList<String> alergias) { 
-        // Define as alergias do paciente
-        paciente.setAlergias(alergias);
-    }
+    
     public void atualizaPacienteAlergia(Paciente paciente, String alergia) { 
         // Define as alergias do paciente
-        paciente.getAlergias().add(alergia);
+        paciente.setAlergias(alergia);
     }
     public void atualizarPaciente(Paciente paciente, char campo, String novoDado) {
         switch(campo){
@@ -154,37 +143,53 @@ public class Medico extends Funcionario {
             default -> System.out.println("Campo inválido!");
         }
     }
-    public void removerProntuario(Paciente paciente) {
-        // Remove o prontuário de um paciente
+    public void removerProntuario(String cpf) {
+        /*
+        Remove o prontuário de um paciente -> seta todos os seus atributos como nulos.
+        */
+        //TROCAR PARA O BANCO DE DADOS
+        Busca buscar = new Busca();
+        int iPac = buscar.acharCPF(cpf, listaPacientes);
+        Paciente paciente = listaPacientes.get(iPac);
+        
         paciente.getProntuario().setSintomas(null);
         paciente.getProntuario().setDiagnostico(null);
         paciente.getProntuario().setTratamento(null);
     }
     
     // Métodos dos relatórios:
-    public void gerarImprimirAtestado(Medico medico, Paciente paciente, Prontuario prontuario, int diasAfastamento, String dataInicio) {
+    public void gerarImprimirAtestado(Medico medico, String cpf, int diasAfastamento, String dataInicio) {
         // Gera e imprime um objeto *Atestado*
-        Atestado atestado = new Atestado(medico, paciente, prontuario, diasAfastamento, dataInicio);
+        Busca buscar = new Busca();
+        int iPac = buscar.acharCPF(cpf, listaPacientes);
+        Paciente paciente = listaPacientes.get(iPac);
+        Atestado atestado = new Atestado(medico, paciente, paciente.getProntuario(), diasAfastamento, dataInicio);
         atestado.imprimeAtestado();
     }
-    public void gerarDeclaracao(Medico medico, Paciente paciente, Prontuario prontuario, String dataAcompanhamento, String parentescoAcompanhante, String nomeAcompanhante) {
+    public void gerarDeclaracao(Medico medico, String cpf, String dataAcompanhamento, String parentescoAcompanhante, String nomeAcompanhante) {
         // Gera um objeto *DeclaracaoAcompanhamento*
-        DeclaracaoAcompanhamento declaracao = new DeclaracaoAcompanhamento(medico, paciente, prontuario, dataAcompanhamento, parentescoAcompanhante, nomeAcompanhante);
+        Busca buscar = new Busca();
+        int iPac = buscar.acharCPF(cpf, listaPacientes);
+        Paciente paciente = listaPacientes.get(iPac);
+        DeclaracaoAcompanhamento declaracao = new DeclaracaoAcompanhamento(medico, paciente, paciente.getProntuario(), dataAcompanhamento, parentescoAcompanhante, nomeAcompanhante);
         declaracao.imprimeDeclaracao();
     }
-    public void gerarReceita(Medico medico, Paciente paciente, String remedio, float dosagem, String modoUso, int vezesDia) {
+    public void gerarReceita(Medico medico, String cpf, String remedio, float dosagem, String modoUso, int vezesDia) {
         // Gera um objeto *Receita*
+        Busca buscar = new Busca();
+        int iPac = buscar.acharCPF(cpf, listaPacientes);
+        Paciente paciente = listaPacientes.get(iPac);
         Receita receita = new Receita(medico, paciente, remedio, dosagem, modoUso, vezesDia);
         receita.imprimeReceita();
     }
-    public int clientesAtendidos(List<Consulta> listaConsultas, int mes, int ano) {
+    public int clientesAtendidos(int mes, int ano) {
         // Lista para armazenar CPFs únicos
         // Contador do numero de pacientes iniciando em 0
         List<String> pacientesUnicos = new ArrayList<>();
         int numPacientes = 0;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        for (Consulta consulta : listaConsultas) {
+        for (Consulta consulta : atendimentos) {
             // Converte a String da data para LocalDate
             LocalDate dataConsulta = LocalDate.parse(consulta.getData(), formatter);
 
