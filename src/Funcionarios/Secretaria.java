@@ -35,6 +35,9 @@ public class Secretaria extends Funcionario {
     }
     
     public void removerConsulta(String identificador) {
+        /*
+        Remove uma consulta da lista de consultas a partir do identificador
+        */
         Busca busca = new Busca();
         int indice = busca.acharConsulta(listaConsultas, identificador);
         

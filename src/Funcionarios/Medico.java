@@ -23,13 +23,18 @@ public class Medico extends Funcionario {
     
     // Método construtor:
     public Medico() {}
-    public Medico(String nome, String cpf, double salario, ArrayList<Consulta> listaConsultas, ArrayList<Paciente> listaPacientes, String crm, ArrayList<Consulta> atendimentos) {
+    
+    public Medico(String nome, String crm, String cpf, double salario, ArrayList<Consulta> listaConsultas, ArrayList<Paciente> listaPacientes, ArrayList<Consulta> atendimentos) {
         super(nome, cpf, salario, listaConsultas, listaPacientes);
         this.crm = crm;
-        this.atendimentos = new ArrayList<>();
+        this.atendimentos = atendimentos;
     }
 
     // Sets e Gets para os atributos:
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
+    
     public String getCrm() {
         return crm;
     }
@@ -42,90 +47,42 @@ public class Medico extends Funcionario {
     }
     
     public void cadastrarDadosPaciente(String identificador, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean doencaCardio, String cirurgias, String alergias) {
-        // Cadastra os dados de saúde de um objeto *Paciente*
+        /*
+        Cadastra o dados de saúde do paciente atendido na consulta de identificador "identificador".
+        */
         Busca buscar = new Busca();
         int iCon = buscar.acharConsulta(listaConsultas, identificador);
-        Consulta consulta = listaConsultas.get(iCon);
+        Consulta consulta = listaConsultas.get(iCon); //descobre qual é a consulta
         
-        consulta.getPaciente().setFumar(fumar);
+        consulta.getPaciente().setFumar(fumar); // cadastra os dados do paciente da consulta.
         consulta.getPaciente().setBeber(beber);
         consulta.getPaciente().setColesterol(colesterol);
         consulta.getPaciente().setDiabete(diabete);
         consulta.getPaciente().setDoencaCardio(doencaCardio);
         consulta.getPaciente().setCirurgias(cirurgias);
         consulta.getPaciente().setAlergias(alergias);
-        this.atendimentos.add(consulta);
+        this.atendimentos.add(consulta); // adiciona a consulta à lista de atendimentos
     }
     
     // Atualiza os dados de saúde de um objeto *Paciente*:
-    public void atualizaPacienteFuma(Paciente paciente, boolean fumar) {
+    public void atualizarPaciente(Paciente paciente, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean doencaCardio, String novaAlergia, String novaCirurgia) {
+        /*
+        Atualiza as informações de saúde de um paciente.
+        */
+        paciente.setAlergias(novaAlergia);
+        paciente.setCirurgias(novaCirurgia);
         paciente.setFumar(fumar);
-    }
-    public void atualizaPacienteBebe(Paciente paciente, boolean beber) {
         paciente.setBeber(beber);
-    }
-    public void atualizaPacienteColesterol(Paciente paciente, boolean colesterol) {
-        paciente.setColesterol(colesterol);
-    }
-    public void atualizaPacienteDiabete(Paciente paciente, boolean diabete) {
-        paciente.setDiabete(diabete);
-    }
-    public void atualizaPacienteDoencaCardio(Paciente paciente, boolean doencaCardio) {
         paciente.setDoencaCardio(doencaCardio);
-    }
-    
-    public void atualizaPacienteCirurgias(Paciente paciente, String cirurgia) {
-        // Adiciona uma nova cirurgia
-        paciente.setCirurgias(cirurgia);
-    }
-    
-    public void atualizaPacienteAlergia(Paciente paciente, String alergia) { 
-        // Define as alergias do paciente
-        paciente.setAlergias(alergia);
-    }
-    public void atualizarPaciente(Paciente paciente, char campo, String novoDado) {
-        switch(campo){
-            case 'F':
-                boolean fumar = "SIM".equals(novoDado.toUpperCase());                                
-                this.atualizaPacienteFuma(paciente, fumar);
-                System.out.printf("Dado alterado!");
-                break;
-            case 'B':
-                boolean beber = "SIM".equals(novoDado.toUpperCase());                                
-                this.atualizaPacienteBebe(paciente, beber);
-                System.out.println("Dado alterado!");
-                break;
-            case 'C':
-                boolean colesterol = "SIM".equals(novoDado.toUpperCase());
-                this.atualizaPacienteColesterol(paciente, colesterol);
-                System.out.println("Dado alterado!");
-                break;
-            case 'D':
-                boolean diabete = "SIM".equals(novoDado.toUpperCase());
-                this.atualizaPacienteDiabete(paciente, diabete);
-                System.out.printf("Dado alterado!");
-                break;
-            case 'H': // heart
-                boolean doencaCardio = "SIM".equals(novoDado.toUpperCase());
-                this.atualizaPacienteDoencaCardio(paciente, doencaCardio);
-                System.out.printf("Dado alterado!");
-                break;
-            case 'S': // surgery
-                this.atualizaPacienteCirurgias(paciente, novoDado);
-                System.out.printf("Dado alterado!");
-                break;
-            case 'A':
-                this.atualizaPacienteAlergia(paciente, novoDado);
-                System.out.printf("Dado alterado!");
-                break;
-            default:
-                System.out.println("Campo inválido!");
-        }
+        paciente.setColesterol(colesterol);
+        paciente.setDiabete(diabete);
     }
     
     // Métodos do prontuário:
     public void cadastrarProntuario(String cpf, String sintomas, String diagnostico, String tratamento) {
-        // Cadastra o prontuário do paciente
+        /*
+        Cadastra o pronturário de um paciente -> busca o paciente a partir do CPF.
+        */
         Prontuario prontuario = new Prontuario(sintomas, diagnostico, tratamento);
         //TROCAR PRO BANCO DE DADOS
         Busca buscar = new Busca();
@@ -134,14 +91,14 @@ public class Medico extends Funcionario {
         //TROCAR PRO BANCO DE DADOS
         paciente.setProntuario(prontuario);
     }
-    public void atualizarProntuario(Paciente paciente, char campo, String novoDado) {
-        // Altera algum dado do prontuário do paciente
-        switch(campo) {
-            case 'S' -> paciente.getProntuario().setSintomas(novoDado);
-            case 'D' -> paciente.getProntuario().setDiagnostico(novoDado);
-            case 'T' -> paciente.getProntuario().setTratamento(novoDado);
-            default -> System.out.println("Campo inválido!");
-        }
+    public void atualizarProntuario(Paciente paciente, String novoSintoma, String novoDiagnostico, String novoTratamento) {
+        /*
+        Ataualiza os dados do prontuario do paciente.
+        Todos os dados saõ sempre atualizados, mesmo que apenas um deles mude.
+        */
+        paciente.getProntuario().setSintomas(novoSintoma);
+        paciente.getProntuario().setDiagnostico(novoDiagnostico);
+        paciente.getProntuario().setTratamento(novoTratamento);
     }
     public void removerProntuario(String cpf) {
         /*
@@ -157,7 +114,7 @@ public class Medico extends Funcionario {
         paciente.getProntuario().setTratamento(null);
     }
     
-    // Métodos dos relatórios:
+    // MÉTODOS DOS RELATÓRIOS:
     public void gerarImprimirAtestado(Medico medico, String cpf, int diasAfastamento, String dataInicio) {
         // Gera e imprime um objeto *Atestado*
         Busca buscar = new Busca();
