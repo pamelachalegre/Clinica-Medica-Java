@@ -6,7 +6,8 @@ package Interfaces;
 
 import Funcionarios.Medico;
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQuery;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,8 +18,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     EntityManager em;
     /**
      * Creates new form MenuPrincipal
+     * @param em
      */
-    public MenuPrincipal() {
+    public MenuPrincipal(EntityManager em) {
         initComponents();
         setSize(540, 300);
         setLocationRelativeTo(null);
@@ -75,7 +77,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         if ("MARIA GABRIELA".equals(nome.toUpperCase())) { // Se o nome da secretária estiver correto:
             dispose(); //A tela do menu principal é invisibilizada
-            new MenuSecretaria().setVisible(true); // A tela do menu da secreetária passa a ser a visível
+            new MenuSecretaria(em).setVisible(true); // A tela do menu da secreetária passa a ser a visível
         } else { // Se não:
             JOptionPane.showMessageDialog(null, "Usuário desconhecido!", "Identificação", JOptionPane.WARNING_MESSAGE);
         }
@@ -93,7 +95,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         if ("2893".equals(crm)) { // Buscar o CRM no banco de dados -> se encontrar:
             dispose(); //IDDEIA: PASSAR O MEDICO CORRETO COMO PRAÊMTRO DA CRIAÇÃO DO MENU.
             Medico med = new Medico();
-            new MenuMedico(med).setVisible(true); //vai ao menu de médicos
+            new MenuMedico(med, em).setVisible(true); //vai ao menu de médicos
         } else {// Se não:
             JOptionPane.showMessageDialog(null, "Usuário desconhecido! CRM inválido.", "Identificação", JOptionPane.WARNING_MESSAGE);
         }
@@ -102,6 +104,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -126,10 +129,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         //</editor-fold>
         /* Create and display the form */
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClinicaMedicaPU");
+        
+        EntityManager em = emf.createEntityManager();
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                new MenuPrincipal().setVisible(true);
+                new MenuPrincipal(em).setVisible(true);
             }
         });
     }

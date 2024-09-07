@@ -37,21 +37,21 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        alergiasNum = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        cirurgiasNum = new javax.swing.JComboBox<>();
         Salvar = new javax.swing.JButton();
         fumar = new javax.swing.JCheckBox();
         beber = new javax.swing.JCheckBox();
         colesterol = new javax.swing.JCheckBox();
         diabetes = new javax.swing.JCheckBox();
         cardio = new javax.swing.JCheckBox();
-        cirurgiasTF = new javax.swing.JCheckBox();
-        alergiasTF = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         identificaConsulta = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        alergias = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        cirurgias = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clinica Medica");
@@ -63,28 +63,6 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         jLabel1.setText("CADASTRO - FICHA MÉDICA");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, -1, 60));
 
-        alergiasNum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "20+" }));
-        alergiasNum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alergiasNumActionPerformed(evt);
-            }
-        });
-        getContentPane().add(alergiasNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
-
-        jLabel8.setText("Quantas:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 49, 20));
-
-        jLabel10.setText("Quantas:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 49, 20));
-
-        cirurgiasNum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "20+" }));
-        cirurgiasNum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cirurgiasNumActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cirurgiasNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, -1, -1));
-
         Salvar.setBackground(new java.awt.Color(179, 242, 255));
         Salvar.setText("Salvar");
         Salvar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +70,7 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
                 SalvarActionPerformed(evt);
             }
         });
-        getContentPane().add(Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, -1, -1));
+        getContentPane().add(Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
 
         fumar.setText("Fuma?");
         getContentPane().add(fumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
@@ -109,12 +87,6 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         cardio.setText("Possui alguma doença cardiovascular?");
         getContentPane().add(cardio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
-        cirurgiasTF.setText("Tem alguma cirurgia?");
-        getContentPane().add(cirurgiasTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
-
-        alergiasTF.setText("Possui alergias?");
-        getContentPane().add(alergiasTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
-
         jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -122,12 +94,30 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
                 cancelar(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
         jLabel2.setText("Insira a data, o horario e seu CRM:");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, 20));
         getContentPane().add(identificaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 180, -1));
+
+        jLabel3.setText("Cirurgias?");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, 20));
+
+        jLabel4.setText("Alergias?");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, 20));
+
+        alergias.setColumns(20);
+        alergias.setRows(5);
+        jScrollPane1.setViewportView(alergias);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 310, 40));
+
+        cirurgias.setColumns(20);
+        cirurgias.setRows(5);
+        jScrollPane2.setViewportView(cirurgias);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 310, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -136,28 +126,11 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         /*
         O medico cadastra a ficha medica do paciente em consulta com as informações dos campos.
         */
-        String cirurgias = "";
-        String alergias = "";
-
-        med.cadastrarDadosPaciente(identificaConsulta.getText(), fumar.isSelected(), beber.isSelected(), colesterol.isSelected(), diabetes.isSelected(), cardio.isSelected(), cirurgias, alergias);
+    
+        med.cadastrarDadosPaciente(identificaConsulta.getText(), fumar.isSelected(), beber.isSelected(), colesterol.isSelected(), diabetes.isSelected(), cardio.isSelected(), cirurgias.getText(), alergias.getText());
         
         dispose();
     }//GEN-LAST:event_SalvarActionPerformed
-
-    private void cirurgiasNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cirurgiasNumActionPerformed
-        /*
-        Caso um número de cirurgias diferente de 0 (default) seja selecionado, abre uma janela para que elas sejam inseridas.
-        */
-        String cirurgias = JOptionPane.showInputDialog(null, "Digite uma de suas cirurgias:", "Cirurgias",JOptionPane.QUESTION_MESSAGE);
-        
-    }//GEN-LAST:event_cirurgiasNumActionPerformed
-
-    private void alergiasNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alergiasNumActionPerformed
-        /*
-        Caso um número de alergias diferente de 0 (default) seja selecionado, abre uma janela para que elas sejam inseridas.
-        */
-        String alergias = JOptionPane.showInputDialog(null, "Digite uma de suas alergias:", "Alergias",JOptionPane.QUESTION_MESSAGE);
-    }//GEN-LAST:event_alergiasNumActionPerformed
 
     private void cancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar
         /*
@@ -172,21 +145,21 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Salvar;
-    private javax.swing.JComboBox<String> alergiasNum;
-    private javax.swing.JCheckBox alergiasTF;
+    private javax.swing.JTextArea alergias;
     private javax.swing.JCheckBox beber;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox cardio;
-    private javax.swing.JComboBox<String> cirurgiasNum;
-    private javax.swing.JCheckBox cirurgiasTF;
+    private javax.swing.JTextArea cirurgias;
     private javax.swing.JCheckBox colesterol;
     private javax.swing.JCheckBox diabetes;
     private javax.swing.JCheckBox fumar;
     private javax.swing.JTextField identificaConsulta;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

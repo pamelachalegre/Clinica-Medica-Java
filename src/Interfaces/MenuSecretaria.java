@@ -5,6 +5,7 @@
 package Interfaces;
 
 import Funcionarios.Secretaria;
+import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +14,13 @@ import javax.swing.JOptionPane;
  */
 public class MenuSecretaria extends javax.swing.JFrame {
     Secretaria sec;
+    EntityManager em;
     /**
      * Creates new form MenuSecretaria
      */
-    public MenuSecretaria() {
+    public MenuSecretaria(EntityManager em) {
         initComponents();
+        this.em = em;
         setSize(640, 480);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
@@ -137,7 +140,7 @@ public class MenuSecretaria extends javax.swing.JFrame {
         Volta para o menu principal -> "saindo" do login do usuário.
         */
         dispose();
-        new MenuPrincipal().setVisible(true);
+        new MenuPrincipal(em).setVisible(true);
     }//GEN-LAST:event_sair
 
     private void gerenciarMensagens(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarMensagens

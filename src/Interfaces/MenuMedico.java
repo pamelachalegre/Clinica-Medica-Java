@@ -4,8 +4,13 @@
  */
 package Interfaces;
 
+import Dados.Paciente;
 import Funcionarios.Medico;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
+import org.hibernate.annotations.NamedQuery;
 
 /**
  *
@@ -13,11 +18,16 @@ import javax.swing.JOptionPane;
  */
 public class MenuMedico extends javax.swing.JFrame {
     Medico med;
+    EntityManager em;
+    
     /**
      * Creates new form MenuMedico
+     * @param med
+     * @param em
      */
-    public MenuMedico(Medico med) {
+    public MenuMedico(Medico med, EntityManager em) {
         this.med = med;
+        this.em = em;
         initComponents();
         setSize(640, 450);
         setLocationRelativeTo(null);
@@ -63,6 +73,11 @@ public class MenuMedico extends javax.swing.JFrame {
 
         atualizaFichaMedica.setBackground(new java.awt.Color(179, 242, 255));
         atualizaFichaMedica.setText("Atualizar Ficha Médica");
+        atualizaFichaMedica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarFichaMedica(evt);
+            }
+        });
         getContentPane().add(atualizaFichaMedica, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 240, -1));
 
         cadastrarProntuario.setBackground(new java.awt.Color(179, 242, 255));
@@ -76,6 +91,11 @@ public class MenuMedico extends javax.swing.JFrame {
 
         atualizaProntuario.setBackground(new java.awt.Color(179, 242, 255));
         atualizaProntuario.setText("Atualizar Prontuário");
+        atualizaProntuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizaProntuario(evt);
+            }
+        });
         getContentPane().add(atualizaProntuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 240, -1));
 
         removeProntuario.setBackground(new java.awt.Color(179, 242, 255));
@@ -114,7 +134,7 @@ public class MenuMedico extends javax.swing.JFrame {
         Volta para o menu principal -> "saindo" do login do usuário.
         */
         dispose();
-        new MenuPrincipal().setVisible(true);
+        new MenuPrincipal(em).setVisible(true);
     }//GEN-LAST:event_sair
 
     private void gerarRelatorio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerarRelatorio
@@ -146,6 +166,28 @@ public class MenuMedico extends javax.swing.JFrame {
                 
         med.removerProntuario(cpf);
     }//GEN-LAST:event_removerProntuario
+
+    private void atualizarFichaMedica(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarFichaMedica
+        
+        String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
+        
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE" + cpf));
+        
+        List<Paciente> pac = query.getResultList(); // O CPF é único para cada paciente. Portanto, o paciente correto estará no índice 0.
+        
+        new AtualizaDadosSaudePaciente(med, pac.get(0)).setVisible(true);
+    }//GEN-LAST:event_atualizarFichaMedica
+
+    private void atualizaProntuario(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizaProntuario
+        // TODO add your handling code here:
+        String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
+        
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE" + cpf));
+        
+        List<Paciente> pac = query.getResultList(); // O CPF é único para cada paciente. Portanto, o paciente correto estará no índice 0.
+        
+        new AtualizaProntuario(med, pac.get(0)).setVisible(true);
+    }//GEN-LAST:event_atualizaProntuario
 
     /**
      * @param args the command line arguments

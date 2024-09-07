@@ -4,23 +4,30 @@
  */
 package Interfaces;
 
+import Dados.Consulta;
+import Dados.Paciente;
+import Funcionarios.CadastroMedico;
 import Funcionarios.Medico;
 
 /**
  *
- * @author guijo
+ * @author home
  */
-public class CadastraProntuario extends javax.swing.JFrame {
+public class AtualizaProntuario extends javax.swing.JFrame {
     Medico med;
+    Paciente pac;
     
     /**
-     * Creates new form CadastroProntuário
+     * Creates new form AtualizaProntuario
      * @param med
+     * @param pac
      */
-    public CadastraProntuario(Medico med) {
-        this.med = med;
+    public AtualizaProntuario(Medico med, Paciente pac) {
         initComponents();
-        setSize(665, 430);
+        this.med = med;
+        this.pac = pac;
+        initPaciente();
+        setSize(660, 340);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
     }
@@ -34,42 +41,33 @@ public class CadastraProntuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         salvar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        cpfPaciente = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         sintomas = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         diagnostico = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         tratamento = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(107, 211, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CADASTRAR - PRONTUÁRIO");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 260, 60));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Tratamento:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 70, 40));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 70, 40));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Sintomas:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 60, 40));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 60, 40));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Diagnostico:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 70, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 70, 40));
 
         salvar.setBackground(new java.awt.Color(179, 242, 255));
         salvar.setText("Salvar");
@@ -78,7 +76,7 @@ public class CadastraProntuario extends javax.swing.JFrame {
                 salvarActionPerformed(evt);
             }
         });
-        getContentPane().add(salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, -1, -1));
+        getContentPane().add(salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, -1));
 
         jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Cancelar");
@@ -87,29 +85,30 @@ public class CadastraProntuario extends javax.swing.JFrame {
                 cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
-
-        jLabel5.setText("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 220, 20));
-        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 200, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
 
         sintomas.setColumns(20);
         sintomas.setRows(5);
         jScrollPane1.setViewportView(sintomas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
         diagnostico.setColumns(20);
         diagnostico.setRows(5);
         jScrollPane2.setViewportView(diagnostico);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, -1, -1));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, -1, -1));
 
         tratamento.setColumns(20);
         tratamento.setRows(5);
         jScrollPane3.setViewportView(tratamento);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 550, 70));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 550, 70));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(107, 211, 255));
+        jLabel1.setText("ATUALIZAÇÃO - PRONTUÁRIO");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -117,8 +116,9 @@ public class CadastraProntuario extends javax.swing.JFrame {
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
         /*
         O médico cadastra o prontuário do paciente com as informações inseridas nos campos.
+        Todos os campos são atualizados, mesmo que alguns deles não tenham sido alterados.
         */
-        med.cadastrarProntuario(cpfPaciente.getText(), sintomas.getText(), diagnostico.getText(), tratamento.getText());
+        med.atualizarProntuario(pac, sintomas.getText(), diagnostico.getText(), tratamento.getText());
         dispose();
     }//GEN-LAST:event_salvarActionPerformed
 
@@ -128,20 +128,23 @@ public class CadastraProntuario extends javax.swing.JFrame {
         */
         dispose();
     }//GEN-LAST:event_cancelarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+    
+    private void initPaciente() {
+        /*
+        Preenche os campos com as informações anteriores do paciente.
+        */
+        sintomas.setText(pac.getProntuario().getSintomas());
+        diagnostico.setText(pac.getProntuario().getDiagnostico());
+        tratamento.setText(pac.getProntuario().getTratamento());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cpfPaciente;
     private javax.swing.JTextArea diagnostico;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

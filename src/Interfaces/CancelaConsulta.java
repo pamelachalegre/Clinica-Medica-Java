@@ -17,7 +17,7 @@ public class CancelaConsulta extends javax.swing.JFrame {
      */
     public CancelaConsulta() {
         initComponents();
-        setSize(440, 240);
+        setSize(380, 220);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
     }
@@ -33,9 +33,13 @@ public class CancelaConsulta extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        data = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        hora = new javax.swing.JTextField();
+        crm = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clinica Medica");
@@ -44,11 +48,12 @@ public class CancelaConsulta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(165, 107, 255));
         jLabel1.setText("CANCELAMENTO - CONSULTA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
-        jLabel2.setText("Insira a data, o horário e o CRM do medico da consulta (sem espaços):");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 370, -1));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Insira a data (DD/MM/AAA):");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 20));
+        getContentPane().add(data, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 160, -1));
 
         jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Cancelar");
@@ -57,7 +62,7 @@ public class CancelaConsulta extends javax.swing.JFrame {
                 cancelar(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(224, 188, 255));
         jButton2.setText("Cancelar Consulta");
@@ -66,7 +71,17 @@ public class CancelaConsulta extends javax.swing.JFrame {
                 removerConsulta(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, -1));
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Insira o horário (HH:MM):");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 150, 20));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Insira o CRM do médio:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 150, 20));
+        getContentPane().add(hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 160, -1));
+        getContentPane().add(crm, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 160, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -82,20 +97,20 @@ public class CancelaConsulta extends javax.swing.JFrame {
         */
         sec = new Secretaria();
         
-        sec.removerConsulta(jTextField1.getText());
+        sec.removerConsulta((data.getText() + hora.getText() + crm.getText())); // Junta os três campos para formar o IDENTIFICADOR da consulta.
         dispose();
     }//GEN-LAST:event_removerConsulta
 
-    /**
-     * @param args the command line arguments
-     */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField crm;
+    private javax.swing.JTextField data;
+    private javax.swing.JTextField hora;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
