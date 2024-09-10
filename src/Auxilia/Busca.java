@@ -33,7 +33,7 @@ public class Busca {
     
     public int acharConsulta(ArrayList<Consulta> listaConsultas, String id) {
         int i = 0;
-        while((i < listaConsultas.size())&&(!id.equals(listaConsultas.get(i).getId()))){
+        while((i < listaConsultas.size())&&(!id.equals(listaConsultas.get(i).getIdentificador()))){
             i++;
         }
         if(i < listaConsultas.size()) {

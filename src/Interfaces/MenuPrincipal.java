@@ -130,7 +130,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         //</editor-fold>
         /* Create and display the form */
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClinicaMedicaPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample");
         
         EntityManager em = emf.createEntityManager();
         

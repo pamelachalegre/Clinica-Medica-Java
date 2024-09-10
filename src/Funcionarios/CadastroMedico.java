@@ -6,6 +6,7 @@ package Funcionarios;
 
 import Dados.Consulta;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class CadastroMedico {
     private double salario;
     
     @OneToMany(cascade = CascadeType.ALL)
-    private ArrayList<Consulta> atendimentos;
+    private List<Consulta> atendimentos;
     
 
     public Integer getId() {
@@ -50,11 +51,11 @@ public class CadastroMedico {
         this.crm = crm;
     }
 
-    public ArrayList<Consulta> getAtendimentos() {
+    public List<Consulta> getAtendimentos() {
         return atendimentos;
     }
 
-    public void setAtendimentos(ArrayList<Consulta> atendimentos) {
+    public void setAtendimentos(List<Consulta> atendimentos) {
         this.atendimentos = atendimentos;
     }
     
