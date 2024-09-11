@@ -10,6 +10,7 @@ import Funcionarios.Secretaria;
 import static java.lang.System.exit;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
@@ -132,8 +133,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         /*
         Para sair do menu principal, o unuário deve encerrar o programa pelo botão "Sair" sempre.
         */
+        
+        EntityManagerFactory emf = em.getEntityManagerFactory();
         em.close();
-        em.getEntityManagerFactory().close();
+        emf.close();
         exit(0);     
     }//GEN-LAST:event_sairActioPerformed
 
