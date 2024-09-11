@@ -8,36 +8,23 @@ import Dados.Consulta;
 import Dados.Paciente;
 import Funcionarios.CadastroMedico;
 import Interfaces.MenuPrincipal;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NamedQuery;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 /**
  *
  * @author home
  */
+
 public class Main {
     
     public static void main(String[] args) {
+        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample");
         
         EntityManager em = emf.createEntityManager();
-        
-        em.getTransaction().begin();
-        
-        // Buscando pacientes no banco de dados
-        Query query = em.createQuery("SELECT p FROM Paciente p");
-        List<Paciente> listaPacientes = query.getResultList();
-        
-        if (listaPacientes.isEmpty()) {
-            System.out.println("Nenhum paciente encontrado no banco de dados.");
-            return;
-        }
-        
+
         //CRIAÇÃO DE PACIENTES INICIAIS
         Paciente pac1 = new Paciente("ANA PAULA", "111.222.333-44", "11.222.333-4", 'F', 18, "03/09/2005", "Avenida Maringá, 123", "44 99999-9999", "usuario@exemplo.com", true);
         Paciente pac2 = new Paciente("CARLOS SILVA", "222.333.444-55", "22.333.444-5", 'M', 25, "15/02/1999", "Rua das Flores, 456", "44 88888-8888", "carlos@exemplo.com", true);
@@ -46,7 +33,6 @@ public class Main {
         Paciente pac5 = new Paciente("FERNANDA LIMA", "555.666.777-88", "55.666.777-8", 'F', 35, "12/08/1988", "Avenida Paulista, 202", "44 55555-5555", "fernanda@exemplo.com", true);
         Paciente pac6 = new Paciente("PAULO MENDES", "666.777.888-99", "66.777.888-9", 'M', 28, "30/01/1996", "Rua Principal, 303", "44 44444-4444", "paulo@exemplo.com", true);
         Paciente pac7 = new Paciente("JULIANA COSTA", "777.888.999-00", "77.888.999-0", 'F', 22, "19/06/2001", "Avenida Secundária, 404", "44 33333-3333", "juliana@exemplo.com", true);
-        
         //CRIAÇÃO DE MÉDICOS INICIAIS
         CadastroMedico med1 = new CadastroMedico("MEREDITH GREY", "111.111.111-11", 11.111, "28930");
         CadastroMedico med2 = new CadastroMedico("GEORGE O'MALLEY", "222.222.222-22", 22.222, "10293");
@@ -57,14 +43,15 @@ public class Main {
         CadastroMedico med7 = new CadastroMedico("MARK SLOAN", "777.777.777-77", 77.777, "192803");
         
         //CRIAÇÃO DE CONSULTAS INICIAIS
-        Consulta con1 = new Consulta("14/09/2023", "15:00", med1, listaPacientes.get(0), 'N');
-        Consulta con2 = new Consulta("02/08/2024", "15:00", med2, listaPacientes.get(0), 'N');
-        Consulta con3 = new Consulta("05/10/2023", "10:00", med3, listaPacientes.get(1), 'N');
-        Consulta con4 = new Consulta("16/11/2023", "11:00", med4, listaPacientes.get(2), 'N');
-        Consulta con5 = new Consulta("28/12/2023", "14:00", med5, listaPacientes.get(3), 'R');
-        Consulta con6 = new Consulta("07/01/2024", "09:00", med6, listaPacientes.get(4), 'R');
-        Consulta con7 = new Consulta("18/02/2024", "13:00", med7, listaPacientes.get(5), 'R');
+        Consulta con1 = new Consulta("14/09/2023", "15:00", med1, pac1, 'N');
+        Consulta con2 = new Consulta("02/08/2024", "15:00", med2, pac1, 'N');
+        Consulta con3 = new Consulta("05/10/2023", "10:00", med3, pac2, 'N');
+        Consulta con4 = new Consulta("16/11/2023", "11:00", med4, pac3, 'N');
+        Consulta con5 = new Consulta("28/12/2023", "14:00", med5, pac4, 'R');
+        Consulta con6 = new Consulta("07/01/2024", "09:00", med6, pac5, 'R');
+        Consulta con7 = new Consulta("18/02/2024", "13:00", med7, pac6, 'R');
         
+        em.getTransaction().begin();
         //MARCANDO UM GRUPO DE MÉDICOS PARA O BANCO DE DADOS -> TABELA "MEDICO".
         em.persist(med1);
         em.persist(med2);
@@ -91,9 +78,9 @@ public class Main {
         em.persist(con7);
         
         em.getTransaction().commit(); //ENVIANDO DE FATO
-        //@NamedQuery(name="acharPaciente", query="select p FROM Paciente p WHERE p.cpf LIKE :cpfPaciente");
-        //Query query = em.createNamedQuery(“findPessoas”);
-        //query.setParameter(“nomePessoa”, “Marcos”);
+        
+        MenuPrincipal menu = new MenuPrincipal(em);
+        menu.setVisible(true);
         
     }
 }
