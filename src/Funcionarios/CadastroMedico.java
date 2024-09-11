@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Funcionarios;
 
 import Dados.Consulta;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,10 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author home
- */
 @Entity
 public class CadastroMedico {
     /*
@@ -87,6 +78,5 @@ public class CadastroMedico {
         this.cpf = cpf;
         this.salario = salario;
         this.crm = crm;
-        //this.atendimentos = new ArrayList<>();
     }
 }
