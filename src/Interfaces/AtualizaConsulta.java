@@ -103,7 +103,7 @@ public class AtualizaConsulta extends javax.swing.JFrame {
         sec.atualizarConsultaDataHora(consultas.get(0), data.getText(), hora.getText()); // SECRETARIA ATUALIZA A CONSULTA
         
         em.getTransaction().commit();
-        
+        dispose();
     }//GEN-LAST:event_atualizarDados
 
     private void cancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar

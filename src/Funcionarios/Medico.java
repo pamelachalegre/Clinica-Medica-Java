@@ -52,8 +52,7 @@ public class Medico extends Funcionario {
         Cadastra o dados de saúde do paciente atendido na consulta de identificador "identificador".
         */
         em.getTransaction().begin();
-        Query query = em.createQuery(("select c FROM Consultas c WHERE c.identificador LIKE\'" + identificador + "\'"));
-        
+        Query query = em.createQuery(("select c FROM Consulta c WHERE c.identificador LIKE\'" + identificador + "\'"));
         List<Consulta> consultas = query.getResultList();
         Consulta consulta = consultas.get(0);
         
@@ -64,6 +63,7 @@ public class Medico extends Funcionario {
         consulta.getPaciente().setDoencaCardio(doencaCardio);
         consulta.getPaciente().setCirurgias(cirurgias);
         consulta.getPaciente().setAlergias(alergias);
+        
         em.getTransaction().commit();
         this.atendimentos.add(consulta); // adiciona a consulta à lista de atendimentos
     }

@@ -53,6 +53,7 @@ public class Secretaria extends Funcionario {
         */
         consulta.setData(data);
         consulta.setHorario(hora);
+        consulta.setIdentificador((data + hora + consulta.getMedico().getCrm()));
     }
     
     public void removerConsulta(String identificador) {
@@ -61,7 +62,7 @@ public class Secretaria extends Funcionario {
         */
         em.getTransaction().begin(); //Remove a consulta do banco de dados.
         //BUSCA A CONSULTA CORRETA NO BANCO DE DADOS
-        Query query = em.createQuery("select c FROM Consulta WHERE c.crm LIKE \'" + identificador + "\'");
+        Query query = em.createQuery("select c FROM Consulta c WHERE c.identificador LIKE \'" + identificador + "\'");
         List<Consulta> consultas = query.getResultList(); //pega a lista resultante -> o identificador é único
                
         em.remove(consultas.get(0)); //REMOVE A CONSULTA DO BANCO
@@ -115,11 +116,11 @@ public class Secretaria extends Funcionario {
         */
         
         //RECUPERA TODAS AS CONSULTAS DA TABELA DE CONSULTAS 
-        Query query = em.createQuery("select c FROM Consultas c");
+        Query query = em.createQuery("select c FROM Consulta c");
         List<Consulta> listaConsultas = query.getResultList();
         
         if (listaConsultas.isEmpty()) {
-            System.out.println("Erro");
+            System.err.println("Erro");
         } else {
             GerenciadorMensagens enviar = new GerenciadorMensagens();
             enviar.gerenciarMensagens((ArrayList<Consulta>) listaConsultas);

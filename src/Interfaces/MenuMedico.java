@@ -60,7 +60,7 @@ public class MenuMedico extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(107, 211, 255));
         jLabel1.setText("MENU MÉDICO");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 130, 60));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 240, 60));
 
         cadastraFichaMedica.setBackground(new java.awt.Color(179, 242, 255));
         cadastraFichaMedica.setText("Cadastrar Ficha Médica");
@@ -168,14 +168,17 @@ public class MenuMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_removerProntuario
 
     private void atualizarFichaMedica(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarFichaMedica
-        
+        /*
+        Leva à tela de atualizar a ficha médica
+        */
         String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
-        
+        em.getTransaction().begin();
+        //BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
         Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
-        
         List<Paciente> pac = query.getResultList(); // O CPF é único para cada paciente. Portanto, o paciente correto estará no índice 0.
         
         new AtualizaDadosSaudePaciente(med, pac.get(0)).setVisible(true);
+        em.getTransaction().commit();
     }//GEN-LAST:event_atualizarFichaMedica
 
     private void atualizaProntuario(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizaProntuario

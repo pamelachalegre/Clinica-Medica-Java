@@ -108,6 +108,7 @@ public class NovaConsulta extends javax.swing.JFrame {
         }
         
         sec.cadastrarConsulta(data.getText(), hora.getText(), crmMedico.getText(), cpfPaciente.getText(), ret);
+        dispose();
     }//GEN-LAST:event_cadastrarConsulta
 
     private void cancelarCadastro(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCadastro
