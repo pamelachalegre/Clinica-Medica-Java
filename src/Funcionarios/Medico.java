@@ -107,51 +107,64 @@ public class Medico extends Funcionario {
     }
     public void removerProntuario(String cpf) {
         /*
-        Remove o prontuário de um paciente -> seta todos os seus atributos como nulos.
+        Remove o prontuário de um paciente -> seta como nulo e remove do banco de dados.
         */
-        //TROCAR PARA O BANCO DE DADOS
+        em.getTransaction().begin();
+        //BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
         Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
-        
         List<Paciente> pacientes = query.getResultList();
-        Paciente paciente = pacientes.get(0);
+        Paciente paciente = pacientes.get(0); // 0 POIS O CPF É ÚNICO -> APENAS UM PACIENTE VAI SER RETORNADO
         
-        paciente.getProntuario().setSintomas(null);
-        paciente.getProntuario().setDiagnostico(null);
-        paciente.getProntuario().setTratamento(null);
+        em.remove(paciente.getProntuario()); //REMOVE O OBJETO PRONTUÁRIO DO BANCO DE DADOS
+        paciente.setProntuario(null); // REMOVE O PRONTUÁRIO DO PACIENTE
+        em.getTransaction().commit();
     }
     
     // MÉTODOS DOS RELATÓRIOS:
     public void gerarImprimirAtestado(Medico medico, String cpf, int diasAfastamento, String dataInicio) {
-        // Gera e imprime um objeto *Atestado*
+        /*
+        Gera um objeto Atestado para emitir um atestado para o paciente
+        */
+        em.getTransaction().begin();
+        // BUSCA O PACIENTE DO ATESTADO NO BANCO DE DADOS
         Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
-        
         List<Paciente> pacientes = query.getResultList();
+        em.getTransaction().commit();
+
         Paciente paciente = pacientes.get(0);
         
         Atestado atestado = new Atestado(medico, paciente, paciente.getProntuario(), diasAfastamento, dataInicio);
         atestado.imprimeAtestado();
     }
     public void gerarDeclaracao(Medico medico, String cpf, String dataAcompanhamento, String parentescoAcompanhante, String nomeAcompanhante) {
-        // Gera um objeto *DeclaracaoAcompanhamento*
+        /*
+        Gera um objeto DeclaracaoAcompanhamento para emitir uma declaração de acompanhamento
+        */
+        em.getTransaction().begin();
+        // BUSCA O PACIENTE DA DECLARAÇÃO NO BANCO DE DADOS
         Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
-        
         List<Paciente> pacientes = query.getResultList();
+        em.getTransaction().commit();
         Paciente paciente = pacientes.get(0);
         
         DeclaracaoAcompanhamento declaracao = new DeclaracaoAcompanhamento(medico, paciente, paciente.getProntuario(), dataAcompanhamento, parentescoAcompanhante, nomeAcompanhante);
         declaracao.imprimeDeclaracao();
     }
     public void gerarReceita(Medico medico, String cpf, String remedio, float dosagem, String modoUso, int vezesDia) {
-        // Gera um objeto *Receita*
+        /*
+        Usa o objeto Receita para emitir uma receita.
+        */
+        // BUSCA O PACIENTE DA RECEITA NO BANCO DE DADOS
+        em.getTransaction().begin();
         Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
-        
         List<Paciente> pacientes = query.getResultList();
+        em.getTransaction().commit();
         Paciente paciente = pacientes.get(0);
         
         Receita receita = new Receita(medico, paciente, remedio, dosagem, modoUso, vezesDia);
         receita.imprimeReceita();
     }
-    public int clientesAtendidos(int mes, int ano) {
+    public void clientesAtendidos(int mes, int ano) {
         // Lista para armazenar CPFs únicos
         // Contador do numero de pacientes iniciando em 0
         List<String> pacientesUnicos = new ArrayList<>();
@@ -174,7 +187,6 @@ public class Medico extends Funcionario {
                 }
             }
         }
-        // Retorna o numero de pacientes unicos atendidos
-        return numPacientes;
+        System.out.println("\n\nNÚMERO DE CLIENTES ATENDIDOS EM " + mes + "/" + ano + ": " + numPacientes);
     }
 }

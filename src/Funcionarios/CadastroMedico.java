@@ -81,6 +81,7 @@ public class CadastroMedico {
         this.atendimentos = atendimentos;
     }
     
+    public CadastroMedico() { }
     public CadastroMedico(String nome, String cpf, double salario, String crm) {
         this.nome = nome;
         this.cpf = cpf;
