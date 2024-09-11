@@ -21,7 +21,7 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
     public CadastraDadosSaudePaciente(Medico med) {
         this.med = med;
         initComponents();
-        setSize(485, 370);
+        setSize(485, 380);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
     }
@@ -73,19 +73,19 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         getContentPane().add(Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
 
         fumar.setText("Fuma?");
-        getContentPane().add(fumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
+        getContentPane().add(fumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         beber.setText("Ingere bebidas alcoólicas?");
-        getContentPane().add(beber, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        getContentPane().add(beber, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
         colesterol.setText("Tem colesterol alto?");
-        getContentPane().add(colesterol, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
+        getContentPane().add(colesterol, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, -1));
 
         diabetes.setText("Tem diabetes?");
-        getContentPane().add(diabetes, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, -1, -1));
+        getContentPane().add(diabetes, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, -1));
 
         cardio.setText("Possui alguma doença cardiovascular?");
-        getContentPane().add(cardio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
+        getContentPane().add(cardio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
         jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Cancelar");
@@ -96,16 +96,16 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
-        jLabel2.setText("Insira a data, o horario e seu CRM:");
+        jLabel2.setText("Insira a data e o horário da consulta:");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, 20));
-        getContentPane().add(identificaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 180, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 20));
+        getContentPane().add(identificaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 180, -1));
 
         jLabel3.setText("Cirurgias?");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, 20));
 
         jLabel4.setText("Alergias?");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, 20));
 
         alergias.setColumns(20);
         alergias.setRows(5);
@@ -117,7 +117,7 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         cirurgias.setRows(5);
         jScrollPane2.setViewportView(cirurgias);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 310, 40));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 310, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -127,7 +127,7 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         O medico cadastra a ficha medica do paciente em consulta com as informações dos campos.
         */
     
-        med.cadastrarDadosPaciente(identificaConsulta.getText(), fumar.isSelected(), beber.isSelected(), colesterol.isSelected(), diabetes.isSelected(), cardio.isSelected(), cirurgias.getText(), alergias.getText());
+        med.cadastrarDadosPaciente((identificaConsulta.getText() + med.getCrm()), fumar.isSelected(), beber.isSelected(), colesterol.isSelected(), diabetes.isSelected(), cardio.isSelected(), cirurgias.getText(), alergias.getText());
         
         dispose();
     }//GEN-LAST:event_SalvarActionPerformed
@@ -138,10 +138,6 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         */
         dispose();
     }//GEN-LAST:event_cancelar
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Salvar;

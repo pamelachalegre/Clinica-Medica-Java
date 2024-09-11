@@ -19,7 +19,7 @@ public class CadastroPaciente extends javax.swing.JFrame {
      */
     public CadastroPaciente(Secretaria sec) {
         initComponents();
-        setSize(540, 450);
+        setSize(550, 450);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
         this.sec = sec;
@@ -70,44 +70,44 @@ public class CadastroPaciente extends javax.swing.JFrame {
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Nome completo:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 100, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 100, 20));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("CPF (xxx.xxx.xxx-xx):");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 140, 20));
         getContentPane().add(nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 300, -1));
         getContentPane().add(cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 300, -1));
 
         jLabel4.setText("Data de Nascimento:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, 20));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Endereço:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 60, 20));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 60, 20));
         getContentPane().add(rg, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 300, -1));
         getContentPane().add(idade, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 50, -1));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Telefone:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 60, 20));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 60, 20));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("E-mail:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 60, 20));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 60, 20));
         getContentPane().add(telefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 300, -1));
         getContentPane().add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 300, -1));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("RG (xx.xxx.xxx-x):");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 100, 20));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 20));
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Sexo:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 100, 20));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 100, 20));
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Idade:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 100, 20));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 100, 20));
         getContentPane().add(endereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 300, -1));
 
         buttonGroup1.add(feminino);
@@ -120,7 +120,7 @@ public class CadastroPaciente extends javax.swing.JFrame {
         getContentPane().add(dataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 110, -1));
 
         convenio.setText("Paciente de convênio");
-        getContentPane().add(convenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 140, -1));
+        getContentPane().add(convenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 190, -1));
 
         jButton1.setBackground(new java.awt.Color(224, 188, 255));
         jButton1.setText("Salvar");

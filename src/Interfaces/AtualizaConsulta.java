@@ -56,7 +56,7 @@ public class AtualizaConsulta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(165, 107, 255));
         jLabel1.setText("ATUALIZAÇÃO - DATA E HORA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
 
         jLabel2.setText("Nova Data:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
@@ -85,8 +85,8 @@ public class AtualizaConsulta extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
 
         jLabel4.setText("Insira a data, o horário e o CRM do médico da consulta (sem espaços):");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, 20));
-        getContentPane().add(identificaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 200, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 20));
+        getContentPane().add(identificaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 200, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

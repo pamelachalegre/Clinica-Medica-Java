@@ -47,11 +47,11 @@ public class RemovePaciente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(165, 107, 255));
         jLabel1.setText("REMOÇÃO - PACIENTE");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
 
         jLabel2.setText("Insira o CPF do paciente que deseja remover:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
-        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 240, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
+        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 240, -1));
 
         jButton1.setBackground(new java.awt.Color(224, 188, 255));
         jButton1.setText("Remover");
@@ -60,7 +60,7 @@ public class RemovePaciente extends javax.swing.JFrame {
                 removerPaciente(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, -1, -1));
 
         jButton2.setForeground(new java.awt.Color(255, 0, 0));
         jButton2.setText("Cancelar");
@@ -86,11 +86,8 @@ public class RemovePaciente extends javax.swing.JFrame {
         Secretaria remove o paciente a partir do CPF.
         */
         sec.removerPaciente(cpfPaciente.getText());
+        dispose();
     }//GEN-LAST:event_removerPaciente
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpfPaciente;

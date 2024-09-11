@@ -18,7 +18,7 @@ public class CancelaConsulta extends javax.swing.JFrame {
      */
     public CancelaConsulta(Secretaria sec) {
         initComponents();
-        setSize(380, 220);
+        setSize(380, 230);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
         this.sec = sec;

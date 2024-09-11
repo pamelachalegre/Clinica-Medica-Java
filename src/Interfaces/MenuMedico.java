@@ -5,6 +5,7 @@
 package Interfaces;
 
 import Dados.Paciente;
+import Funcionarios.CadastroMedico;
 import Funcionarios.Medico;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -133,7 +134,15 @@ public class MenuMedico extends javax.swing.JFrame {
         /*
         Volta para o menu principal -> "saindo" do login do usuário.
         */
-        dispose();
+        dispose(); // DESTRÓI A TELA DO MENU DO MÉDICO
+        em.getTransaction().begin();
+        //BUSCA O OBJETO CADASTROMEDICO RELACIONADO AO OBJETO MEDICO USANDO O SISTEMA ATUALMENTE
+        Query query = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + med.getCrm() + "\'"));
+        List<CadastroMedico> certo = query.getResultList();
+        
+        certo.get(0).setAtendimentos(med.getPacientesAtendidos()); // ATUALIZA A LISTA DE ATENDIMENTOS RELACIONADAS AO MEDICO -> POIS NOVAS CONSULTAS PODEM TER SIDO REALIZADAS
+        em.getTransaction().commit();
+        
         new MenuPrincipal(em).setVisible(true);
     }//GEN-LAST:event_sair
 
@@ -162,9 +171,10 @@ public class MenuMedico extends javax.swing.JFrame {
         /*
         O médico remove o prontuário de um paciente a partir do seu CPF.
         */
+        //OBTEM O cpf DO PACIENTE PARA REMOÇÃO DO PRONTUÁRIO
         String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
                 
-        med.removerProntuario(cpf);
+        med.removerProntuario(cpf); // CHAMA O MÉTODO DO MÉDICO PARA REMOVER O PRONTUÁRIO DO PACIENTE
     }//GEN-LAST:event_removerProntuario
 
     private void atualizarFichaMedica(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarFichaMedica
@@ -182,14 +192,17 @@ public class MenuMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_atualizarFichaMedica
 
     private void atualizaProntuario(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizaProntuario
-        // TODO add your handling code here:
+        /*
+        Leva à tela de atualização do prontuário do paciente de CPF 'cpf'.
+        */
         String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
-        
+        em.getTransaction().begin();
+        // BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
         Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
-        
         List<Paciente> pac = query.getResultList(); // O CPF é único para cada paciente. Portanto, o paciente correto estará no índice 0.
         
         new AtualizaProntuario(med, pac.get(0)).setVisible(true);
+        em.getTransaction().commit();
     }//GEN-LAST:event_atualizaProntuario
 
     /**

@@ -37,10 +37,10 @@ public class TelaAtestado extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cpfPaciente = new javax.swing.JTextField();
         dataInicio = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        numDias = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clinica Medica");
@@ -55,12 +55,8 @@ public class TelaAtestado extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Data de início:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, 20));
-        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 150, -1));
-        getContentPane().add(dataInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 150, -1));
-
-        jComboBox1.setBackground(new java.awt.Color(179, 242, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "mais de 15" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
+        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 150, -1));
+        getContentPane().add(dataInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 150, -1));
 
         jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Cancelar");
@@ -82,6 +78,7 @@ public class TelaAtestado extends javax.swing.JFrame {
 
         jLabel4.setText("Insira os dados requeridos:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        getContentPane().add(numDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 150, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -95,8 +92,7 @@ public class TelaAtestado extends javax.swing.JFrame {
         /*
         O médico gera o atestado do paciente
         */
-        int numDias = (int) jComboBox1.getSelectedItem();
-        med.gerarImprimirAtestado(med, cpfPaciente.getText(), numDias,dataInicio.getText());
+        med.gerarImprimirAtestado(med, cpfPaciente.getText(), Integer.parseInt(numDias.getText()), dataInicio.getText());
     }//GEN-LAST:event_gerarAtestado
 
     /**
@@ -108,10 +104,10 @@ public class TelaAtestado extends javax.swing.JFrame {
     private javax.swing.JTextField dataInicio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField numDias;
     // End of variables declaration//GEN-END:variables
 }

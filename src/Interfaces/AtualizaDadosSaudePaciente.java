@@ -69,19 +69,19 @@ public class AtualizaDadosSaudePaciente extends javax.swing.JFrame {
         getContentPane().add(Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
 
         fumar.setText("Fuma?");
-        getContentPane().add(fumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        getContentPane().add(fumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
         beber.setText("Ingere bebidas alcoólicas?");
-        getContentPane().add(beber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+        getContentPane().add(beber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
         colesterol.setText("Tem colesterol alto?");
-        getContentPane().add(colesterol, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, -1));
+        getContentPane().add(colesterol, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
 
         diabetes.setText("Tem diabetes?");
-        getContentPane().add(diabetes, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, -1));
+        getContentPane().add(diabetes, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, -1));
 
         cardio.setText("Possui alguma doença cardiovascular?");
-        getContentPane().add(cardio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        getContentPane().add(cardio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Cancelar");
@@ -95,7 +95,7 @@ public class AtualizaDadosSaudePaciente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(107, 211, 255));
         jLabel1.setText("ATUALIZAÇÃO - FICHA MÉDICA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 240, -1));
 
         jLabel2.setText("Cirurgias:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, 20));
@@ -130,7 +130,6 @@ public class AtualizaDadosSaudePaciente extends javax.swing.JFrame {
         O medico atualiza a ficha medica do paciente em consulta com as informações dos campos.
         Todos os campos sempre são atualizados, mesmo que a informação neles não tenha sido alterada
         */
-        
         med.atualizarPaciente(pac, fumar.isSelected(), beber.isSelected(), colesterol.isSelected(), diabetes.isSelected(), cardio.isSelected(), alergiasPac.getText(), cirurgias.getText());
         dispose();
     }//GEN-LAST:event_SalvarActionPerformed

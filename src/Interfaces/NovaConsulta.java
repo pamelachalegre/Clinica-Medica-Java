@@ -69,7 +69,7 @@ public class NovaConsulta extends javax.swing.JFrame {
 
         retorno.setText("Consulta de retorno");
         getContentPane().add(retorno, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, -1));
-        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 230, -1));
+        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 230, -1));
 
         jLabel5.setText("Paciente (CPF):");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, 20));
@@ -91,7 +91,7 @@ public class NovaConsulta extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
-        getContentPane().add(crmMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 140, -1));
+        getContentPane().add(crmMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

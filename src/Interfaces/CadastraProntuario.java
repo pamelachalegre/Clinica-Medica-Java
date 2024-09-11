@@ -61,7 +61,7 @@ public class CadastraProntuario extends javax.swing.JFrame {
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Tratamento:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 70, 40));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 90, 40));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Sintomas:");
@@ -69,7 +69,7 @@ public class CadastraProntuario extends javax.swing.JFrame {
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Diagnostico:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 70, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 80, 40));
 
         salvar.setBackground(new java.awt.Color(179, 242, 255));
         salvar.setText("Salvar");
@@ -90,7 +90,7 @@ public class CadastraProntuario extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
 
         jLabel5.setText("Insira o CPF do paciente (xxx.xxx.xxx-xx):");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 220, 20));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 250, 20));
         getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 200, -1));
 
         sintomas.setColumns(20);
@@ -103,13 +103,13 @@ public class CadastraProntuario extends javax.swing.JFrame {
         diagnostico.setRows(5);
         jScrollPane2.setViewportView(diagnostico);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, -1, -1));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, -1, -1));
 
         tratamento.setColumns(20);
         tratamento.setRows(5);
         jScrollPane3.setViewportView(tratamento);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 550, 70));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 530, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

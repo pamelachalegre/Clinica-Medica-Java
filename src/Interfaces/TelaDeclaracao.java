@@ -18,7 +18,7 @@ public class TelaDeclaracao extends javax.swing.JFrame {
     public TelaDeclaracao(Medico med) {
         this.med = med;
         initComponents();
-        setSize(410, 260);
+        setSize(430, 260);
         getContentPane().setBackground(java.awt.Color.white);
     }
 
@@ -46,7 +46,7 @@ public class TelaDeclaracao extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 130, -1));
+        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 130, -1));
 
         jLabel1.setText("Insira os dados requeridos:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
@@ -66,9 +66,9 @@ public class TelaDeclaracao extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Nome do acompanhante:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 150, 20));
-        getContentPane().add(data, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 130, -1));
-        getContentPane().add(parentesco, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, -1));
-        getContentPane().add(nomeAcompanhante, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 220, -1));
+        getContentPane().add(data, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 130, -1));
+        getContentPane().add(parentesco, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 220, -1));
+        getContentPane().add(nomeAcompanhante, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 220, -1));
 
         jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Cancelar");
