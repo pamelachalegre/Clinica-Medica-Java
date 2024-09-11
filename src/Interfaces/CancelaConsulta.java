@@ -6,10 +6,6 @@ package Interfaces;
 
 import Funcionarios.Secretaria;
 
-/**
- *
- * @author home
- */
 public class CancelaConsulta extends javax.swing.JFrame {
     Secretaria sec;
     /**
@@ -18,10 +14,11 @@ public class CancelaConsulta extends javax.swing.JFrame {
      */
     public CancelaConsulta(Secretaria sec) {
         initComponents();
+        this.sec = sec;
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(380, 230);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
-        this.sec = sec;
     }
 
     /**
@@ -89,7 +86,9 @@ public class CancelaConsulta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar
-        // TODO add your handling code here:
+        /*
+        Cancela a ação.
+        */
         dispose();
     }//GEN-LAST:event_cancelar
 
@@ -97,7 +96,8 @@ public class CancelaConsulta extends javax.swing.JFrame {
         /*
         A secretária remove a consulta do banco de dados.
         */
-        sec.removerConsulta((data.getText() + hora.getText() + crm.getText())); // Junta os três campos para formar o IDENTIFICADOR da consulta.
+        // Junta os três campos (data, hora e o crm) para formar o IDENTIFICADOR da consulta.
+        sec.removerConsulta((data.getText() + hora.getText() + crm.getText()));
         dispose();
     }//GEN-LAST:event_removerConsulta
 

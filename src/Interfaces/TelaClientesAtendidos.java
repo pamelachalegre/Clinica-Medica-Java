@@ -6,10 +6,6 @@ package Interfaces;
 
 import Funcionarios.Medico;
 
-/**
- *
- * @author home
- */
 public class TelaClientesAtendidos extends javax.swing.JFrame {
     Medico med;
     /**
@@ -19,6 +15,9 @@ public class TelaClientesAtendidos extends javax.swing.JFrame {
     public TelaClientesAtendidos(Medico med) {
         this.med = med;
         initComponents();
+        //Fatores estéticos da janela (tamanho e cor)
+        setSize(410, 200);
+        getContentPane().setBackground(java.awt.Color.white);
     }
 
     /**
@@ -39,6 +38,7 @@ public class TelaClientesAtendidos extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 71, -1));
 
@@ -86,12 +86,10 @@ public class TelaClientesAtendidos extends javax.swing.JFrame {
         /*
         Consultar o número de clientes atendidos no mês do ano preenchidos nos campos.
         */
+        //Transforma as strings mes e ano em números inteiros
         med.clientesAtendidos(Integer.parseInt(mes.getText()), Integer.parseInt(ano.getText()));
+        dispose();
     }//GEN-LAST:event_consultarClientes
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ano;

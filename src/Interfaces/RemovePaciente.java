@@ -6,10 +6,6 @@ package Interfaces;
 
 import Funcionarios.Secretaria;
 
-/**
- *
- * @author home
- */
 public class RemovePaciente extends javax.swing.JFrame {
     Secretaria sec;
     
@@ -19,10 +15,11 @@ public class RemovePaciente extends javax.swing.JFrame {
      */
     public RemovePaciente(Secretaria sec) {
         initComponents();
+        this.sec = sec;
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(400, 220);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
-        this.sec = sec;
     }
 
     /**

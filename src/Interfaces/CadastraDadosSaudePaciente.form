@@ -65,6 +65,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="fumar">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Fuma?"/>
       </Properties>
       <Constraints>
@@ -75,6 +78,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="beber">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Ingere bebidas alco&#xf3;licas?"/>
       </Properties>
       <Constraints>
@@ -85,6 +91,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="colesterol">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Tem colesterol alto?"/>
       </Properties>
       <Constraints>
@@ -95,6 +104,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="diabetes">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Tem diabetes?"/>
       </Properties>
       <Constraints>
@@ -105,6 +117,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="cardio">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Possui alguma doen&#xe7;a cardiovascular?"/>
       </Properties>
       <Constraints>

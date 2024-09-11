@@ -6,10 +6,6 @@ package Interfaces;
 
 import Funcionarios.Medico;
 
-/**
- *
- * @author home
- */
 public class TelaAtestado extends javax.swing.JFrame {
     Medico med;
     /**
@@ -19,6 +15,7 @@ public class TelaAtestado extends javax.swing.JFrame {
     public TelaAtestado(Medico med) {
         this.med = med;
         initComponents();
+        //Fatores estéticos da janela (tamanho e cor)
         setSize(360, 220);
         getContentPane().setBackground(java.awt.Color.white);
     }
@@ -84,20 +81,20 @@ public class TelaAtestado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar
-        // TODO add your handling code here:
+        /*
+        Cancela a ação.
+        */
         dispose();
     }//GEN-LAST:event_cancelar
 
     private void gerarAtestado(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerarAtestado
         /*
-        O médico gera o atestado do paciente
+        O médico gera o atestado do paciente com as informações dos campos.
         */
+        //Transforma a string do numero de dias em um número inteiro
         med.gerarImprimirAtestado(med, cpfPaciente.getText(), Integer.parseInt(numDias.getText()), dataInicio.getText());
+        dispose();
     }//GEN-LAST:event_gerarAtestado
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpfPaciente;

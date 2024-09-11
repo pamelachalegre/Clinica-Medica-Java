@@ -19,10 +19,11 @@ public class CadastroPaciente extends javax.swing.JFrame {
      */
     public CadastroPaciente(Secretaria sec) {
         initComponents();
+        this.sec = sec;
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(550, 450);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
-        this.sec = sec;
     }
 
     /**
@@ -83,7 +84,7 @@ public class CadastroPaciente extends javax.swing.JFrame {
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Endereço:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 60, 20));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 100, 20));
         getContentPane().add(rg, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 300, -1));
         getContentPane().add(idade, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 50, -1));
 
@@ -110,15 +111,18 @@ public class CadastroPaciente extends javax.swing.JFrame {
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 100, 20));
         getContentPane().add(endereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 300, -1));
 
+        feminino.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(feminino);
         feminino.setText("Feminino");
         getContentPane().add(feminino, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
 
+        masculino.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(masculino);
         masculino.setText("Masculino");
         getContentPane().add(masculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, -1, -1));
         getContentPane().add(dataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 110, -1));
 
+        convenio.setBackground(new java.awt.Color(255, 255, 255));
         convenio.setText("Paciente de convênio");
         getContentPane().add(convenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 190, -1));
 
@@ -147,12 +151,12 @@ public class CadastroPaciente extends javax.swing.JFrame {
         /*
         Envia os dados inseridos do paciente para a secretária executar o cadastro dele no banco de dados da clínica.
         */
-        int idadeInt = Integer.parseInt(idade.getText());
+        int idadeInt = Integer.parseInt(idade.getText()); // TRansforma a string idade em int
         char sexo = 'N'; //Inicia como 'N' para "não informado"
-        if (feminino.isSelected()) { //Verifica se o sexo escolhido foi o botão FEMININO
+        if (feminino.isSelected()) { //Verifica se o sexo escolhido foi o botão FEMININO -> char é 'F'
             sexo = 'F';
         } else {
-            if(masculino.isSelected()) { //Verifica se foi o botão MASCULINO
+            if(masculino.isSelected()) { //Verifica se foi o botão MASCULINO -> char é 'M'
                 sexo = 'M';
             }
         }
@@ -162,8 +166,10 @@ public class CadastroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastrarPaciente
 
     private void cancelarCadastro(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCadastro
-        // TODO add your handling code here:
-        dispose(); //setVisible(false); ???
+        /*
+        Cancela a ação
+        */
+        dispose();
     }//GEN-LAST:event_cancelarCadastro
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

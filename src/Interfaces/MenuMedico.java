@@ -12,11 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author home
- */
-
 public class MenuMedico extends javax.swing.JFrame {
     Medico med;
     EntityManager em;
@@ -30,6 +25,7 @@ public class MenuMedico extends javax.swing.JFrame {
         this.med = med;
         this.em = em;
         initComponents();
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(640, 450);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
@@ -133,8 +129,9 @@ public class MenuMedico extends javax.swing.JFrame {
     private void sair(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sair
         /*
         Volta para o menu principal -> "saindo" do login do usuário.
+        Ao sair do login do médico a lista de atendimentos é atualizada no cadastro do médico.
+        Pois, durente o uso, ela pode ter sido alterada (com novas consultas a novos pacientes)
         */
-        dispose(); // DESTRÓI A TELA DO MENU DO MÉDICO
         em.getTransaction().begin();
         //BUSCA O OBJETO CADASTROMEDICO RELACIONADO AO OBJETO MEDICO USANDO O SISTEMA ATUALMENTE
         Query query = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + med.getCrm() + "\'"));
@@ -143,12 +140,13 @@ public class MenuMedico extends javax.swing.JFrame {
         certo.get(0).setAtendimentos(med.getPacientesAtendidos()); // ATUALIZA A LISTA DE ATENDIMENTOS RELACIONADAS AO MEDICO -> POIS NOVAS CONSULTAS PODEM TER SIDO REALIZADAS
         em.getTransaction().commit();
         
+        dispose();
         new MenuPrincipal(em).setVisible(true);
     }//GEN-LAST:event_sair
 
     private void gerarRelatorio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerarRelatorio
         /*
-        Leva ao menu de relatórios que podem ser gerados.
+        Leva ao menu de relatórios que podem ser gerados pelo médico
         */
         new MenuRelatorios(med).setVisible(true);
     }//GEN-LAST:event_gerarRelatorio
@@ -181,6 +179,7 @@ public class MenuMedico extends javax.swing.JFrame {
         /*
         Leva à tela de atualizar a ficha médica
         */
+        // Pega o cpf do paciente que vai ser alterado
         String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
         em.getTransaction().begin();
         //BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
@@ -195,6 +194,7 @@ public class MenuMedico extends javax.swing.JFrame {
         /*
         Leva à tela de atualização do prontuário do paciente de CPF 'cpf'.
         */
+        //Pega o cpf do paciente que vai ter o prontuário alterado
         String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
         em.getTransaction().begin();
         // BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
@@ -204,10 +204,6 @@ public class MenuMedico extends javax.swing.JFrame {
         new AtualizaProntuario(med, pac.get(0)).setVisible(true);
         em.getTransaction().commit();
     }//GEN-LAST:event_atualizaProntuario
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atualizaFichaMedica;

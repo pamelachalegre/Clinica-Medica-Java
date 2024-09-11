@@ -6,10 +6,6 @@ package Interfaces;
 
 import Funcionarios.Medico;
 
-/**
- *
- * @author home
- */
 public class TelaReceita extends javax.swing.JFrame {
     Medico med;
     /**
@@ -19,7 +15,8 @@ public class TelaReceita extends javax.swing.JFrame {
     public TelaReceita(Medico med) {
         this.med = med;
         initComponents();
-        setSize(420, 300);
+        //Fatores relativos a estética da janela (tamanho e cor)
+        setSize(340, 300);
         getContentPane().setBackground(java.awt.Color.white);
     }
 
@@ -44,7 +41,7 @@ public class TelaReceita extends javax.swing.JFrame {
         modoUso = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        vezes = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clinica Medica");
@@ -57,20 +54,20 @@ public class TelaReceita extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, 20));
 
         jLabel3.setText("Medicação:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 20));
 
-        jLabel4.setText("Dosagem:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, -1, 20));
+        jLabel4.setText("Dosagem (d.d):");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
 
         jLabel5.setText("Modo de uso:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 20));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 20));
 
         jLabel6.setText("Quantas vezes ao dia?");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 20));
-        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 260, -1));
-        getContentPane().add(remedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 290, -1));
-        getContentPane().add(dose, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 70, -1));
-        getContentPane().add(modoUso, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 360, 40));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 20));
+        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 170, -1));
+        getContentPane().add(remedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 200, -1));
+        getContentPane().add(dose, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 130, -1));
+        getContentPane().add(modoUso, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 180, 20));
 
         jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Cancelar");
@@ -88,10 +85,10 @@ public class TelaReceita extends javax.swing.JFrame {
                 gerarReceita(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "6" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
+        vezes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "6", "8", "12", "24" }));
+        getContentPane().add(vezes, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 80, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -107,22 +104,21 @@ public class TelaReceita extends javax.swing.JFrame {
         /*
         O médico gera uma receita a partir de seu método "gerarReceita".
         */
+        // Transforma a string com a dosagem do remédio em um float (precisa ser no modelo x.x)
         Float doseFloat = Float.valueOf(dose.getText());
-        int vezesDia = (int) jComboBox1.getSelectedItem();
+        
+        // Pega o objeto selecionado (que será um número) -> transforma em string -> transforma em um número inteiro.
+        int vezesDia = Integer.parseInt((vezes.getSelectedItem().toString()));
+        
         med.gerarReceita(med, cpfPaciente.getText(), remedio.getText(), doseFloat, modoUso.getText(), vezesDia);
         dispose();
     }//GEN-LAST:event_gerarReceita
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpfPaciente;
     private javax.swing.JTextField dose;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -131,5 +127,6 @@ public class TelaReceita extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField modoUso;
     private javax.swing.JTextField remedio;
+    private javax.swing.JComboBox<String> vezes;
     // End of variables declaration//GEN-END:variables
 }
