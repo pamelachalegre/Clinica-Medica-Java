@@ -4,6 +4,10 @@ import Dados.Paciente;
 import Dados.Consulta;
 import Geradores.GerenciadorMensagens;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 
 public class Secretaria extends Funcionario {
     /*
@@ -14,15 +18,32 @@ public class Secretaria extends Funcionario {
     */
     
     // Métodos construtores:
-    public Secretaria() {}
-    public Secretaria(String nome, String cpf, double salario, ArrayList<Consulta> listaConsultas, ArrayList<Paciente> listaPacientes) {
-        super(nome, cpf, salario, listaConsultas, listaPacientes);
+    public Secretaria(EntityManager em) {
+        super(em);
     }
     
-    public void cadastrarConsulta(String data, String horario, CadastroMedico medico, Paciente paciente, char tipo) {
-        // Cria uma nova consulta e adiciona na lista de consultas
-        Consulta consulta = new Consulta(data, horario, medico, paciente, tipo);
-        listaConsultas.add(consulta);
+    public Secretaria(String nome, String cpf, double salario, EntityManager em) {
+        super(nome, cpf, salario, em);
+    }
+    
+    public void cadastrarConsulta(String data, String horario, String crmMedico, String cpfPaciente, char tipo) {
+        /*
+        Cria uma nova consulta e leva ao banco de dados
+        */
+        em.getTransaction().begin();
+        //BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
+        Query queryPac = em.createQuery(("select p FROM Pacientes p WHERE p.cpf LIKE \'" + cpfPaciente + "\'"));
+        List<Paciente> pacientes = queryPac.getResultList();
+        //BUSCA O MEDICO CORRETO NO BANCO DE DADOS
+        Query queryMed = em.createQuery(("select m FROM Medicos m WHERE m.crm LIKE \'" + crmMedico + "\'"));
+        List<CadastroMedico> medicos = queryMed.getResultList();
+        
+        //CRIA UMA NOVA CONSULTA
+        Consulta consulta = new Consulta(data, horario, medicos.get(0), pacientes.get(0), tipo);
+        
+        em.persist(consulta); //MANDA PARA O BANCO DE DADOS
+        
+        em.getTransaction().commit();
     }
     
     public void atualizarConsultaDataHora(Consulta consulta, String data, String hora) {
@@ -36,19 +57,28 @@ public class Secretaria extends Funcionario {
     
     public void removerConsulta(String identificador) {
         /*
-        Remove uma consulta da lista de consultas a partir do identificador
+        Remove uma consulta de identificador do banco de dados.
         */
-        Busca busca = new Busca();
-        int indice = busca.acharConsulta(listaConsultas, identificador);
+        em.getTransaction().begin(); //Remove a consulta do banco de dados.
+        //BUSCA A CONSULTA CORRETA NO BANCO DE DADOS
+        Query query = em.createQuery("select c FROM Consulta WHERE c.crm LIKE \'" + identificador + "\'");
+        List<Consulta> consultas = query.getResultList(); //pega a lista resultante -> o identificador é único
+               
+        em.remove(consultas.get(0)); //REMOVE A CONSULTA DO BANCO
         
-        listaConsultas.remove(indice);
-        System.out.println("CONSULTA CANCELADA");
+        em.getTransaction().commit();
     }
   
     public void cadastrarPaciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio) {
-        //CRIA UM PACIENTE E O ADICIONA NA LISTA DE PACIENTES
+        /*
+        Cadastra um novo paciente no banco de dados - cria um novo objeto paciente.
+        */
+        //CRIA UM OBJETO PACIENTE
         Paciente paciente = new Paciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio);
-        listaPacientes.add(paciente);
+        
+        em.getTransaction().begin();
+        em.persist(paciente); // ENVIA O NOVO PACIENTE PARA O BANCO DE DADOS.
+        em.getTransaction().commit();
     }
     
     public void atualizarPaciente(Paciente paciente, String nome, char sexo, int idade, String endereco, String telefone, String email, boolean conve) {
@@ -65,24 +95,34 @@ public class Secretaria extends Funcionario {
         paciente.setConvenio(conve);
     }
 
-    public void removerPaciente(String identificador) {
+    public void removerPaciente(String cpf) {
         /*
-        RETIRA O PACIENTE DE IDENTIFICADOR DA LISTA DE PACIENTES
+        RETIRA O PACIENTE DE cpf DO BANCO DE DADOS
         */
-        Busca busca = new Busca();
-        String cpf = identificador;
-        int i = busca.acharCPF(cpf, listaPacientes);
-        if(i != -1) {
-            listaPacientes.remove(i);
-            System.out.println("PACIENTE REMOVIDO!");
-        }
+        em.getTransaction().begin();
+        //BUSCA O PACIENTE NO BANCO DE DADOS
+        Query query = em.createQuery(("select p FROM Pacientes p WHERE p.cpf LIKE \'" + cpf + "\'"));
+        List<Paciente> pacientes = query.getResultList();
+        
+        em.remove(pacientes.get(0)); // REMOVE O PACIENTE DO BANCO DE DADOS
+        
+        em.getTransaction().commit();
     }
     
     public void gerenciarMensagens() {
         /*
         Usa o gerenciador de mensagens para gerenciar as consultas do dia seguinte.
         */
-        GerenciadorMensagens enviar = new GerenciadorMensagens();
-        enviar.gerenciarMensagens(listaConsultas);
+        
+        //RECUPERA TODAS AS CONSULTAS DA TABELA DE CONSULTAS 
+        Query query = em.createQuery("select c FROM Consultas c");
+        List<Consulta> listaConsultas = query.getResultList();
+        
+        if (listaConsultas.isEmpty()) {
+            System.out.println("Erro");
+        } else {
+            GerenciadorMensagens enviar = new GerenciadorMensagens();
+            enviar.gerenciarMensagens(listaConsultas);
+        }
     }
 }

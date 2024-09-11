@@ -2,14 +2,13 @@ package Funcionarios;
 import Dados.Consulta;
 import Dados.Paciente;
 import java.util.ArrayList;
+import javax.persistence.EntityManager;
 
 public abstract class Funcionario {
     private String nome, cpf;
     private double salario;
 
-    
-    public ArrayList<Consulta> listaConsultas;
-    public ArrayList<Paciente> listaPacientes;
+    protected EntityManager em;
 
     // Sets e Gets para os atributos da superclasse *Funcionario*:
     public String getNome() {
@@ -32,36 +31,17 @@ public abstract class Funcionario {
     public void setSalario(double salario) {
         this.salario = salario;
     }
-
-    public ArrayList<Consulta> getListaConsultas() {
-        return listaConsultas;
-    }
-    public void setListaConsultas(ArrayList<Consulta> listaConsultas) {
-        this.listaConsultas = listaConsultas;
-    }
-
-    public ArrayList<Paciente> getListaPacientes() {
-        return listaPacientes;
-    }
-    public void setListaPacientes(ArrayList<Paciente> listaPacientes) {
-        this.listaPacientes = listaPacientes;
-    }
     
     // Métodos Construtores:
-    public Funcionario() {}
-    public Funcionario(String nome, String cpf, double salario, ArrayList<Consulta> listaConsultas, ArrayList<Paciente> listaPacientes) {
+    public Funcionario(EntityManager em) {
         super();
-        this.nome = nome;
-        this.cpf = cpf;
-        this.salario = salario;
-        this.listaConsultas = listaConsultas;
-        this.listaPacientes = listaPacientes;
+        this.em = em;
     }
-    
-    public Funcionario(String nome, String cpf, double salario) {
+    public Funcionario(String nome, String cpf, double salario, EntityManager em) {
         super();
         this.nome = nome;
         this.cpf = cpf;
         this.salario = salario;
+        this.em = em;
     }
 }
