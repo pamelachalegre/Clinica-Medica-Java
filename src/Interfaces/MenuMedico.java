@@ -171,7 +171,7 @@ public class MenuMedico extends javax.swing.JFrame {
         
         String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
         
-        Query query = em.createQuery(("select p FROM Pacientes p WHERE p.cpf LIKE \'" + cpf + "\'"));
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
         
         List<Paciente> pac = query.getResultList(); // O CPF é único para cada paciente. Portanto, o paciente correto estará no índice 0.
         
@@ -182,7 +182,7 @@ public class MenuMedico extends javax.swing.JFrame {
         // TODO add your handling code here:
         String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
         
-        Query query = em.createQuery(("select p FROM Pacientes p WHERE p.cpf LIKE \'" + cpf + "\'"));
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
         
         List<Paciente> pac = query.getResultList(); // O CPF é único para cada paciente. Portanto, o paciente correto estará no índice 0.
         

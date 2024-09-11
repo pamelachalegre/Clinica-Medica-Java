@@ -23,15 +23,17 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
     
     /**
      * Creates new form AtualizaDadosPaciente
+     * @param sec
+     * @param em
      */
     public AtualizaDadosPaciente(Secretaria sec, EntityManager em) {
         initComponents();
         setSize(480, 450);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
-        initPaciente();
         this.sec = sec;
         this.em = em;
+        initPaciente();
     }
 
     /**

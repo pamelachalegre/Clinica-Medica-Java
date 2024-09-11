@@ -32,10 +32,10 @@ public class Secretaria extends Funcionario {
         */
         em.getTransaction().begin();
         //BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
-        Query queryPac = em.createQuery(("select p FROM Pacientes p WHERE p.cpf LIKE \'" + cpfPaciente + "\'"));
+        Query queryPac = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpfPaciente + "\'"));
         List<Paciente> pacientes = queryPac.getResultList();
         //BUSCA O MEDICO CORRETO NO BANCO DE DADOS
-        Query queryMed = em.createQuery(("select m FROM Medicos m WHERE m.crm LIKE \'" + crmMedico + "\'"));
+        Query queryMed = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + crmMedico + "\'"));
         List<CadastroMedico> medicos = queryMed.getResultList();
         
         //CRIA UMA NOVA CONSULTA
@@ -101,7 +101,7 @@ public class Secretaria extends Funcionario {
         */
         em.getTransaction().begin();
         //BUSCA O PACIENTE NO BANCO DE DADOS
-        Query query = em.createQuery(("select p FROM Pacientes p WHERE p.cpf LIKE \'" + cpf + "\'"));
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
         List<Paciente> pacientes = query.getResultList();
         
         em.remove(pacientes.get(0)); // REMOVE O PACIENTE DO BANCO DE DADOS
@@ -122,7 +122,7 @@ public class Secretaria extends Funcionario {
             System.out.println("Erro");
         } else {
             GerenciadorMensagens enviar = new GerenciadorMensagens();
-            enviar.gerenciarMensagens(listaConsultas);
+            enviar.gerenciarMensagens((ArrayList<Consulta>) listaConsultas);
         }
     }
 }

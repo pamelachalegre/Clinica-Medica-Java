@@ -112,7 +112,7 @@ public class NovaConsulta extends javax.swing.JFrame {
 
     private void cancelarCadastro(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCadastro
         // TODO add your handling code here:
-        dispose(); //setVisivble(false); ????
+        dispose();
     }//GEN-LAST:event_cancelarCadastro
 
     /**

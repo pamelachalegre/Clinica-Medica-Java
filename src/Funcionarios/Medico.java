@@ -21,11 +21,11 @@ public class Medico extends Funcionario {
     e *Receita*.
     */
     private String crm;
-    private ArrayList<Consulta> atendimentos;
+    private List<Consulta> atendimentos = new ArrayList();
     
     // Método construtor:
     
-    public Medico(String nome, String crm, String cpf, double salario, ArrayList<Consulta> atendimentos, EntityManager em) {
+    public Medico(String nome, String crm, String cpf, double salario, List<Consulta> atendimentos, EntityManager em) {
         super(nome, cpf, salario, em);
         this.crm = crm;
         this.atendimentos = atendimentos;
@@ -40,7 +40,7 @@ public class Medico extends Funcionario {
         return crm;
     }
 
-    public ArrayList<Consulta> getPacientesAtendidos() {
+    public List<Consulta> getPacientesAtendidos() {
         return atendimentos;
     }
     public void setPacientesAtendidos(ArrayList<Consulta> atendidos) {
@@ -51,6 +51,7 @@ public class Medico extends Funcionario {
         /*
         Cadastra o dados de saúde do paciente atendido na consulta de identificador "identificador".
         */
+        em.getTransaction().begin();
         Query query = em.createQuery(("select c FROM Consultas c WHERE c.identificador LIKE\'" + identificador + "\'"));
         
         List<Consulta> consultas = query.getResultList();
@@ -63,8 +64,6 @@ public class Medico extends Funcionario {
         consulta.getPaciente().setDoencaCardio(doencaCardio);
         consulta.getPaciente().setCirurgias(cirurgias);
         consulta.getPaciente().setAlergias(alergias);
-        em.getTransaction().begin();
-        em.persist(consulta.getPaciente());
         em.getTransaction().commit();
         this.atendimentos.add(consulta); // adiciona a consulta à lista de atendimentos
     }
@@ -90,7 +89,7 @@ public class Medico extends Funcionario {
         */
         Prontuario prontuario = new Prontuario(sintomas, diagnostico, tratamento);
         //TROCAR PRO BANCO DE DADOS
-        Query query = em.createQuery(("select p FROM Pacientes p WHERE p.cpf LIKE\'" + cpf + "\'"));
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
         
         List<Paciente> pacientes = query.getResultList();
         Paciente paciente = pacientes.get(0);
@@ -111,7 +110,7 @@ public class Medico extends Funcionario {
         Remove o prontuário de um paciente -> seta todos os seus atributos como nulos.
         */
         //TROCAR PARA O BANCO DE DADOS
-        Query query = em.createQuery(("select p FROM Pacientes p WHERE p.cpf LIKE\'" + cpf + "\'"));
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
         
         List<Paciente> pacientes = query.getResultList();
         Paciente paciente = pacientes.get(0);
@@ -124,7 +123,7 @@ public class Medico extends Funcionario {
     // MÉTODOS DOS RELATÓRIOS:
     public void gerarImprimirAtestado(Medico medico, String cpf, int diasAfastamento, String dataInicio) {
         // Gera e imprime um objeto *Atestado*
-        Query query = em.createQuery(("select p FROM Pacientes p WHERE p.cpf LIKE\'" + cpf + "\'"));
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
         
         List<Paciente> pacientes = query.getResultList();
         Paciente paciente = pacientes.get(0);
@@ -134,7 +133,7 @@ public class Medico extends Funcionario {
     }
     public void gerarDeclaracao(Medico medico, String cpf, String dataAcompanhamento, String parentescoAcompanhante, String nomeAcompanhante) {
         // Gera um objeto *DeclaracaoAcompanhamento*
-        Query query = em.createQuery(("select p FROM Pacientes p WHERE p.cpf LIKE\'" + cpf + "\'"));
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
         
         List<Paciente> pacientes = query.getResultList();
         Paciente paciente = pacientes.get(0);
@@ -144,7 +143,7 @@ public class Medico extends Funcionario {
     }
     public void gerarReceita(Medico medico, String cpf, String remedio, float dosagem, String modoUso, int vezesDia) {
         // Gera um objeto *Receita*
-        Query query = em.createQuery(("select p FROM Pacientes p WHERE p.cpf LIKE\'" + cpf + "\'"));
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
         
         List<Paciente> pacientes = query.getResultList();
         Paciente paciente = pacientes.get(0);

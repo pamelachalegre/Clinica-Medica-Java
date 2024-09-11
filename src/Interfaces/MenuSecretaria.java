@@ -17,6 +17,8 @@ public class MenuSecretaria extends javax.swing.JFrame {
     EntityManager em;
     /**
      * Creates new form MenuSecretaria
+     * @param sec
+     * @param em
      */
     public MenuSecretaria(Secretaria sec, EntityManager em) {
         initComponents();

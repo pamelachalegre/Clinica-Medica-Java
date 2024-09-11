@@ -101,7 +101,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         CadastroMedico certo = medico.get(0);
         if (certo.getCrm().equals(crm)) { // Buscar o CRM no banco de dados -> se encontrar:
             dispose();
-            Medico med = new Medico(certo.getNome(), certo.getCrm(), certo.getCpf(), certo.getSalario(), (ArrayList<Consulta>) certo.getAtendimentos(), em);
+            Medico med = new Medico(certo.getNome(), certo.getCrm(), certo.getCpf(), certo.getSalario(), certo.getAtendimentos(), em);
             new MenuMedico(med, em).setVisible(true); //vai ao menu de médicos
         } else {// Se não:
             JOptionPane.showMessageDialog(null, "Usuário desconhecido! CRM inválido.", "Identificação", JOptionPane.WARNING_MESSAGE);

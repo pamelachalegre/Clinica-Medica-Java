@@ -13,14 +13,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
  * @author home
  */
 @Entity
-@Table(name="MEDICO")
 public class CadastroMedico {
     /*
     Forma POJO com os dados do médico.
@@ -32,7 +30,7 @@ public class CadastroMedico {
     private double salario;
     
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Consulta> atendimentos;
+    private List<Consulta> atendimentos = new ArrayList<>();
     
 
     public Integer getId() {
@@ -88,6 +86,6 @@ public class CadastroMedico {
         this.cpf = cpf;
         this.salario = salario;
         this.crm = crm;
-        this.atendimentos = new ArrayList<>();
+        //this.atendimentos = new ArrayList<>();
     }
 }
