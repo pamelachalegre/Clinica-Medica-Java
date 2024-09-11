@@ -15,12 +15,14 @@ public class RemovePaciente extends javax.swing.JFrame {
     
     /**
      * Creates new form RemovePaciente
+     * @param sec
      */
-    public RemovePaciente() {
+    public RemovePaciente(Secretaria sec) {
         initComponents();
         setSize(400, 220);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
+        this.sec = sec;
     }
 
     /**
@@ -83,8 +85,6 @@ public class RemovePaciente extends javax.swing.JFrame {
         /*
         Secretaria remove o paciente a partir do CPF.
         */
-        sec = new Secretaria();
-        
         sec.removerPaciente(cpfPaciente.getText());
     }//GEN-LAST:event_removerPaciente
 

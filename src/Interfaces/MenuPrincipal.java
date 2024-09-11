@@ -4,10 +4,14 @@
  */
 package Interfaces;
 
+import Dados.Consulta;
+import Funcionarios.CadastroMedico;
 import Funcionarios.Medico;
+import Funcionarios.Secretaria;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
 /**
@@ -77,7 +81,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         if ("MARIA GABRIELA".equals(nome.toUpperCase())) { // Se o nome da secretária estiver correto:
             dispose(); //A tela do menu principal é invisibilizada
-            new MenuSecretaria(em).setVisible(true); // A tela do menu da secreetária passa a ser a visível
+            Secretaria sec = new Secretaria(em);
+            new MenuSecretaria(sec, em).setVisible(true); // A tela do menu da secreetária passa a ser a visível
         } else { // Se não:
             JOptionPane.showMessageDialog(null, "Usuário desconhecido!", "Identificação", JOptionPane.WARNING_MESSAGE);
         }
@@ -90,57 +95,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         */
         String crm = JOptionPane.showInputDialog(null, "Insira seu CRM:", "Identificação",JOptionPane.QUESTION_MESSAGE);
         
-        //Query query = new Query();
+        Query query = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + crm + "\'"));
+        List<CadastroMedico> medico = query.getResultList();
         
-        if ("2893".equals(crm)) { // Buscar o CRM no banco de dados -> se encontrar:
-            dispose(); //IDDEIA: PASSAR O MEDICO CORRETO COMO PRAÊMTRO DA CRIAÇÃO DO MENU.
-            Medico med = new Medico();
+        CadastroMedico certo = medico.get(0);
+        if (certo.getCrm().equals(crm)) { // Buscar o CRM no banco de dados -> se encontrar:
+            dispose();
+            Medico med = new Medico(certo.getNome(), certo.getCrm(), certo.getCpf(), certo.getSalario(), (ArrayList<Consulta>) certo.getAtendimentos(), em);
             new MenuMedico(med, em).setVisible(true); //vai ao menu de médicos
         } else {// Se não:
             JOptionPane.showMessageDialog(null, "Usuário desconhecido! CRM inválido.", "Identificação", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_acharMedico
 
-    /**
-     * @param args the command line arguments
-     */
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        /* Create and display the form */
-        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample");
-        
-        EntityManager em = emf.createEntityManager();
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
-                new MenuPrincipal(em).setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

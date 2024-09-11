@@ -4,9 +4,12 @@
  */
 package Interfaces;
 
+import Dados.Consulta;
 import Funcionarios.Secretaria;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -14,14 +17,17 @@ import javax.swing.JOptionPane;
  */
 public class AtualizaConsulta extends javax.swing.JFrame {
     Secretaria sec;
+    EntityManager em;
     /**
      * Creates new form AtualizaConsulta
      */
-    public AtualizaConsulta() {
+    public AtualizaConsulta(Secretaria sec, EntityManager em) {
         initComponents();
-        setSize(480, 260);
+        setSize(480, 280);
         setLocationRelativeTo(null);
-        getContentPane().setBackground(java.awt.Color.white);     
+        getContentPane().setBackground(java.awt.Color.white);    
+        this.sec = sec;
+        this.em = em;
     }
 
     /**
@@ -89,11 +95,14 @@ public class AtualizaConsulta extends javax.swing.JFrame {
         /*
         Atualiza a data e a hora da consulta escolhida.
         */
-        // IDENTIFICAR A CONSULTA PELO identificaConsulta e buscar no banco de dados.
+        em.getTransaction().begin();
+        //BUSCA DA CONSULTA  CORRETA A PARTIR DO IDENTIFICADOR
+        Query query = em.createQuery(("select c FROM Consulta c WHERE c.identificador LIKE \'" + identificaConsulta.getText() + "\'"));
+        List<Consulta> consultas = query.getResultList();
         
-        sec = new Secretaria();
+        sec.atualizarConsultaDataHora(consultas.get(0), data.getText(), hora.getText()); // SECRETARIA ATUALIZA A CONSULTA
         
-        //sec.atualizarConsultaDataHora(consulta, data.getText(), hora.getText());
+        em.getTransaction().commit();
         
     }//GEN-LAST:event_atualizarDados
 

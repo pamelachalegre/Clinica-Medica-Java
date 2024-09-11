@@ -11,17 +11,18 @@ import Funcionarios.Secretaria;
  * @author home
  */
 public class CadastroPaciente extends javax.swing.JFrame {
-    
     private Secretaria sec;
     
     /**
      * Creates new form CadastroPaciente
+     * @param sec
      */
-    public CadastroPaciente() {
+    public CadastroPaciente(Secretaria sec) {
         initComponents();
         setSize(540, 450);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
+        this.sec = sec;
     }
 
     /**
@@ -146,7 +147,6 @@ public class CadastroPaciente extends javax.swing.JFrame {
         /*
         Envia os dados inseridos do paciente para a secretária executar o cadastro dele no banco de dados da clínica.
         */
-        sec = new Secretaria();
         int idadeInt = Integer.parseInt(idade.getText());
         char sexo = 'N'; //Inicia como 'N' para "não informado"
         if (feminino.isSelected()) { //Verifica se o sexo escolhido foi o botão FEMININO
@@ -158,34 +158,14 @@ public class CadastroPaciente extends javax.swing.JFrame {
         }
         //OBJETO SECRETÁRIA CADASTRA O PACIENTE NO BANCO DE DADOS
         sec.cadastrarPaciente(nome.getText(), cpf.getText(), rg.getText(), sexo, idadeInt, dataNascimento.getText(), endereco.getText(), telefone.getText(), email.getText(), convenio.isSelected());
-        limparCampos();
+        dispose();
     }//GEN-LAST:event_cadastrarPaciente
 
     private void cancelarCadastro(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCadastro
         // TODO add your handling code here:
         dispose(); //setVisible(false); ???
     }//GEN-LAST:event_cancelarCadastro
-
-    private void limparCampos() {
-        /*
-        LIMPA TODOS OS CAMPOS PARA O CADASTRO DE UM NOVO PACIENTE.
-        */
-        nome.setText(null);
-        cpf.setText(null);
-        rg.setText(null);
-        buttonGroup1.clearSelection();
-        idade.setText(null);
-        dataNascimento.setText(null);
-        endereco.setText(null);
-        telefone.setText(null);
-        email.setText(null);
-        convenio.setSelected(false);
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox convenio;

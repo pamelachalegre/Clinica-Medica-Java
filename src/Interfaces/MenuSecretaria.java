@@ -18,12 +18,13 @@ public class MenuSecretaria extends javax.swing.JFrame {
     /**
      * Creates new form MenuSecretaria
      */
-    public MenuSecretaria(EntityManager em) {
+    public MenuSecretaria(Secretaria sec, EntityManager em) {
         initComponents();
         this.em = em;
         setSize(640, 480);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
+        this.sec = sec;
     }
 
     /**
@@ -147,7 +148,6 @@ public class MenuSecretaria extends javax.swing.JFrame {
         /*
         Gerencia as mensagens e exibe uma mensagem de "Mensagens gerenciadas!".
         */
-        sec = new Secretaria();
         sec.gerenciarMensagens(); // secretária gerencia as mensagens do dia seguinte a "hoje".
         
         JOptionPane.showMessageDialog(null, "Mensagens gerenciadas com sucesso e enviadas aos pacientes!", "Gerenciador de Mensagens", JOptionPane.INFORMATION_MESSAGE);
@@ -157,42 +157,42 @@ public class MenuSecretaria extends javax.swing.JFrame {
         /*
         Leva à tela de cadastro de uma nova consulta.
         */
-        new NovaConsulta().setVisible(true);
+        new NovaConsulta(sec).setVisible(true);
     }//GEN-LAST:event_cadastrarConsulta
 
     private void cadastrarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPaciente
         /*
         Leva à tela de cadastro de um novo paciente.
         */
-        new CadastroPaciente().setVisible(true);
+        new CadastroPaciente(sec).setVisible(true);
     }//GEN-LAST:event_cadastrarPaciente
 
     private void atualizarConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarConsulta
         /*
         Leva à tela de atuzalização da data e hora de uma consulta.
         */
-        new AtualizaConsulta().setVisible(true);
+        new AtualizaConsulta(sec, em).setVisible(true);
     }//GEN-LAST:event_atualizarConsulta
 
     private void atualizarPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarPaciente
         /*
         Leva à tela de atualização dos dados de um paciente.
         */
-        new AtualizaDadosPaciente().setVisible(true);
+        new AtualizaDadosPaciente(sec, em).setVisible(true);
     }//GEN-LAST:event_atualizarPaciente
 
     private void removerPaciente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerPaciente
         /*
         Leva à tela de remoção de paciente.
         */
-        new RemovePaciente().setVisible(true);
+        new RemovePaciente(sec).setVisible(true);
     }//GEN-LAST:event_removerPaciente
 
     private void cancelarConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarConsulta
         /*
         Leva à tela de cancelamento de consulta
         */
-        new CancelaConsulta().setVisible(true);
+        new CancelaConsulta(sec).setVisible(true);
     }//GEN-LAST:event_cancelarConsulta
 
 

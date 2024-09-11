@@ -5,6 +5,7 @@
 package Interfaces;
 
 import Funcionarios.Secretaria;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -14,12 +15,14 @@ public class NovaConsulta extends javax.swing.JFrame {
     Secretaria sec;
     /**
      * Creates new form NovaConsulta
+     * @param sec
      */
-    public NovaConsulta() {
+    public NovaConsulta(Secretaria sec) {
         initComponents();
         setSize(480, 280);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
+        this.sec =  sec;
     }
 
     /**
@@ -54,22 +57,22 @@ public class NovaConsulta extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
         jLabel2.setText("Data:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 20));
 
         jLabel3.setText("Horário:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, 20));
-        getContentPane().add(data, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 110, -1));
-        getContentPane().add(hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 120, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, 20));
+        getContentPane().add(data, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 110, -1));
+        getContentPane().add(hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 120, -1));
 
         jLabel4.setText("Médico (CRM):");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 20));
 
         retorno.setText("Consulta de retorno");
-        getContentPane().add(retorno, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
-        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 230, -1));
+        getContentPane().add(retorno, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, -1));
+        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 230, -1));
 
         jLabel5.setText("Paciente (CPF):");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, 20));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, 20));
 
         jButton1.setBackground(new java.awt.Color(224, 188, 255));
         jButton1.setText("Salvar");
@@ -78,7 +81,7 @@ public class NovaConsulta extends javax.swing.JFrame {
                 cadastrarConsulta(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, -1, -1));
 
         jButton2.setForeground(new java.awt.Color(255, 0, 0));
         jButton2.setText("Cancelar");
@@ -87,19 +90,24 @@ public class NovaConsulta extends javax.swing.JFrame {
                 cancelarCadastro(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
-        getContentPane().add(crmMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 140, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        getContentPane().add(crmMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrarConsulta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarConsulta
-        // TODO add your handling code here:
-        sec = new Secretaria();
+        /*
+        A secretária cadastra a nova consulta no banco de dados com as informações dos campos.
+        */
+        char ret;
+        if (retorno.isSelected()) {
+            ret = 'R';
+        } else {
+            ret = 'N';
+        }
         
-        //BUSCAR crmMedico no banco de dados.
-        
-        //sec.cadastrarConsulta(data.getText(), hora.getText(), crmMedico.getText(), cpfPaciente.getText(), retorno.isSelected());
+        sec.cadastrarConsulta(data.getText(), hora.getText(), crmMedico.getText(), cpfPaciente.getText(), ret);
     }//GEN-LAST:event_cadastrarConsulta
 
     private void cancelarCadastro(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCadastro

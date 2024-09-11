@@ -14,12 +14,14 @@ public class CancelaConsulta extends javax.swing.JFrame {
     Secretaria sec;
     /**
      * Creates new form CancelaConsulta
+     * @param sec
      */
-    public CancelaConsulta() {
+    public CancelaConsulta(Secretaria sec) {
         initComponents();
         setSize(380, 220);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
+        this.sec = sec;
     }
 
     /**
@@ -95,8 +97,6 @@ public class CancelaConsulta extends javax.swing.JFrame {
         /*
         A secretária remove a consulta do banco de dados.
         */
-        sec = new Secretaria();
-        
         sec.removerConsulta((data.getText() + hora.getText() + crm.getText())); // Junta os três campos para formar o IDENTIFICADOR da consulta.
         dispose();
     }//GEN-LAST:event_removerConsulta

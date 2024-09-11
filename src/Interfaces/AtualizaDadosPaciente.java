@@ -6,6 +6,9 @@ package Interfaces;
 
 import Dados.Paciente;
 import Funcionarios.Secretaria;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,16 +19,19 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
     Paciente pac;
     String cpf;
     Secretaria sec;
+    EntityManager em;
     
     /**
      * Creates new form AtualizaDadosPaciente
      */
-    public AtualizaDadosPaciente() {
+    public AtualizaDadosPaciente(Secretaria sec, EntityManager em) {
         initComponents();
         setSize(480, 450);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
         initPaciente();
+        this.sec = sec;
+        this.em = em;
     }
 
     /**
@@ -149,9 +155,9 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
         A secretária altera os dados do paciente determinado e a tela de atualização é fechada.
         Os dados de todos os campos são levados para atualização, mesmo que eles não tenham sido alterados.
         */
-        sec = new Secretaria();
         char sexo = 'N';
         
+        //DEFINIÇÃO DO CHAR SEXO
         if (feminino.isSelected()) { //Verifica se o sexo escolhido foi o botão FEMININO
             sexo = 'F';
         } else {
@@ -159,9 +165,10 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
                 sexo = 'M';
             }
         }
-        
+        //SECRETARIA ATUALIZA OS DADOS DO PACIENTE TIRADOS DOS CAMPOS
+        em.getTransaction().begin();
         sec.atualizarPaciente(pac, nomeNovo.getText(), sexo, Integer.parseInt(idadeNovo.getText()), enderecoNovo.getText(), telefoneNovo.getText(), emailNovo.getText(), convenioNovo.isSelected());
-        
+        em.getTransaction().commit();
         dispose();
     }//GEN-LAST:event_salvarAlteracoes
 
@@ -172,8 +179,13 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
         */
         this.cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente:", "Identificar Paciente", JOptionPane.QUESTION_MESSAGE);
         
-        //buscar o paciente do cpf e colocar o paciente retornado em pac e colocar suas informações nos campos.
-        pac = new Paciente("ANA PAULA", "111.222.333-44", "11.222.333-4", 'F', 18, "03/09/2005", "Avenida Maringá, 123", "44 99999-9999", "usuario@exemplo.com", true);
+        em.getTransaction().begin();
+        //BUSCA O PACIENTE DE cpf NO BANCO DE DADOS
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
+        List<Paciente> pacientes = query.getResultList();
+        pac = pacientes.get(0);
+        em.getTransaction().commit();
+        
         //Iniciando os campos com as informações do paciente:
         nomeNovo.setText(pac.getNome());
         idadeNovo.setText(pac.getIdade() + ""); // Transforma o inteiro em string para o campo de texto.
@@ -189,7 +201,6 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
                 masculino.setSelected(true); 
             }
         }
-        
     }
     
     /**
