@@ -15,15 +15,11 @@ public class Paciente {
      * A utilização de listas para os atriutos de Alergias e Cirurgias se deve a quantidade varávele e mutável desses.
      * Por esse motivo, utilizamos o Arraylist, que permite uma alocação de memória dinâmica, mas de menor ocupação da memória.
     */
-    //DADOS CADASTRAIS:
-    //@Id @GeneratedValue(strategy = GenerationType.AUTO)
-    //private Integer id;
-
-    private String nome;
     
+    // DADOS CADASTRAIS 
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
-    
+    private String nome;
     private String cpf;
     private String rg;
     private char sexo;
@@ -37,7 +33,7 @@ public class Paciente {
     @OneToOne(cascade = CascadeType.ALL)
     private Prontuario prontuario;
     
-    //DADOS DE SAÚDE:
+    // DADOS DE SAÚDE
     private boolean fumar;
     private boolean beber;
     private boolean colesterol;
@@ -46,9 +42,9 @@ public class Paciente {
     private String cirurgias;
     private String alergias; 
 
-    public Paciente() {    }
+    public Paciente() { }
 
-    //MÉTODO CONSTRUTOR:
+    // MÉTODO CONSTRUTOR
     public Paciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio) {
         this.nome = nome;
         this.cpf = cpf;
@@ -62,6 +58,7 @@ public class Paciente {
         this.convenio = convenio;
     }
 
+    // SETTERS E GETTERS DE TODOS OS ATRIBUTOS
     public String getNome() {
         return nome;
     }
@@ -179,7 +176,7 @@ public class Paciente {
     }
     
     public void setCirurgias(String cirurgia) {
-        this.cirurgias = cirurgia; //SETA AS NOVAS CIRURGIAS.
+        this.cirurgias = cirurgia;
     }
     
     public String getAlergias() {
@@ -187,6 +184,6 @@ public class Paciente {
     }
     
     public void setAlergias(String alergia) {
-        this.alergias = alergia; //SETA AS NOVAS ALERGIAS.
+        this.alergias = alergia;
     }
 }
