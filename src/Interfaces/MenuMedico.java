@@ -133,6 +133,7 @@ public class MenuMedico extends javax.swing.JFrame {
         Pois, durente o uso, ela pode ter sido alterada (com novas consultas a novos pacientes)
         */
         //BUSCA O OBJETO CADASTROMEDICO RELACIONADO AO OBJETO MEDICO USANDO O SISTEMA ATUALMENTE
+        em.getTransaction().begin();
         Query query = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + med.getCrm() + "\'"));
         List<CadastroMedico> certo = query.getResultList();
         
