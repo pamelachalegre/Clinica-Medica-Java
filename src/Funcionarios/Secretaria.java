@@ -1,5 +1,5 @@
 package Funcionarios;
-import Auxilia.Busca;
+
 import Dados.Paciente;
 import Dados.Consulta;
 import Geradores.GerenciadorMensagens;
@@ -115,12 +115,14 @@ public class Secretaria extends Funcionario {
         Usa o gerenciador de mensagens para gerenciar as consultas do dia seguinte.
         */
         
-        //RECUPERA TODAS AS CONSULTAS DA TABELA DE CONSULTAS 
+        em.getTransaction().begin();
+        //RECUPERA TODAS AS CONSULTAS DA TABELA DE CONSULTAS PARA ANÁLISE DO GERENCIADOR
         Query query = em.createQuery("select c FROM Consulta c");
         List<Consulta> listaConsultas = query.getResultList();
+        em.getTransaction().commit();
         
-        if (listaConsultas.isEmpty()) {
-            System.err.println("Erro");
+        if (listaConsultas.isEmpty()) { // SE NENHUMA CONSULTA FOI RECUPERADA
+            System.out.println("\nNão há consultas!\n");
         } else {
             GerenciadorMensagens enviar = new GerenciadorMensagens();
             enviar.gerenciarMensagens((ArrayList<Consulta>) listaConsultas);

@@ -1,5 +1,5 @@
 package Funcionarios;
-import Auxilia.Busca;
+
 import Dados.Paciente;
 import Dados.Prontuario;
 import Dados.Consulta;
