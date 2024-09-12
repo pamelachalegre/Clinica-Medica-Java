@@ -1,35 +1,42 @@
 package Dados;
+
+// Importações necessárias
 import Funcionarios.CadastroMedico;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 
-@Entity
+@Entity // Criação de uma tabela de Consulta no banco de dados com o mesmo nome da classe
 public class Consulta {
-    /*
-    É um POJO com dados de uma consulta a ser realizada. Este objeto é manipulado pelo objeto Secretária no main, que
-    pode definir consultas, colocá-las em uma lista de consultas ou removê-las.
+    /**
+     * É um POJO com dados de uma consulta a ser realizada 
+     * Este objeto é manipulado pelo objeto Secretária
+     * Uma consulta pode ser criada, cancelada ou ter suas data e hora atualizadas
     */
+    
+    // Identificação por chaves primárias das classes Consulta inseridas no Banco de Dados
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     
-    private String identificador; //para buscar uma consulta
+    //Atributos
+    private String identificador; // Registro de uma consulta, facilita na busca e identificação
     private String dataConsulta;
     private String horario;
-    private char tipoConsulta; // R = retorno; N = normal
+    private char tipoConsulta; // 'R' = retorno; 'N' = normal
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH) // Mapeamento de relacionamento "muitos para um" com CadastroMedico
     private CadastroMedico medico;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL) // Mapeamento de relacionamento "um para um" com Paciente
     private Paciente paciente;
     
 
-    //MÉTODO CONSTRUTOR
+    //Métodos construtores
     public Consulta(){}
     
     public Consulta(String data, String horario, CadastroMedico medico, Paciente paciente, char tipoConsulta){
@@ -39,8 +46,9 @@ public class Consulta {
         this.medico = medico;
         this.paciente = paciente;
         this.tipoConsulta = tipoConsulta;
-}
-
+    }
+    
+    //Sets e Gets dos atributos
     public String getIdentificador() {
         return identificador;
     }
