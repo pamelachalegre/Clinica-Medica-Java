@@ -15,14 +15,14 @@ public class Consulta {
     /**
      * É um POJO com dados de uma consulta a ser realizada 
      * Este objeto é manipulado pelo objeto Secretária
-     * Uma consulta pode ser criada, ter suas data e hora atualizadas, pode ser cancelada
+     * Uma consulta pode ser criada, cancelada ou ter suas data e hora atualizadas
     */
     
     // Identificação por chaves primárias das classes Consulta inseridas no Banco de Dados
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
    
     // Atributos
-    private Integer id;
     private String identificador; // Registro de uma consulta, facilita na busca e identificação
     private String dataConsulta;
     private String horario;
