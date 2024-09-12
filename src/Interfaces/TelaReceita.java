@@ -43,7 +43,7 @@ public class TelaReceita extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         vezes = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

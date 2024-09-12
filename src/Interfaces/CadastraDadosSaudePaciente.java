@@ -49,7 +49,7 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         cirurgias = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -100,7 +100,7 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         jLabel2.setText("Insira a data e o horário da consulta:");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 20));
-        getContentPane().add(identificaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 180, -1));
+        getContentPane().add(identificaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 180, -1));
 
         jLabel3.setText("Cirurgias?");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, 20));

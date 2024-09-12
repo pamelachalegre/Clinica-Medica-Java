@@ -39,7 +39,7 @@ public class TelaAtestado extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         numDias = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

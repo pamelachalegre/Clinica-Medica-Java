@@ -46,7 +46,7 @@ public class CadastraProntuario extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tratamento = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
