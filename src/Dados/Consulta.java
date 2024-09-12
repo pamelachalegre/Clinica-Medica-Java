@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 
@@ -21,20 +22,20 @@ public class Consulta {
     // Identificação por chaves primárias das classes Consulta inseridas no Banco de Dados
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
-   
-    // Atributos
+    
+    //Atributos
     private String identificador; // Registro de uma consulta, facilita na busca e identificação
     private String dataConsulta;
     private String horario;
     private char tipoConsulta; // 'R' = retorno; 'N' = normal
-  
-    @OneToOne(cascade = CascadeType.ALL) // Mapeamento de relacionamento "um para um" com CadastroMedico
+    
+    @ManyToOne(cascade = CascadeType.REFRESH) // Mapeamento de relacionamento "muitos para um" com CadastroMedico
     private CadastroMedico medico;
     
     @OneToOne(cascade = CascadeType.ALL) // Mapeamento de relacionamento "um para um" com Paciente
     private Paciente paciente;
     
-    // Métodos Construtores
+    //Métodos construtores
     public Consulta(){}
     public Consulta(String data, String horario, CadastroMedico medico, Paciente paciente, char tipoConsulta){
         this.identificador = data + horario + medico.getCrm();
@@ -44,8 +45,9 @@ public class Consulta {
         this.paciente = paciente;
         this.tipoConsulta = tipoConsulta;
     }
-    
-    // Sets e Gets dos atributos
+
+    //Sets e Gets dos atributos
+
     public String getIdentificador() {
         return identificador;
     }

@@ -4,15 +4,9 @@
  */
 package Interfaces;
 
-import Dados.Consulta;
 import Dados.Paciente;
-import Funcionarios.CadastroMedico;
 import Funcionarios.Medico;
 
-/**
- *
- * @author home
- */
 public class AtualizaDadosSaudePaciente extends javax.swing.JFrame {
     Medico med;
     Paciente pac;
@@ -26,7 +20,8 @@ public class AtualizaDadosSaudePaciente extends javax.swing.JFrame {
         initComponents();
         this.med = med;
         this.pac = pac;
-        initPaciente();
+        initPaciente(); // Preenche os campos da tela com as informações do paciente
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(470, 345);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
@@ -56,7 +51,8 @@ public class AtualizaDadosSaudePaciente extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         cirurgias = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Salvar.setBackground(new java.awt.Color(179, 242, 255));
@@ -68,18 +64,23 @@ public class AtualizaDadosSaudePaciente extends javax.swing.JFrame {
         });
         getContentPane().add(Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
 
+        fumar.setBackground(new java.awt.Color(255, 255, 255));
         fumar.setText("Fuma?");
         getContentPane().add(fumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
+        beber.setBackground(new java.awt.Color(255, 255, 255));
         beber.setText("Ingere bebidas alcoólicas?");
         getContentPane().add(beber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
+        colesterol.setBackground(new java.awt.Color(255, 255, 255));
         colesterol.setText("Tem colesterol alto?");
         getContentPane().add(colesterol, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
 
+        diabetes.setBackground(new java.awt.Color(255, 255, 255));
         diabetes.setText("Tem diabetes?");
         getContentPane().add(diabetes, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, -1));
 
+        cardio.setBackground(new java.awt.Color(255, 255, 255));
         cardio.setText("Possui alguma doença cardiovascular?");
         getContentPane().add(cardio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 

@@ -11,10 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author home
- */
 public class AtualizaDadosPaciente extends javax.swing.JFrame {
     Paciente pac;
     String cpf;
@@ -28,12 +24,13 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
      */
     public AtualizaDadosPaciente(Secretaria sec, EntityManager em) {
         initComponents();
+        this.sec = sec;
+        this.em = em;
+        initPaciente(); // Preenche os campos da tela com as informações do paciente
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(480, 450);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
-        this.sec = sec;
-        this.em = em;
-        initPaciente();
     }
 
     /**
@@ -67,7 +64,9 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Clinica Medica");
+        setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -105,6 +104,7 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
         jLabel10.setText("E-mail:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 60, 20));
 
+        convenioNovo.setBackground(new java.awt.Color(255, 255, 255));
         convenioNovo.setText("Paciente de convênio");
         getContentPane().add(convenioNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
         getContentPane().add(nomeNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 290, -1));
@@ -113,10 +113,12 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
         getContentPane().add(telefoneNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 290, -1));
         getContentPane().add(emailNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 290, -1));
 
+        feminino.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(feminino);
         feminino.setText("Feminino");
         getContentPane().add(feminino, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
 
+        masculino.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(masculino);
         masculino.setText("Masculino");
         getContentPane().add(masculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, -1, -1));
@@ -147,7 +149,7 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
 
     private void cancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar
         /*
-        Se o usuário mudar de ideia, todas as alterações podem ser canceladas.
+        Cancela a ação.
         */
         dispose();
     }//GEN-LAST:event_cancelar
@@ -180,34 +182,32 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
         Caso haja alteração, o campo pode ser modificado, caso não, ele permanece com a informação original.
         */
         this.cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente:", "Identificar Paciente", JOptionPane.QUESTION_MESSAGE);
-        
-        em.getTransaction().begin();
-        //BUSCA O PACIENTE DE cpf NO BANCO DE DADOS
-        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
-        List<Paciente> pacientes = query.getResultList();
-        pac = pacientes.get(0);
-        em.getTransaction().commit();
-        
-        //Iniciando os campos com as informações do paciente:
-        nomeNovo.setText(pac.getNome());
-        idadeNovo.setText(pac.getIdade() + ""); // Transforma o inteiro em string para o campo de texto.
-        enderecoNovo.setText(pac.getEndereco());
-        telefoneNovo.setText(pac.getTelefone());
-        emailNovo.setText(pac.getEmail());
-        convenioNovo.setSelected(pac.getConvenio());
-        
-        if (pac.getSexo() == 'F') {
-            feminino.setSelected(true);
-        } else {
-            if (pac.getSexo() == 'M') {
-                masculino.setSelected(true); 
+        // Caso o usuário cancele o JOptionPane, cpf será NULL.
+        if (this.cpf != null) {
+            em.getTransaction().begin();
+            //BUSCA O PACIENTE DE cpf NO BANCO DE DADOS
+            Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
+            List<Paciente> pacientes = query.getResultList();
+            pac = pacientes.get(0);
+            em.getTransaction().commit();
+
+            //Iniciando os campos com as informações do paciente:
+            nomeNovo.setText(pac.getNome());
+            idadeNovo.setText(pac.getIdade() + ""); // Transforma o inteiro em string para o campo de texto.
+            enderecoNovo.setText(pac.getEndereco());
+            telefoneNovo.setText(pac.getTelefone());
+            emailNovo.setText(pac.getEmail());
+            convenioNovo.setSelected(pac.getConvenio());
+
+            if (pac.getSexo() == 'F') {
+                feminino.setSelected(true);
+            } else {
+                if (pac.getSexo() == 'M') {
+                    masculino.setSelected(true); 
+                }
             }
         }
     }
-    
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

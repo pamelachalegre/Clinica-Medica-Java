@@ -6,19 +6,17 @@ package Interfaces;
 
 import Funcionarios.Medico;
 
-/**
- *
- * @author home
- */
 public class TelaDeclaracao extends javax.swing.JFrame {
     Medico med;
     /**
      * Creates new form TelaDeclaracao
+     * @param med
      */
     public TelaDeclaracao(Medico med) {
         this.med = med;
         initComponents();
-        setSize(430, 260);
+        //Fatores estéticos da janela (tamanho e cor)
+        setSize(440, 260);
         getContentPane().setBackground(java.awt.Color.white);
     }
 
@@ -43,32 +41,32 @@ public class TelaDeclaracao extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 130, -1));
+        getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 130, -1));
 
         jLabel1.setText("Insira os dados requeridos:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("CPF do paciente:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 150, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 160, 20));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Data da consulta:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 150, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 160, 20));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Parentesco com o paciente:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 150, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 170, 20));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Nome do acompanhante:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 150, 20));
-        getContentPane().add(data, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 130, -1));
-        getContentPane().add(parentesco, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 220, -1));
-        getContentPane().add(nomeAcompanhante, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 220, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 160, 20));
+        getContentPane().add(data, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 130, -1));
+        getContentPane().add(parentesco, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 220, -1));
+        getContentPane().add(nomeAcompanhante, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 220, -1));
 
         jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Cancelar");
@@ -100,14 +98,12 @@ public class TelaDeclaracao extends javax.swing.JFrame {
 
     private void gerarDeclaracao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerarDeclaracao
         /*
-        O médico gera uma declaração de acompanhamento para um acompanhante de nome "nomeAcompanhante"
+        O médico gera uma declaração de acompanhamento para um acompanhante de nome "nomeAcompanhante".
+        Preenchida com as informações dos campos
         */
         med.gerarDeclaracao(med, cpfPaciente.getText(), data.getText(), parentesco.getText(), nomeAcompanhante.getText());
+        dispose();
     }//GEN-LAST:event_gerarDeclaracao
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpfPaciente;

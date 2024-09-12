@@ -9,7 +9,6 @@ import Funcionarios.Secretaria;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,14 +19,17 @@ public class AtualizaConsulta extends javax.swing.JFrame {
     EntityManager em;
     /**
      * Creates new form AtualizaConsulta
+     * @param sec
+     * @param em
      */
     public AtualizaConsulta(Secretaria sec, EntityManager em) {
         initComponents();
+        this.sec = sec;
+        this.em = em;
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(480, 280);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);    
-        this.sec = sec;
-        this.em = em;
     }
 
     /**
@@ -49,7 +51,7 @@ public class AtualizaConsulta extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         identificaConsulta = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -107,7 +109,9 @@ public class AtualizaConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_atualizarDados
 
     private void cancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar
-        // TODO add your handling code here:
+        /*
+        Cancela a ação.
+        */
         dispose();
     }//GEN-LAST:event_cancelar
 

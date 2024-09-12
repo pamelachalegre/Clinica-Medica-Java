@@ -4,20 +4,16 @@
  */
 package Interfaces;
 
-import Dados.Consulta;
 import Funcionarios.CadastroMedico;
 import Funcionarios.Medico;
 import Funcionarios.Secretaria;
-import java.util.ArrayList;
+import static java.lang.System.exit;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author home
- */
 public class MenuPrincipal extends javax.swing.JFrame {
     EntityManager em;
     /**
@@ -26,10 +22,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal(EntityManager em) {
         initComponents();
-        setSize(540, 300);
+        this.em = em; //traz o gerenciador de entidades
+        //Fatores estéticos da janela (tamanho, posição e cor)
+        setSize(540, 320);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
-        this.em = em; //traz o gerenciador de entidades
     }
 
     /**
@@ -44,8 +41,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Clinica Medica");
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,19 +70,38 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Selecione o tipo de usuário:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 180, 30));
 
+        jButton3.setForeground(new java.awt.Color(255, 0, 0));
+        jButton3.setText("Sair");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairActioPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuSecretaria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSecretaria
-        // Se o usuário escolher o modo secretária, ele será direcionado ao menu da secretária.
-        String nome = JOptionPane.showInputDialog(null, "Insira o usuário:", "Identificação",JOptionPane.QUESTION_MESSAGE);
+        /* 
+        Se o usuário escolher o modo secretária, ele será direcionado ao menu da secretária.
+        Há apenas uma secretária e, portanto, não há necessidade de procurar sua identificação no banco de dados
+        */
+        // Única secretária / único objeto secretária do sistema
+        Secretaria sec = new Secretaria("Maria Gabriela", "123.123.123-44", 4.500, em);
         
-        if ("MARIA GABRIELA".equals(nome.toUpperCase())) { // Se o nome da secretária estiver correto:
-            dispose(); //A tela do menu principal é invisibilizada
-            Secretaria sec = new Secretaria(em);
-            new MenuSecretaria(sec, em).setVisible(true); // A tela do menu da secreetária passa a ser a visível
-        } else { // Se não:
-            JOptionPane.showMessageDialog(null, "Usuário desconhecido!", "Identificação", JOptionPane.WARNING_MESSAGE);
+        // Verificação do usuário
+        String nome = JOptionPane.showInputDialog(null, "Insira o usuário:", "Identificação",JOptionPane.QUESTION_MESSAGE);
+        // Caso o usuário cancele a JOptionPane, a string nome será null.
+        if (nome != null) {
+            if ((sec.getNome().toUpperCase()).equals(nome.toUpperCase())) { // Se o nome da secretária estiver correto:
+                dispose(); //A tela do menu principal é invisibilizada
+                // A tela do menu da secretária passa a ser a visível para alterações pelo objeto secretária
+                new MenuSecretaria(sec, em).setVisible(true);
+            } else { // Se não:
+                // o usuário é desconhecido
+                JOptionPane.showMessageDialog(null, "Usuário desconhecido!", "Identificação", JOptionPane.WARNING_MESSAGE);
+            }
         }
         
     }//GEN-LAST:event_menuSecretaria
@@ -93,25 +110,43 @@ public class MenuPrincipal extends javax.swing.JFrame {
         /*
         Recupera o objeto CadastroMedico correto do Banco de Dados e instancia o médico correto para ações.
         */
+        //Verificação do usuário
         String crm = JOptionPane.showInputDialog(null, "Insira seu CRM:", "Identificação",JOptionPane.QUESTION_MESSAGE);
-        
-        Query query = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + crm + "\'"));
-        List<CadastroMedico> medico = query.getResultList();
-        
-        CadastroMedico certo = medico.get(0);
-        if (certo.getCrm().equals(crm)) { // Buscar o CRM no banco de dados -> se encontrar:
-            dispose();
-            Medico med = new Medico(certo.getNome(), certo.getCrm(), certo.getCpf(), certo.getSalario(), certo.getAtendimentos(), em);
-            new MenuMedico(med, em).setVisible(true); //vai ao menu de médicos
-        } else {// Se não:
-            JOptionPane.showMessageDialog(null, "Usuário desconhecido! CRM inválido.", "Identificação", JOptionPane.WARNING_MESSAGE);
+        //Caso o usuário cancele a JOptionPane, a string crm será null.
+        if(crm != null) {
+            em.getTransaction().begin();
+            // BUSCA O CADASTRO DO MÉDICO DO crm INSERIDO
+            Query query = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + crm + "\'"));
+            List<CadastroMedico> medico = query.getResultList();
+            em.getTransaction().commit();
+
+            CadastroMedico certo = medico.get(0); // CRM é uma informação única -> será o da posição 0
+            if (certo.getCrm().equals(crm)) { // confere se é o crm correto, se é:
+                dispose();
+                //Cria um objeto médico com as informações retiradas do cadastro
+                Medico med = new Medico(certo.getNome(), certo.getCrm(), certo.getCpf(), certo.getSalario(), certo.getAtendimentos(), em);
+                new MenuMedico(med, em).setVisible(true); //vai ao menu de médicos
+            } else {// Se não:
+                // Mostra uma mensagem de que o usuário não foi reconhecido
+                JOptionPane.showMessageDialog(null, "Usuário desconhecido! CRM inválido.", "Identificação", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_acharMedico
 
+    private void sairActioPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActioPerformed
+        /*
+        Para sair do menu principal, o unuário deve encerrar o programa pelo botão "Sair" sempre.
+        */
+        EntityManagerFactory emf = em.getEntityManagerFactory();
+        em.close();
+        emf.close();
+        exit(0);     
+    }//GEN-LAST:event_sairActioPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

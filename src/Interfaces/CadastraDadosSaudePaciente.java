@@ -5,12 +5,7 @@
 package Interfaces;
 
 import Funcionarios.Medico;
-import javax.swing.JOptionPane;
 
-/**
- *
- * @author guijo
- */
 public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
     Medico med;
     
@@ -21,6 +16,7 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
     public CadastraDadosSaudePaciente(Medico med) {
         this.med = med;
         initComponents();
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(485, 380);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
@@ -53,7 +49,7 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         cirurgias = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -72,18 +68,23 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         });
         getContentPane().add(Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
 
+        fumar.setBackground(new java.awt.Color(255, 255, 255));
         fumar.setText("Fuma?");
         getContentPane().add(fumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
+        beber.setBackground(new java.awt.Color(255, 255, 255));
         beber.setText("Ingere bebidas alcoólicas?");
         getContentPane().add(beber, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
+        colesterol.setBackground(new java.awt.Color(255, 255, 255));
         colesterol.setText("Tem colesterol alto?");
         getContentPane().add(colesterol, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, -1));
 
+        diabetes.setBackground(new java.awt.Color(255, 255, 255));
         diabetes.setText("Tem diabetes?");
         getContentPane().add(diabetes, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, -1));
 
+        cardio.setBackground(new java.awt.Color(255, 255, 255));
         cardio.setText("Possui alguma doença cardiovascular?");
         getContentPane().add(cardio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
@@ -99,7 +100,7 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         jLabel2.setText("Insira a data e o horário da consulta:");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 20));
-        getContentPane().add(identificaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 180, -1));
+        getContentPane().add(identificaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 180, -1));
 
         jLabel3.setText("Cirurgias?");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, 20));
@@ -126,9 +127,8 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         /*
         O medico cadastra a ficha medica do paciente em consulta com as informações dos campos.
         */
-    
+        // O OBJETO MÉCIO CADASTRA OS DADOS DA FICHA MÉDICA DO PACIENTE
         med.cadastrarDadosPaciente((identificaConsulta.getText() + med.getCrm()), fumar.isSelected(), beber.isSelected(), colesterol.isSelected(), diabetes.isSelected(), cardio.isSelected(), cirurgias.getText(), alergias.getText());
-        
         dispose();
     }//GEN-LAST:event_SalvarActionPerformed
 

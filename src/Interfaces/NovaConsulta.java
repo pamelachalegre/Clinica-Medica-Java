@@ -5,12 +5,7 @@
 package Interfaces;
 
 import Funcionarios.Secretaria;
-import javax.persistence.EntityManager;
 
-/**
- *
- * @author home
- */
 public class NovaConsulta extends javax.swing.JFrame {
     Secretaria sec;
     /**
@@ -19,10 +14,11 @@ public class NovaConsulta extends javax.swing.JFrame {
      */
     public NovaConsulta(Secretaria sec) {
         initComponents();
+        this.sec =  sec;
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(480, 280);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
-        this.sec =  sec;
     }
 
     /**
@@ -47,7 +43,7 @@ public class NovaConsulta extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         crmMedico = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -67,6 +63,7 @@ public class NovaConsulta extends javax.swing.JFrame {
         jLabel4.setText("Médico (CRM):");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 20));
 
+        retorno.setBackground(new java.awt.Color(255, 255, 255));
         retorno.setText("Consulta de retorno");
         getContentPane().add(retorno, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, -1));
         getContentPane().add(cpfPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 230, -1));
@@ -101,24 +98,23 @@ public class NovaConsulta extends javax.swing.JFrame {
         A secretária cadastra a nova consulta no banco de dados com as informações dos campos.
         */
         char ret;
-        if (retorno.isSelected()) {
-            ret = 'R';
-        } else {
-            ret = 'N';
+        if (retorno.isSelected()) { // se a checkbox foi marcada
+            ret = 'R'; // caractere é de retorno
+        } else { // se não
+            ret = 'N'; // caractere é de normal
         }
         
+        // O OBJETO SECRETÁRIA CADASTRA A NOVA CONSULTA
         sec.cadastrarConsulta(data.getText(), hora.getText(), crmMedico.getText(), cpfPaciente.getText(), ret);
         dispose();
     }//GEN-LAST:event_cadastrarConsulta
 
     private void cancelarCadastro(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCadastro
-        // TODO add your handling code here:
+        /*
+        Cancelar a ação.
+        */
         dispose();
     }//GEN-LAST:event_cancelarCadastro
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpfPaciente;

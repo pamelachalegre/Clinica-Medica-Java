@@ -6,10 +6,6 @@ package Interfaces;
 
 import Funcionarios.Medico;
 
-/**
- *
- * @author guijo
- */
 public class CadastraProntuario extends javax.swing.JFrame {
     Medico med;
     
@@ -20,6 +16,7 @@ public class CadastraProntuario extends javax.swing.JFrame {
     public CadastraProntuario(Medico med) {
         this.med = med;
         initComponents();
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(665, 430);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
@@ -49,7 +46,7 @@ public class CadastraProntuario extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tratamento = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -118,6 +115,7 @@ public class CadastraProntuario extends javax.swing.JFrame {
         /*
         O médico cadastra o prontuário do paciente com as informações inseridas nos campos.
         */
+        //OBJETO MÉDICO CADASTRA O PRONTUÁRIO
         med.cadastrarProntuario(cpfPaciente.getText(), sintomas.getText(), diagnostico.getText(), tratamento.getText());
         dispose();
     }//GEN-LAST:event_salvarActionPerformed
@@ -128,10 +126,6 @@ public class CadastraProntuario extends javax.swing.JFrame {
         */
         dispose();
     }//GEN-LAST:event_cancelarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cpfPaciente;

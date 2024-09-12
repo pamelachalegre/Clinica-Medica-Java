@@ -6,10 +6,6 @@ package Interfaces;
 
 import Funcionarios.Medico;
 
-/**
- *
- * @author home
- */
 public class MenuRelatorios extends javax.swing.JFrame {
     Medico med;
     /**
@@ -19,9 +15,10 @@ public class MenuRelatorios extends javax.swing.JFrame {
     public MenuRelatorios(Medico med) {
         this.med = med;
         initComponents();
-        setSize(300, 300); //tamanho fixo da janela
-        setLocationRelativeTo(null); //abertura no meio da tela
-        getContentPane().setBackground(java.awt.Color.white); //cor de fundo : branco
+        //Fatores estéticos da janela (tamanho, posição e cor)
+        setSize(320, 300);
+        setLocationRelativeTo(null);
+        getContentPane().setBackground(java.awt.Color.white);
     }
 
     /**
@@ -40,14 +37,14 @@ public class MenuRelatorios extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(107, 211, 255));
         jLabel1.setText("RELATÓRIOS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 40));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, 40));
 
         jButton1.setBackground(new java.awt.Color(179, 242, 255));
         jButton1.setText("Atestado");
@@ -56,7 +53,7 @@ public class MenuRelatorios extends javax.swing.JFrame {
                 gerarAtestado(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 210, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 240, -1));
 
         jButton2.setBackground(new java.awt.Color(179, 242, 255));
         jButton2.setText("Declaração de Acompanhamento");
@@ -65,7 +62,7 @@ public class MenuRelatorios extends javax.swing.JFrame {
                 gerarDeclaracao(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 210, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 240, -1));
 
         jButton3.setBackground(new java.awt.Color(179, 242, 255));
         jButton3.setText("Receita");
@@ -74,7 +71,7 @@ public class MenuRelatorios extends javax.swing.JFrame {
                 gerarReceita(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 210, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 240, -1));
 
         jButton4.setBackground(new java.awt.Color(179, 242, 255));
         jButton4.setText("Relação de clientes atendidos");
@@ -83,7 +80,7 @@ public class MenuRelatorios extends javax.swing.JFrame {
                 clientesAtendidos(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 210, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 240, -1));
 
         jButton5.setForeground(new java.awt.Color(255, 0, 0));
         jButton5.setText("Cancelar");
@@ -92,7 +89,7 @@ public class MenuRelatorios extends javax.swing.JFrame {
                 cancelarRelatorio(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -131,10 +128,6 @@ public class MenuRelatorios extends javax.swing.JFrame {
         */
         new TelaReceita(med).setVisible(true);
     }//GEN-LAST:event_gerarReceita
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -8,10 +8,6 @@ import Funcionarios.Secretaria;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author home
- */
 public class MenuSecretaria extends javax.swing.JFrame {
     Secretaria sec;
     EntityManager em;
@@ -23,10 +19,11 @@ public class MenuSecretaria extends javax.swing.JFrame {
     public MenuSecretaria(Secretaria sec, EntityManager em) {
         initComponents();
         this.em = em;
+        this.sec = sec;
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(640, 480);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
-        this.sec = sec;
     }
 
     /**
@@ -51,7 +48,7 @@ public class MenuSecretaria extends javax.swing.JFrame {
 
         jMenuItem1.setText("jMenuItem1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -149,6 +146,7 @@ public class MenuSecretaria extends javax.swing.JFrame {
     private void gerenciarMensagens(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarMensagens
         /*
         Gerencia as mensagens e exibe uma mensagem de "Mensagens gerenciadas!".
+        As mensagens são impressas no terminal.
         */
         sec.gerenciarMensagens(); // secretária gerencia as mensagens do dia seguinte a "hoje".
         
@@ -196,8 +194,6 @@ public class MenuSecretaria extends javax.swing.JFrame {
         */
         new CancelaConsulta(sec).setVisible(true);
     }//GEN-LAST:event_cancelarConsulta
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

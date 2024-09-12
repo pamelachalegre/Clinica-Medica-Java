@@ -15,7 +15,7 @@ public class Paciente {
      * Este objeto é manipulado pelo objeto Médico
      * Um paciente pode ser cadastrado, removido ou alterado
     */
-    
+
     // Identificação por chaves primárias das classes Consulta inseridas no Banco de Dados
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
@@ -46,6 +46,7 @@ public class Paciente {
 
     // Métodos Construtores
     public Paciente() {}
+  
     public Paciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio) {
         this.nome = nome;
         this.cpf = cpf;

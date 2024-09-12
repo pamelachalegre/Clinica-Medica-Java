@@ -4,15 +4,9 @@
  */
 package Interfaces;
 
-import Dados.Consulta;
 import Dados.Paciente;
-import Funcionarios.CadastroMedico;
 import Funcionarios.Medico;
 
-/**
- *
- * @author home
- */
 public class AtualizaProntuario extends javax.swing.JFrame {
     Medico med;
     Paciente pac;
@@ -26,7 +20,8 @@ public class AtualizaProntuario extends javax.swing.JFrame {
         initComponents();
         this.med = med;
         this.pac = pac;
-        initPaciente();
+        initPaciente(); // Preenche os campos com as informações do paciente pac
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(660, 340);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
@@ -54,12 +49,13 @@ public class AtualizaProntuario extends javax.swing.JFrame {
         tratamento = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Tratamento:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 70, 40));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 90, 40));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Sintomas:");
@@ -103,7 +99,7 @@ public class AtualizaProntuario extends javax.swing.JFrame {
         tratamento.setRows(5);
         jScrollPane3.setViewportView(tratamento);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 550, 70));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 520, 70));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(107, 211, 255));
@@ -118,6 +114,7 @@ public class AtualizaProntuario extends javax.swing.JFrame {
         O médico cadastra o prontuário do paciente com as informações inseridas nos campos.
         Todos os campos são atualizados, mesmo que alguns deles não tenham sido alterados.
         */
+        //O OBJETO MÉDICO ATUALIZA O PRONTUÁRIO DO PACIENTE pac
         med.atualizarProntuario(pac, sintomas.getText(), diagnostico.getText(), tratamento.getText());
         dispose();
     }//GEN-LAST:event_salvarActionPerformed
@@ -132,6 +129,7 @@ public class AtualizaProntuario extends javax.swing.JFrame {
     private void initPaciente() {
         /*
         Preenche os campos com as informações anteriores do paciente.
+        Pega os dados do prontuário do paciente e coloca nos campos para que o médico possa ter acesso a eles antes de atualizar.
         */
         sintomas.setText(pac.getProntuario().getSintomas());
         diagnostico.setText(pac.getProntuario().getDiagnostico());

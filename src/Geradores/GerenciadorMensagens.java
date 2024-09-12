@@ -8,18 +8,21 @@ import java.time.format.DateTimeFormatter;
 
 public class GerenciadorMensagens {
     private ArrayList<Consulta> consultasAmanha;
-    /*
-     * Envia uma mensagem para o paciente, avisando-o da consulta no dia seguinte
-     * Define se a pessoa tem ou não email/telefone, enviando as mensagens em correspondência a esses dados
+    /**
+     * Envia uma mensagem para o paciente, avisando-o da consulta no dia seguinte.
+     * Define se a pessoa tem ou não email/telefone, enviando as mensagens em correspondência a esses dados.
      */
     
-    private void enviarMensagem(ArrayList<Consulta> consultasAmanha) {
-        /* 
-        Envia mensagem aos pacientes com consulta marcada para o dia seguinte,
-        analisa se poderá enviar a mensagem por e-mail ou por telefone
-        */
-        for(int i = 0; i < consultasAmanha.size(); i++) {
-            Consulta consul = consultasAmanha.get(i);       
+    //MÉTODO CONSTRUTOR DEFAULT
+    public GerenciadorMensagens() {
+        
+    }
+    
+    private void enviarMensagem(ArrayList<Consulta> listaConsultasAmanha) {
+        /* Envia mensagem aos pacientes com consulta marcada para o dia seguinte,
+        analisa se poderá enviar a mensagem por e-mail ou por telefone.*/
+        for(int i = 0; i < listaConsultasAmanha.size(); i++) {
+            Consulta consul = listaConsultasAmanha.get(i);       
             String mail = consul.getPaciente().getEmail();
             String tel = consul.getPaciente().getTelefone();
             if (mail != "") {
@@ -34,15 +37,16 @@ public class GerenciadorMensagens {
         }
     }
     
+
     public void gerenciarMensagens(ArrayList<Consulta> consultas) {
         /*
         Define para quais pacientes a mensagem será enviada, que são aqueles que tem 
         consulta marcada para o dia seguinte do dia atual
         */
-    LocalDate hoje = LocalDate.now(); // Obtém a data de hoje
-    LocalDate amanha = hoje.plusDays(1); // Obtém a data de amanhã
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato de data que será usado para analisar as datas das consultas
-    ArrayList<Consulta> consultasAmanha = new ArrayList<>(); 
+        LocalDate hoje = LocalDate.now(); // Obtém a data de hoje
+        LocalDate amanha = hoje.plusDays(1); // Obtém a data de amanhã
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato de data que será usado para analisar as datas das consultas
+        ArrayList<Consulta> listaConsultasAmanha = new ArrayList<>(); 
 
     for (Consulta consulta : consultas) {
         LocalDate dataConsulta = LocalDate.parse(consulta.getData(), formatter); // Converte a data da consulta de String para LocalDate usando o formato definido

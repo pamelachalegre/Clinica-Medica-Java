@@ -6,10 +6,6 @@ package Interfaces;
 
 import Funcionarios.Secretaria;
 
-/**
- *
- * @author home
- */
 public class RemovePaciente extends javax.swing.JFrame {
     Secretaria sec;
     
@@ -19,10 +15,11 @@ public class RemovePaciente extends javax.swing.JFrame {
      */
     public RemovePaciente(Secretaria sec) {
         initComponents();
+        this.sec = sec;
+        //Fatores estéticos da janela (tamanho, posição e cor)
         setSize(400, 220);
         setLocationRelativeTo(null);
         getContentPane().setBackground(java.awt.Color.white);
-        this.sec = sec;
     }
 
     /**
@@ -40,7 +37,7 @@ public class RemovePaciente extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
