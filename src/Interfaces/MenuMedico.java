@@ -170,7 +170,7 @@ public class MenuMedico extends javax.swing.JFrame {
         O médico remove o prontuário de um paciente a partir do seu CPF.
         */
         //OBTEM O cpf DO PACIENTE PARA REMOÇÃO DO PRONTUÁRIO
-        String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
+        String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
         // Caso o usuário cancele o JOptionPane, a string cpf será null
         if (cpf != null) {
             med.removerProntuario(cpf); // CHAMA O MÉTODO DO MÉDICO PARA REMOVER O PRONTUÁRIO DO PACIENTE
@@ -183,7 +183,7 @@ public class MenuMedico extends javax.swing.JFrame {
         Leva à tela de atualizar a ficha médica
         */
         // Pega o cpf do paciente que vai ser alterado
-        String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
+        String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente:", "ATUALIZAÇÃO DA FICHA MÉDICA", JOptionPane.INFORMATION_MESSAGE);
         // Caso o usuário cancele o JOptionPane, a string cpf será null
         if (cpf != null) {
             em.getTransaction().begin();
@@ -202,7 +202,7 @@ public class MenuMedico extends javax.swing.JFrame {
         Leva à tela de atualização do prontuário do paciente de CPF 'cpf'.
         */
         //Pega o cpf do paciente que vai ter o prontuário alterado
-        String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
+        String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente:", "ATUALIZAÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
         // Caso o usuário cancele o JOptionPane, a string cpf será null
         if (cpf != null) {
             em.getTransaction().begin();
