@@ -35,10 +35,8 @@ public class Consulta {
     @OneToOne(cascade = CascadeType.ALL) // Mapeamento de relacionamento "um para um" com Paciente
     private Paciente paciente;
     
-
     //Métodos construtores
     public Consulta(){}
-    
     public Consulta(String data, String horario, CadastroMedico medico, Paciente paciente, char tipoConsulta){
         this.identificador = data + horario + medico.getCrm();
         this.dataConsulta = data;
@@ -47,12 +45,12 @@ public class Consulta {
         this.paciente = paciente;
         this.tipoConsulta = tipoConsulta;
     }
-    
+
     //Sets e Gets dos atributos
+
     public String getIdentificador() {
         return identificador;
     }
-
     public void setIdentificador(String id) {
         this.identificador = id;
     }

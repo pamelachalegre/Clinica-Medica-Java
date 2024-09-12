@@ -1,4 +1,6 @@
 package Geradores;
+
+// Importações necessárias
 import java.util.ArrayList;
 import Dados.Consulta;
 import java.time.LocalDate;
@@ -35,22 +37,24 @@ public class GerenciadorMensagens {
         }
     }
     
-        public void gerenciarMensagens(ArrayList<Consulta> listaConsultas) {
-            /*Define para quais pacientes a mensagem será enviada, que são aqueles que tem 
-            consulta marcada para o dia seguinte do dia atual
-            */
+
+    public void gerenciarMensagens(ArrayList<Consulta> consultas) {
+        /*
+        Define para quais pacientes a mensagem será enviada, que são aqueles que tem 
+        consulta marcada para o dia seguinte do dia atual
+        */
         LocalDate hoje = LocalDate.now(); // Obtém a data de hoje
         LocalDate amanha = hoje.plusDays(1); // Obtém a data de amanhã
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato de data que será usado para analisar as datas das consultas
         ArrayList<Consulta> listaConsultasAmanha = new ArrayList<>(); 
 
-        for (Consulta consulta : listaConsultas) {
-            LocalDate dataConsulta = LocalDate.parse(consulta.getData(), formatter); // Converte a data da consulta de String para LocalDate usando o formato definido
-            if (dataConsulta.equals(amanha)) { // Verifica se a data da consulta é igual a amanhã
-                listaConsultasAmanha.add(consulta); // Se for, adiciona a consulta à lista de consultas que ocorrerão amanhã
-            }
+    for (Consulta consulta : consultas) {
+        LocalDate dataConsulta = LocalDate.parse(consulta.getData(), formatter); // Converte a data da consulta de String para LocalDate usando o formato definido
+        if (dataConsulta.equals(amanha)) { // Verifica se a data da consulta é igual a amanhã
+            consultasAmanha.add(consulta); // Se for, adiciona a consulta à lista de consultas que ocorrerão amanhã
         }
-        enviarMensagem(listaConsultasAmanha);  
+    }
+    enviarMensagem(consultasAmanha);  
     }
     
 }

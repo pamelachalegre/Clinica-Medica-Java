@@ -5,15 +5,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity // Cria-se uma tabela do pojo Prontuario no banco de dados com o nome Prontuario
 public class Prontuario {
     /**
      * Um POJO, com atributos e sets e gets. Específico a cada paciente, possui dados sobre o estado de saúde de um 
      * paciente. Esses dados são atualizados pelo médico sempre que necessário.
      */
     
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    @Id @GeneratedValue(strategy=GenerationType.AUTO) /* identificação através de chaves primárias das classes Prontuario 
+    inseridas no Banco de Dados
+    
+*/
+    private Integer id; // chave primária da classe no Banco de Dados
     
     private String sintomas;
     private String diagnostico;
@@ -27,7 +30,7 @@ public class Prontuario {
         this.diagnostico = diagnostico;
         this.tratamento = tratamento;
     }
-    
+    // Métodos sets e gets
     public String getSintomas() {
         return sintomas;
     }

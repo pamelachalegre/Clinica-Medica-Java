@@ -4,6 +4,10 @@ import Dados.Prontuario;
 import Funcionarios.Medico;
 
 public class Atestado {
+    /* POJO gerado pela classe Médico, que pode ser requisitada pelo usuario e apresenta os atributos de um atestado médico, como
+    médico, paciente, prontuario, dias de afastamento e dataInicio.*/
+    
+    // Atributos
     protected Medico medico;
     protected Paciente paciente;
     protected Prontuario prontuario;

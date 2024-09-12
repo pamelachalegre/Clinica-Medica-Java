@@ -3,6 +3,9 @@ import Dados.Paciente;
 import Funcionarios.Medico;
 
 public class Receita{
+    /* POJO gerado pela classe Medico, que representa uma receita médica com seus respectivos
+    atributos, como medico que receitou, paciente, remedio, dosagem, modo de uso, dosagem de vezes ao dia*/
+    // Atributos.
     protected Medico medico;
     protected Paciente paciente;
     protected String remedio;

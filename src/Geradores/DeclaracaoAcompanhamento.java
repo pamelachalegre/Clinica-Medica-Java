@@ -4,6 +4,11 @@ import Dados.Prontuario;
 import Funcionarios.Medico;
 
 public class DeclaracaoAcompanhamento {
+    /* POJO gerado pela classe Medico, que pode ser requisitado pelo usuário e representa
+    um objeto de Declaração de Acompanhamento de um parente ou cuidador em uma consulta médica. Apresentando
+    seus respectivos atributos:
+    */
+    // Atributos
     protected Medico medico;
     protected Paciente paciente;
     protected Prontuario prontuario;
