@@ -7,23 +7,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-@Entity
+@Entity // Cria-se uma tabela do pojo Paciente no banco de dados com o nome consulta
 public class Paciente {
     /**
      * Definido como um POJO, possui diversos atributos que são modificados por meio de sets e gets, outras ações sobre
      * esses objetos podem ser efetuadas por outros tipos de objeto com métodos que acessam os sets e gets deste.
-     * A utilização de listas para os atriutos de Alergias e Cirurgias se deve a quantidade varávele e mutável desses.
+     * A utilização de listas para os atributos de Alergias e Cirurgias se deve a quantidade de variáveis e a grande possiblidade de modificação das mesmas.
      * Por esse motivo, utilizamos o Arraylist, que permite uma alocação de memória dinâmica, mas de menor ocupação da memória.
     */
-    //DADOS CADASTRAIS:
-    //@Id @GeneratedValue(strategy = GenerationType.AUTO)
-    //private Integer id;
+    
 
+    
+    
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)/* identificação através de chaves primárias das classes Paciente 
+    inseridas no Banco de Dados 
+*/
+    // Atributos
+    private Integer id; // chave primária da classe no Banco de Dados
+    
+    // Dados pessoais do paciente
     private String nome;
-    
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
-    
     private String cpf;
     private String rg;
     private char sexo;
@@ -34,7 +37,7 @@ public class Paciente {
     private String email;
     private boolean convenio; // true = convenio | false = particular
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)// Mapeamento de relacionamento "um para um" com o atributo prontuario.
     private Prontuario prontuario;
     
     //DADOS DE SAÚDE:
@@ -61,7 +64,8 @@ public class Paciente {
         this.email = email;
         this.convenio = convenio;
     }
-
+    
+    // Sets e gets
     public String getNome() {
         return nome;
     }

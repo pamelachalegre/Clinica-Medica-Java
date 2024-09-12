@@ -13,6 +13,8 @@ public class GerenciadorMensagens {
      */
     
     private void enviarMensagem(ArrayList<Consulta> listaConsultasAmanha) {
+        /* Envia mensagem aos pacientes com consulta marcada para o dia seguinte,
+        analisa se poderá enviar a mensagem por e-mail ou por telefone.*/
         for(int i = 0; i < listaConsultasAmanha.size(); i++) {
             Consulta consul = listaConsultasAmanha.get(i);       
             String mail = consul.getPaciente().getEmail();
@@ -30,6 +32,9 @@ public class GerenciadorMensagens {
     }
     
         public void gerenciarMensagens(ArrayList<Consulta> listaConsultas) {
+            /*Define para quais pacientes a mensagem será enviada, que são aqueles que tem 
+            consulta marcada para o dia seguinte do dia atual
+            */
         LocalDate hoje = LocalDate.now(); // Obtém a data de hoje
         LocalDate amanha = hoje.plusDays(1); // Obtém a data de amanhã
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato de data que será usado para analisar as datas das consultas

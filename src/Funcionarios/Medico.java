@@ -20,11 +20,11 @@ public class Medico extends Funcionario {
     como *Relatorio* e *Paciente*. Também é capaz de criar os objetos *Atestado*, *DeclaracaoAcompanhamento*,
     e *Receita*.
     */
-    private String crm;
+    private String crm; // identificação do médico
     private List<Consulta> atendimentos = new ArrayList();
     
     // Método construtor:
-    
+    // Atributo *em* se refere ao banco de dados
     public Medico(String nome, String crm, String cpf, double salario, List<Consulta> atendimentos, EntityManager em) {
         super(nome, cpf, salario, em);
         this.crm = crm;
@@ -49,14 +49,16 @@ public class Medico extends Funcionario {
     
     public void cadastrarDadosPaciente(String identificador, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean doencaCardio, String cirurgias, String alergias) {
         /*
-        Cadastra o dados de saúde do paciente atendido na consulta de identificador "identificador".
+        Cadastra o dados de saúde do paciente atendido dentro da classe Consulta, sendo o objeto consulta encontrado através do atributo *identificador*.
         */
-        em.getTransaction().begin();
-        Query query = em.createQuery(("select c FROM Consulta c WHERE c.identificador LIKE\'" + identificador + "\'"));
-        List<Consulta> consultas = query.getResultList();
+        em.getTransaction().begin(); // Inicializa o banco de dados para atualização de informações
+        Query query = em.createQuery(("select c FROM Consulta c WHERE c.identificador LIKE\'" + identificador + "\'")); /* Busca um POJO Consulta no banco de dados através 
+        do atributo *identificador* e retorna um lista de quantas POJOs encontrou com o mesmo valor deste atributo */
+        List<Consulta> consultas = query.getResultList(); // Guarda o resultado do query
         Consulta consulta = consultas.get(0);
         
-        consulta.getPaciente().setFumar(fumar); // cadastra os dados do paciente da consulta.
+        // Cadastra os dados do paciente presentes na consulta.
+        consulta.getPaciente().setFumar(fumar); 
         consulta.getPaciente().setBeber(beber);
         consulta.getPaciente().setColesterol(colesterol);
         consulta.getPaciente().setDiabete(diabete);
@@ -64,14 +66,14 @@ public class Medico extends Funcionario {
         consulta.getPaciente().setCirurgias(cirurgias);
         consulta.getPaciente().setAlergias(alergias);
         
-        em.getTransaction().commit();
+        em.getTransaction().commit(); // Salva as alterações no banco de dados
         this.atendimentos.add(consulta); // adiciona a consulta à lista de atendimentos
     }
     
-    // Atualiza os dados de saúde de um objeto *Paciente*:
+    
     public void atualizarPaciente(Paciente paciente, boolean fumar, boolean beber, boolean colesterol, boolean diabete, boolean doencaCardio, String novaAlergia, String novaCirurgia) {
         /*
-        Atualiza as informações de saúde de um paciente.
+        Atualiza as informações de saúde de um  paciente.
         */
         paciente.setAlergias(novaAlergia);
         paciente.setCirurgias(novaCirurgia);
@@ -88,18 +90,19 @@ public class Medico extends Funcionario {
         Cadastra o pronturário de um paciente -> busca o paciente a partir do CPF.
         */
         Prontuario prontuario = new Prontuario(sintomas, diagnostico, tratamento);
-        //TROCAR PRO BANCO DE DADOS
-        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
+        
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'")); /* Busca um POJO Paciente no banco de dados através 
+        do atributo *cpf* e retorna um lista de quantas POJOs encontrou com o mesmo valor deste atributo */
         
         List<Paciente> pacientes = query.getResultList();
         Paciente paciente = pacientes.get(0);
-        //TROCAR PRO BANCO DE DADOS
-        paciente.setProntuario(prontuario);
+        
+        paciente.setProntuario(prontuario); // Cria um prontuário do paciente
     }
     public void atualizarProntuario(Paciente paciente, String novoSintoma, String novoDiagnostico, String novoTratamento) {
         /*
-        Ataualiza os dados do prontuario do paciente.
-        Todos os dados saõ sempre atualizados, mesmo que apenas um deles mude.
+        Atualiza os dados do prontuario do paciente.
+        Todos os dados são sempre atualizados, mesmo que apenas um deles mude.
         */
         paciente.getProntuario().setSintomas(novoSintoma);
         paciente.getProntuario().setDiagnostico(novoDiagnostico);
@@ -109,15 +112,16 @@ public class Medico extends Funcionario {
         /*
         Remove o prontuário de um paciente -> seta como nulo e remove do banco de dados.
         */
-        em.getTransaction().begin();
+        em.getTransaction().begin(); // Inicializa o banco de dados para atualização de informações
         //BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
-        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'")); /* Busca um POJO Paciente no banco de dados através 
+        do atributo *cpf* e retorna um lista de quantas POJOs encontrou com o mesmo valor deste atributo */
         List<Paciente> pacientes = query.getResultList();
         Paciente paciente = pacientes.get(0); // 0 POIS O CPF É ÚNICO -> APENAS UM PACIENTE VAI SER RETORNADO
         
         em.remove(paciente.getProntuario()); //REMOVE O OBJETO PRONTUÁRIO DO BANCO DE DADOS
         paciente.setProntuario(null); // REMOVE O PRONTUÁRIO DO PACIENTE
-        em.getTransaction().commit();
+        em.getTransaction().commit(); // Salva as alterações no banco de dados.
     }
     
     // MÉTODOS DOS RELATÓRIOS:
@@ -125,51 +129,54 @@ public class Medico extends Funcionario {
         /*
         Gera um objeto Atestado para emitir um atestado para o paciente
         */
-        em.getTransaction().begin();
+        em.getTransaction().begin(); // Inicializa o banco de dados para atualização de informações
         // BUSCA O PACIENTE DO ATESTADO NO BANCO DE DADOS
-        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));/* Busca um POJO Paciente no banco de dados através 
+        do atributo *cpf* e retorna um lista de quantas POJOs encontrou com o mesmo valor deste atributo */
         List<Paciente> pacientes = query.getResultList();
-        em.getTransaction().commit();
+        em.getTransaction().commit(); // Salva as alterações no banco de dados
 
         Paciente paciente = pacientes.get(0);
         
         Atestado atestado = new Atestado(medico, paciente, paciente.getProntuario(), diasAfastamento, dataInicio);
-        atestado.imprimeAtestado();
+        atestado.imprimeAtestado(); // Imprime o Atestado gerado
     }
     public void gerarDeclaracao(Medico medico, String cpf, String dataAcompanhamento, String parentescoAcompanhante, String nomeAcompanhante) {
         /*
         Gera um objeto DeclaracaoAcompanhamento para emitir uma declaração de acompanhamento
         */
-        em.getTransaction().begin();
+        em.getTransaction().begin(); // Inicializa o banco de dados para atualização de informações
         // BUSCA O PACIENTE DA DECLARAÇÃO NO BANCO DE DADOS
-        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));/* Busca um POJO Paciente no banco de dados através 
+        do atributo *cpf* e retorna um lista de quantas POJOs encontrou com o mesmo valor deste atributo */
         List<Paciente> pacientes = query.getResultList();
-        em.getTransaction().commit();
+        em.getTransaction().commit(); // Salva as alterações no banco de dados
         Paciente paciente = pacientes.get(0);
         
         DeclaracaoAcompanhamento declaracao = new DeclaracaoAcompanhamento(medico, paciente, paciente.getProntuario(), dataAcompanhamento, parentescoAcompanhante, nomeAcompanhante);
-        declaracao.imprimeDeclaracao();
+        declaracao.imprimeDeclaracao(); // Imprime a Declaracao gerada
     }
     public void gerarReceita(Medico medico, String cpf, String remedio, float dosagem, String modoUso, int vezesDia) {
         /*
-        Usa o objeto Receita para emitir uma receita.
+        Cria-se um objeto Receita para emitir uma receita.
         */
         // BUSCA O PACIENTE DA RECEITA NO BANCO DE DADOS
-        em.getTransaction().begin();
-        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
+        em.getTransaction().begin();// Inicializa o banco de dados para atualização de informações
+        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));/* Busca um POJO Paciente no banco de dados através 
+        do atributo *cpf* e retorna um lista de quantas POJOs encontrou com o mesmo valor deste atributo */
         List<Paciente> pacientes = query.getResultList();
-        em.getTransaction().commit();
+        em.getTransaction().commit(); // Salva as alterações no banco de dados
         Paciente paciente = pacientes.get(0);
         
         Receita receita = new Receita(medico, paciente, remedio, dosagem, modoUso, vezesDia);
-        receita.imprimeReceita();
+        receita.imprimeReceita(); // Imprime a Receita gerada
     }
     public void clientesAtendidos(int mes, int ano) {
         // Lista para armazenar CPFs únicos
         // Contador do numero de pacientes iniciando em 0
         List<String> pacientesUnicos = new ArrayList<>();
         int numPacientes = 0;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Data de do dia atual
 
         for (Consulta consulta : atendimentos) {
             // Converte a String da data para LocalDate
@@ -187,6 +194,6 @@ public class Medico extends Funcionario {
                 }
             }
         }
-        System.out.println("\n\nNÚMERO DE CLIENTES ATENDIDOS EM " + mes + "/" + ano + ": " + numPacientes);
+        System.out.println("\n\nNÚMERO DE CLIENTES ATENDIDOS EM " + mes + "/" + ano + ": " + numPacientes); // Imprime a quantidade de clientes atendidos em um mês.
     }
 }

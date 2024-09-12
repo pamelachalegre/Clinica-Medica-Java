@@ -8,24 +8,29 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 
-@Entity
+@Entity // Cria-se uma tabela do pojo Consulta no banco de dados com o nome Consulta
 public class Consulta {
     /*
-    É um POJO com dados de uma consulta a ser realizada. Este objeto é manipulado pelo objeto Secretária no main, que
-    pode definir consultas, colocá-las em uma lista de consultas ou removê-las.
+    É um POJO com dados de uma consulta a ser realizada. Este objeto é manipulado pelo objeto Secretária, que
+    pode definir consultas, colocá-las em uma lista de consultas, inseri-las no banco de dados ou removê-las.
     */
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)/* identificação por de chaves primárias das classes Consulta 
+    inseridas no Banco de Dados
+    
+*/
+    // Atributos
     private Integer id;
     
-    private String identificador; //para buscar uma consulta
+    private String identificador; // Registro de uma consulta, facilita na busca e identificação
     private String dataConsulta;
     private String horario;
     private char tipoConsulta; // R = retorno; N = normal
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)// Mapeamento de relacionamento "um para um" com o atributo medico
+
     private CadastroMedico medico;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)// Mapeamento de relacionamento "um para um" com o atributo paciente
     private Paciente paciente;
     
 
@@ -40,7 +45,7 @@ public class Consulta {
         this.paciente = paciente;
         this.tipoConsulta = tipoConsulta;
 }
-
+    // Funções sets e gets do POJO
     public String getIdentificador() {
         return identificador;
     }

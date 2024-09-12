@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 
 public abstract class Funcionario {
+    /* O POJO Funcionario é uma classe mãe das classes Secretária Médica, que contem
+    os atributos de identificação compartilhados entre as duas classes como nome, cpf e salario*/
     private String nome, cpf;
     private double salario;
 
-    protected EntityManager em;
+    protected EntityManager em; /*
+    Atributo que referencia o banco de dados, o qual sofrerá inserções, alterações e remoções de POJOs
+    pelas classes Secretária e Médico.
+    */
 
     // Sets e Gets para os atributos da superclasse *Funcionario*:
     public String getNome() {
