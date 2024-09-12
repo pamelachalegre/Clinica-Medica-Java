@@ -1,4 +1,6 @@
 package Geradores;
+
+// Importações necessárias
 import java.util.ArrayList;
 import Dados.Consulta;
 import java.time.LocalDate;
@@ -6,17 +8,18 @@ import java.time.format.DateTimeFormatter;
 
 public class GerenciadorMensagens {
     private ArrayList<Consulta> consultasAmanha;
-    /**
-     * Envia uma mensagem para o paciente, avisando-o da consulta no dia seguinte.
-     * Define se a pessoa tem ou não email/telefone, enviando as mensagens em correspondência a esses dados.
-     * @param listaConsultasAmanha 
+    /*
+     * Envia uma mensagem para o paciente, avisando-o da consulta no dia seguinte
+     * Define se a pessoa tem ou não email/telefone, enviando as mensagens em correspondência a esses dados
      */
     
-    private void enviarMensagem(ArrayList<Consulta> listaConsultasAmanha) {
-        /* Envia mensagem aos pacientes com consulta marcada para o dia seguinte,
-        analisa se poderá enviar a mensagem por e-mail ou por telefone.*/
-        for(int i = 0; i < listaConsultasAmanha.size(); i++) {
-            Consulta consul = listaConsultasAmanha.get(i);       
+    private void enviarMensagem(ArrayList<Consulta> consultasAmanha) {
+        /* 
+        Envia mensagem aos pacientes com consulta marcada para o dia seguinte,
+        analisa se poderá enviar a mensagem por e-mail ou por telefone
+        */
+        for(int i = 0; i < consultasAmanha.size(); i++) {
+            Consulta consul = consultasAmanha.get(i);       
             String mail = consul.getPaciente().getEmail();
             String tel = consul.getPaciente().getTelefone();
             if (mail != "") {
@@ -31,22 +34,23 @@ public class GerenciadorMensagens {
         }
     }
     
-        public void gerenciarMensagens(ArrayList<Consulta> listaConsultas) {
-            /*Define para quais pacientes a mensagem será enviada, que são aqueles que tem 
-            consulta marcada para o dia seguinte do dia atual
-            */
-        LocalDate hoje = LocalDate.now(); // Obtém a data de hoje
-        LocalDate amanha = hoje.plusDays(1); // Obtém a data de amanhã
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato de data que será usado para analisar as datas das consultas
-        ArrayList<Consulta> listaConsultasAmanha = new ArrayList<>(); 
+    public void gerenciarMensagens(ArrayList<Consulta> consultas) {
+        /*
+        Define para quais pacientes a mensagem será enviada, que são aqueles que tem 
+        consulta marcada para o dia seguinte do dia atual
+        */
+    LocalDate hoje = LocalDate.now(); // Obtém a data de hoje
+    LocalDate amanha = hoje.plusDays(1); // Obtém a data de amanhã
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define o formato de data que será usado para analisar as datas das consultas
+    ArrayList<Consulta> consultasAmanha = new ArrayList<>(); 
 
-        for (Consulta consulta : listaConsultas) {
-            LocalDate dataConsulta = LocalDate.parse(consulta.getData(), formatter); // Converte a data da consulta de String para LocalDate usando o formato definido
-            if (dataConsulta.equals(amanha)) { // Verifica se a data da consulta é igual a amanhã
-                listaConsultasAmanha.add(consulta); // Se for, adiciona a consulta à lista de consultas que ocorrerão amanhã
-            }
+    for (Consulta consulta : consultas) {
+        LocalDate dataConsulta = LocalDate.parse(consulta.getData(), formatter); // Converte a data da consulta de String para LocalDate usando o formato definido
+        if (dataConsulta.equals(amanha)) { // Verifica se a data da consulta é igual a amanhã
+            consultasAmanha.add(consulta); // Se for, adiciona a consulta à lista de consultas que ocorrerão amanhã
         }
-        enviarMensagem(listaConsultasAmanha);  
+    }
+    enviarMensagem(consultasAmanha);  
     }
     
 }
