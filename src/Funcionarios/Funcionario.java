@@ -1,7 +1,6 @@
 package Funcionarios;
 import Dados.Consulta;
 import Dados.Paciente;
-import java.util.ArrayList;
 import javax.persistence.EntityManager;
 
 public abstract class Funcionario {
