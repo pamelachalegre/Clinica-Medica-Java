@@ -49,7 +49,7 @@ public class MenuMedico extends javax.swing.JFrame {
         geraRelatorios = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -132,7 +132,6 @@ public class MenuMedico extends javax.swing.JFrame {
         Ao sair do login do médico a lista de atendimentos é atualizada no cadastro do médico.
         Pois, durente o uso, ela pode ter sido alterada (com novas consultas a novos pacientes)
         */
-        em.getTransaction().begin();
         //BUSCA O OBJETO CADASTROMEDICO RELACIONADO AO OBJETO MEDICO USANDO O SISTEMA ATUALMENTE
         Query query = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + med.getCrm() + "\'"));
         List<CadastroMedico> certo = query.getResultList();
@@ -171,8 +170,11 @@ public class MenuMedico extends javax.swing.JFrame {
         */
         //OBTEM O cpf DO PACIENTE PARA REMOÇÃO DO PRONTUÁRIO
         String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
-                
-        med.removerProntuario(cpf); // CHAMA O MÉTODO DO MÉDICO PARA REMOVER O PRONTUÁRIO DO PACIENTE
+        // Caso o usuário cancele o JOptionPane, a string cpf será null
+        if (cpf != null) {
+            med.removerProntuario(cpf); // CHAMA O MÉTODO DO MÉDICO PARA REMOVER O PRONTUÁRIO DO PACIENTE
+        }
+        // Se a ação foi cancelada (cpf == null), nada acontece
     }//GEN-LAST:event_removerProntuario
 
     private void atualizarFichaMedica(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarFichaMedica
@@ -181,13 +183,17 @@ public class MenuMedico extends javax.swing.JFrame {
         */
         // Pega o cpf do paciente que vai ser alterado
         String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
-        em.getTransaction().begin();
-        //BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
-        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
-        List<Paciente> pac = query.getResultList(); // O CPF é único para cada paciente. Portanto, o paciente correto estará no índice 0.
-        
-        new AtualizaDadosSaudePaciente(med, pac.get(0)).setVisible(true);
-        em.getTransaction().commit();
+        // Caso o usuário cancele o JOptionPane, a string cpf será null
+        if (cpf != null) {
+            em.getTransaction().begin();
+            //BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
+            Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
+            List<Paciente> pac = query.getResultList(); // O CPF é único para cada paciente. Portanto, o paciente correto estará no índice 0.
+
+            new AtualizaDadosSaudePaciente(med, pac.get(0)).setVisible(true);
+            em.getTransaction().commit();
+        }
+        // Se a ação foi cancelada (cpf == null), nada acontece
     }//GEN-LAST:event_atualizarFichaMedica
 
     private void atualizaProntuario(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizaProntuario
@@ -196,13 +202,17 @@ public class MenuMedico extends javax.swing.JFrame {
         */
         //Pega o cpf do paciente que vai ter o prontuário alterado
         String cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente para remover o prontuário:", "REMOÇÃO DO PRONTUÁRIO", JOptionPane.INFORMATION_MESSAGE);
-        em.getTransaction().begin();
-        // BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
-        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
-        List<Paciente> pac = query.getResultList(); // O CPF é único para cada paciente. Portanto, o paciente correto estará no índice 0.
-        
-        new AtualizaProntuario(med, pac.get(0)).setVisible(true);
-        em.getTransaction().commit();
+        // Caso o usuário cancele o JOptionPane, a string cpf será null
+        if (cpf != null) {
+            em.getTransaction().begin();
+            // BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
+            Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
+            List<Paciente> pac = query.getResultList(); // O CPF é único para cada paciente. Portanto, o paciente correto estará no índice 0.
+
+            new AtualizaProntuario(med, pac.get(0)).setVisible(true);
+            em.getTransaction().commit();
+        }
+        // Se a ação foi cancelada (cpf == null), nada acontece
     }//GEN-LAST:event_atualizaProntuario
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

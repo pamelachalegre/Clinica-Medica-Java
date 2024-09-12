@@ -92,14 +92,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         // Verificação do usuário
         String nome = JOptionPane.showInputDialog(null, "Insira o usuário:", "Identificação",JOptionPane.QUESTION_MESSAGE);
-        
-        if ((sec.getNome().toUpperCase()).equals(nome.toUpperCase())) { // Se o nome da secretária estiver correto:
-            dispose(); //A tela do menu principal é invisibilizada
-            // A tela do menu da secretária passa a ser a visível para alterações pelo objeto secretária
-            new MenuSecretaria(sec, em).setVisible(true);
-        } else { // Se não:
-            // o usuário é desconhecido
-            JOptionPane.showMessageDialog(null, "Usuário desconhecido!", "Identificação", JOptionPane.WARNING_MESSAGE);
+        // Caso o usuário cancele a JOptionPane, a string nome será null.
+        if (nome != null) {
+            if ((sec.getNome().toUpperCase()).equals(nome.toUpperCase())) { // Se o nome da secretária estiver correto:
+                dispose(); //A tela do menu principal é invisibilizada
+                // A tela do menu da secretária passa a ser a visível para alterações pelo objeto secretária
+                new MenuSecretaria(sec, em).setVisible(true);
+            } else { // Se não:
+                // o usuário é desconhecido
+                JOptionPane.showMessageDialog(null, "Usuário desconhecido!", "Identificação", JOptionPane.WARNING_MESSAGE);
+            }
         }
         
     }//GEN-LAST:event_menuSecretaria
@@ -110,22 +112,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         */
         //Verificação do usuário
         String crm = JOptionPane.showInputDialog(null, "Insira seu CRM:", "Identificação",JOptionPane.QUESTION_MESSAGE);
-        
-        em.getTransaction().begin();
-        // BUSCA O CADASTRO DO MÉDICO DO crm INSERIDO
-        Query query = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + crm + "\'"));
-        List<CadastroMedico> medico = query.getResultList();
-        em.getTransaction().commit();
-        
-        CadastroMedico certo = medico.get(0); // CRM é uma informação única -> será o da posição 0
-        if (certo.getCrm().equals(crm)) { // confere se é o crm correto, se é:
-            dispose();
-            //Cria um objeto médico com as informações retiradas do cadastro
-            Medico med = new Medico(certo.getNome(), certo.getCrm(), certo.getCpf(), certo.getSalario(), certo.getAtendimentos(), em);
-            new MenuMedico(med, em).setVisible(true); //vai ao menu de médicos
-        } else {// Se não:
-            // Mostra uma mensagem de que o usuário não foi reconhecido
-            JOptionPane.showMessageDialog(null, "Usuário desconhecido! CRM inválido.", "Identificação", JOptionPane.WARNING_MESSAGE);
+        //Caso o usuário cancele a JOptionPane, a string crm será null.
+        if(crm != null) {
+            em.getTransaction().begin();
+            // BUSCA O CADASTRO DO MÉDICO DO crm INSERIDO
+            Query query = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + crm + "\'"));
+            List<CadastroMedico> medico = query.getResultList();
+            em.getTransaction().commit();
+
+            CadastroMedico certo = medico.get(0); // CRM é uma informação única -> será o da posição 0
+            if (certo.getCrm().equals(crm)) { // confere se é o crm correto, se é:
+                dispose();
+                //Cria um objeto médico com as informações retiradas do cadastro
+                Medico med = new Medico(certo.getNome(), certo.getCrm(), certo.getCpf(), certo.getSalario(), certo.getAtendimentos(), em);
+                new MenuMedico(med, em).setVisible(true); //vai ao menu de médicos
+            } else {// Se não:
+                // Mostra uma mensagem de que o usuário não foi reconhecido
+                JOptionPane.showMessageDialog(null, "Usuário desconhecido! CRM inválido.", "Identificação", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_acharMedico
 
@@ -133,7 +137,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         /*
         Para sair do menu principal, o unuário deve encerrar o programa pelo botão "Sair" sempre.
         */
-        
         EntityManagerFactory emf = em.getEntityManagerFactory();
         em.close();
         emf.close();

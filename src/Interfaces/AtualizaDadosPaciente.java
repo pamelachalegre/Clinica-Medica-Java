@@ -64,7 +64,8 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Clinica Medica");
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -181,27 +182,29 @@ public class AtualizaDadosPaciente extends javax.swing.JFrame {
         Caso haja alteração, o campo pode ser modificado, caso não, ele permanece com a informação original.
         */
         this.cpf = JOptionPane.showInputDialog(null, "Insira o CPF do paciente:", "Identificar Paciente", JOptionPane.QUESTION_MESSAGE);
-        
-        em.getTransaction().begin();
-        //BUSCA O PACIENTE DE cpf NO BANCO DE DADOS
-        Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
-        List<Paciente> pacientes = query.getResultList();
-        pac = pacientes.get(0);
-        em.getTransaction().commit();
-        
-        //Iniciando os campos com as informações do paciente:
-        nomeNovo.setText(pac.getNome());
-        idadeNovo.setText(pac.getIdade() + ""); // Transforma o inteiro em string para o campo de texto.
-        enderecoNovo.setText(pac.getEndereco());
-        telefoneNovo.setText(pac.getTelefone());
-        emailNovo.setText(pac.getEmail());
-        convenioNovo.setSelected(pac.getConvenio());
-        
-        if (pac.getSexo() == 'F') {
-            feminino.setSelected(true);
-        } else {
-            if (pac.getSexo() == 'M') {
-                masculino.setSelected(true); 
+        // Caso o usuário cancele o JOptionPane, cpf será NULL.
+        if (this.cpf != null) {
+            em.getTransaction().begin();
+            //BUSCA O PACIENTE DE cpf NO BANCO DE DADOS
+            Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
+            List<Paciente> pacientes = query.getResultList();
+            pac = pacientes.get(0);
+            em.getTransaction().commit();
+
+            //Iniciando os campos com as informações do paciente:
+            nomeNovo.setText(pac.getNome());
+            idadeNovo.setText(pac.getIdade() + ""); // Transforma o inteiro em string para o campo de texto.
+            enderecoNovo.setText(pac.getEndereco());
+            telefoneNovo.setText(pac.getTelefone());
+            emailNovo.setText(pac.getEmail());
+            convenioNovo.setSelected(pac.getConvenio());
+
+            if (pac.getSexo() == 'F') {
+                feminino.setSelected(true);
+            } else {
+                if (pac.getSexo() == 'M') {
+                    masculino.setSelected(true); 
+                }
             }
         }
     }
