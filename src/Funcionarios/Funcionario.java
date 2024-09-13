@@ -1,15 +1,19 @@
 package Funcionarios;
-import Dados.Consulta;
-import Dados.Paciente;
+
+// Importações necessárias
 import javax.persistence.EntityManager;
 
 public abstract class Funcionario {
+    /*
+     * É uma superclasse que faz herança com Médico e Secretária
+    */
+    
+    // Atributos
     private String nome, cpf;
     private double salario;
-
     protected EntityManager em;
 
-    // Sets e Gets para os atributos da superclasse *Funcionario*:
+    // Sets e Gets dos atributos
     public String getNome() {
         return nome;
     }
@@ -31,7 +35,7 @@ public abstract class Funcionario {
         this.salario = salario;
     }
     
-    // Métodos Construtores:
+    // Métodos Construtores
     public Funcionario(EntityManager em) {
         super();
         this.em = em;
