@@ -1,5 +1,6 @@
 package Dados;
 
+// Importações necessárias
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,22 +8,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-@Entity
+@Entity // Criação de uma tabela de Consulta no banco de dados com o mesmo nome da classe
 public class Paciente {
-    /**
-     * Definido como um POJO, possui diversos atributos que são modificados por meio de sets e gets, outras ações sobre
-     * esses objetos podem ser efetuadas por outros tipos de objeto com métodos que acessam os sets e gets deste.
-     * A utilização de listas para os atriutos de Alergias e Cirurgias se deve a quantidade varávele e mutável desses.
-     * Por esse motivo, utilizamos o Arraylist, que permite uma alocação de memória dinâmica, mas de menor ocupação da memória.
+    /*
+     * É um POJO com os dados pessoais e de saúde de um paciente
+     * Este objeto é manipulado pelo objeto Médico
+     * Um paciente pode ser cadastrado, removido ou alterado
     */
-    
-    // DADOS CADASTRAIS 
+
+    // Identificação por chaves primárias das classes Consulta inseridas no Banco de Dados
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
+    
+    // Dados pessoais do paciente
     private String nome;
     private String cpf;
     private String rg;
-    private char sexo;
+    private char sexo; // 'F' = Feminino | 'M' = Masculino
     private int idade;
     private String dataNascimento;
     private String endereco;
@@ -30,21 +32,21 @@ public class Paciente {
     private String email;
     private boolean convenio; // true = convenio | false = particular
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)// Mapeamento de relacionamento "um para um" com o atributo prontuario.
     private Prontuario prontuario;
     
-    // DADOS DE SAÚDE
-    private boolean fumar;
-    private boolean beber;
-    private boolean colesterol;
-    private boolean diabete;
-    private boolean doencaCardio;
+    // Dados de saúde do paciente
+    private boolean fumar; // true = fumante | false = não é fumante
+    private boolean beber; // true = bebe | false = não bebe
+    private boolean colesterol; // true = possui colesterol alto | false = não possui colesterol alto 
+    private boolean diabete; // true = possui diabetes | false = não possui diabetes
+    private boolean doencaCardio; // true = possui doença cardíaca | false = não possui doença cardíaca
     private String cirurgias;
     private String alergias; 
 
-    public Paciente() { }
-
-    // MÉTODO CONSTRUTOR
+    // Métodos Construtores
+    public Paciente() {}
+  
     public Paciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio) {
         this.nome = nome;
         this.cpf = cpf;
@@ -57,8 +59,8 @@ public class Paciente {
         this.email = email;
         this.convenio = convenio;
     }
-
-    // SETTERS E GETTERS DE TODOS OS ATRIBUTOS
+    
+    // Sets e Gets dos atributos
     public String getNome() {
         return nome;
     }
@@ -174,7 +176,6 @@ public class Paciente {
     public String getCirurgias() {
         return cirurgias;
     }
-    
     public void setCirurgias(String cirurgia) {
         this.cirurgias = cirurgia;
     }
@@ -182,7 +183,6 @@ public class Paciente {
     public String getAlergias() {
         return alergias;
     }
-    
     public void setAlergias(String alergia) {
         this.alergias = alergia;
     }
