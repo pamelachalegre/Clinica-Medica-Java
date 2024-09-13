@@ -4,6 +4,11 @@ import Dados.Prontuario;
 import Funcionarios.Medico;
 
 public class DeclaracaoAcompanhamento {
+    /**
+     * É um objeto de declaração de acompanhamento para a pessoa que acompanhou um paciente a uma consulta.
+     * Gera e imprime a declaração no terminal.
+     */
+    //Atributos
     protected Medico medico;
     protected Paciente paciente;
     protected Prontuario prontuario;
@@ -11,7 +16,7 @@ public class DeclaracaoAcompanhamento {
     protected String parentescoAcompanhante;
     protected String nomeAcompanhante;
 
-    // METODO CONSTRUTOR
+    //Método Construtor : recebe todos os atributos
     public DeclaracaoAcompanhamento(Medico medico, Paciente paciente, Prontuario prontuario, String dataAcompanhamento, String parentescoAcompanhante, String nomeAcompanhante) {
         this.medico = medico;
         this.paciente = paciente;
@@ -21,7 +26,7 @@ public class DeclaracaoAcompanhamento {
         this.nomeAcompanhante = nomeAcompanhante;
     }
 
-    // SETS E GETS
+    // Sets e gets
     public Medico getMedico() {
         return medico;
     }
@@ -71,10 +76,12 @@ public class DeclaracaoAcompanhamento {
     }
     
     public void imprimeDeclaracao() {
-    // IMPRIME NA TELA A DECLARACAO MEDICA DE ACOMPANHANTE
-    System.out.println("------DECLARAÇÃO MÉDICA DE ACOMPANHANTE------");
-    System.out.println("Atesto para os devidos fins, que " + paciente.getNome() + ", paciente sob meus cuidados, foi atendido(a) no dia " + dataAcompanhamento + ", apresentando quadro de " + prontuario.getDiagnostico() + ", tendo sido acompanhado(a) pelo seu(sua) " + parentescoAcompanhante + ", Sr(a). " + nomeAcompanhante + ".");
-    System.out.println(medico.getNome() + " - CRM: " + medico.getCrm());
-}
+        /*
+        Imprime o modelo da declaração de acompanhamento no terminal com as informações dos atributos
+        */
+        System.out.println("------DECLARAÇÃO MÉDICA DE ACOMPANHANTE------");
+        System.out.println("Atesto para os devidos fins, que " + paciente.getNome() + ", paciente sob meus cuidados, foi atendido(a) no dia " + dataAcompanhamento + ", apresentando quadro de " + prontuario.getDiagnostico() + ", tendo sido acompanhado(a) pelo seu(sua) " + parentescoAcompanhante + ", Sr(a). " + nomeAcompanhante + ".");
+        System.out.println(medico.getNome() + " - CRM: " + medico.getCrm());
+    }
 
 }

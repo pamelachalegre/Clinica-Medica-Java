@@ -3,6 +3,11 @@ import Dados.Paciente;
 import Funcionarios.Medico;
 
 public class Receita{
+    /**
+     * É um objeto receita com as informações para tratamento de um paciente. Gera e imprime no terminal.
+     */
+    
+    //Atributos
     protected Medico medico;
     protected Paciente paciente;
     protected String remedio;
@@ -10,7 +15,7 @@ public class Receita{
     protected String modoUso; 
     protected int vezesDia;
 
-    // METODO CONSTRUTOR 
+    //Método construtor -> recebe todos os atributos
     public Receita(Medico medico, Paciente paciente, String remedio, float dosagem, String modoUso, int vezesDia) {
         this.medico = medico;
         this.paciente = paciente;
@@ -20,7 +25,7 @@ public class Receita{
         this.vezesDia = vezesDia;
     }
 
-    // SETS E GETS
+    // Sets e gets
     public Medico getMedico() {
         return medico;
     }
@@ -70,7 +75,9 @@ public class Receita{
     }
     
     public void imprimeReceita() {
-        // IMPRIME NA TELA A RECEITA MEDICA
+        /*
+        Imprime o modelo da receita no terminal com as informações dos atributos.
+        */
         System.out.println("------RECEITA MÉDICA------");
         System.out.println("Nome do paciente: " + paciente.getNome());
         System.out.println("Utilize o remédio " + remedio + " com a dose " + dosagem + " via " + modoUso + ' ' + vezesDia + " vezes ao dia.");
