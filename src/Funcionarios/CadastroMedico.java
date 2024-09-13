@@ -29,7 +29,7 @@ public class CadastroMedico {
     @OneToMany(cascade = CascadeType.ALL) // Mapeamento de relacionamento "um para muitos" com Consulta
     private List<Consulta> atendimentos = new ArrayList<>();
     
-
+    // Sets e Gets dos atributos
     public Integer getId() {
         return id;
     }
