@@ -1,5 +1,6 @@
 package Funcionarios;
 
+// Importações necessárias
 import Dados.Paciente;
 import Dados.Consulta;
 import Geradores.GerenciadorMensagens;
@@ -11,13 +12,14 @@ import javax.persistence.Query;
 
 public class Secretaria extends Funcionario {
     /*
-    Objeto que herda as características de *Funcionario*.
-    Possui métodos para manipular outros objetos, como *Relatorio* e *Paciente*. 
-    Também é capaz de criar os objetos *Atestado*, *DeclaracaoAcompanhamento*,
-    e *Receita*.
+     * A classe Secretaria é uma extensão da classe Funcionario. 
+     * Ela utiliza o EntityManager para interagir com o banco de dados e
+     * apresenta métodos para cadastrar, atualizar e remover
+     * consultas e pacientes. Além disso, gerencia mensagens enviadas aos 
+     * pacientes que possuem consulta agendada para o dia seguinte.
     */
     
-    // Métodos construtores:
+    // Métodos construtores
     public Secretaria(EntityManager em) {
         super(em);
     }
@@ -31,24 +33,24 @@ public class Secretaria extends Funcionario {
         Cria uma nova consulta e leva ao banco de dados
         */
         em.getTransaction().begin();
-        //BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
+        // Busca o paciente no banco de dados através do CPF
         Query queryPac = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpfPaciente + "\'"));
         List<Paciente> pacientes = queryPac.getResultList();
-        //BUSCA O MEDICO CORRETO NO BANCO DE DADOS
+        // Busca o médico no banco de dados através do CRM
         Query queryMed = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + crmMedico + "\'"));
         List<CadastroMedico> medicos = queryMed.getResultList();
         
-        //CRIA UMA NOVA CONSULTA
+        // Cria uma nova consulta associando ao médico e paciente encontrados
         Consulta consulta = new Consulta(data, horario, medicos.get(0), pacientes.get(0), tipo);
         
-        em.persist(consulta); //MANDA PARA O BANCO DE DADOS
+        em.persist(consulta); // Salva no banco de dados
         
         em.getTransaction().commit();
     }
     
     public void atualizarConsultaDataHora(Consulta consulta, String data, String hora) {
         /*
-        Atualiza a data e o horário de uma consulta. 
+        Atualiza a data e o horário de uma consulta existente. 
         Mudanças de médico ou paciente levam ao cancelamento da consulta e marcação de uma nova.
         */
         consulta.setData(data);
@@ -58,34 +60,34 @@ public class Secretaria extends Funcionario {
     
     public void removerConsulta(String identificador) {
         /*
-        Remove uma consulta de identificador do banco de dados.
+        Remove uma consulta do banco de dados com base em seu identificador único
         */
-        em.getTransaction().begin(); //Remove a consulta do banco de dados.
-        //BUSCA A CONSULTA CORRETA NO BANCO DE DADOS
+        em.getTransaction().begin(); 
+        // Busca a consulta pelo identificador
         Query query = em.createQuery("select c FROM Consulta c WHERE c.identificador LIKE \'" + identificador + "\'");
-        List<Consulta> consultas = query.getResultList(); //pega a lista resultante -> o identificador é único
+        List<Consulta> consultas = query.getResultList(); // pega a lista resultante -> o identificador é único
                
-        em.remove(consultas.get(0)); //REMOVE A CONSULTA DO BANCO
+        em.remove(consultas.get(0)); // Remove a consulta do banco
         
         em.getTransaction().commit();
     }
   
     public void cadastrarPaciente(String nome, String cpf, String rg, char sexo, int idade, String dataNascimento, String endereco, String telefone, String email, boolean convenio) {
         /*
-        Cadastra um novo paciente no banco de dados - cria um novo objeto paciente.
+        Cadastra um novo paciente no banco de dados
         */
-        //CRIA UM OBJETO PACIENTE
-        Paciente paciente = new Paciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio);
+        
+        Paciente paciente = new Paciente(nome, cpf, rg, sexo, idade, dataNascimento, endereco, telefone, email, convenio); // Cria um objeto paciente
         
         em.getTransaction().begin();
-        em.persist(paciente); // ENVIA O NOVO PACIENTE PARA O BANCO DE DADOS.
+        em.persist(paciente); // Envia o novo paciente para o banco de dados
         em.getTransaction().commit();
     }
     
     public void atualizarPaciente(Paciente paciente, String nome, char sexo, int idade, String endereco, String telefone, String email, boolean convenio) {
         /*
-        Atualiza os dados atuaizáveis de um paciente -> sempre atualiza todos os campos, MESMO QUE o valor inserido não tenha sido alterado.
-        Os campos não precisam ser todos atualizados obrigatóriamente, podendo manter o mesmo valor de antes da atualização.
+        Atualiza os dados de um paciente existente. Este método modifica todos os atributos, 
+        mesmo que alguns valores não tenham sido alterados.
         */
         paciente.setNome(nome);
         paciente.setSexo(sexo);
@@ -98,32 +100,34 @@ public class Secretaria extends Funcionario {
 
     public void removerPaciente(String cpf) {
         /*
-        RETIRA O PACIENTE DE cpf DO BANCO DE DADOS
+        Remove um paciente do banco de dados com base em seu CPF
         */
         em.getTransaction().begin();
-        //BUSCA O PACIENTE NO BANCO DE DADOS
+        // Busca o paciente no banco de dados pelo CPF
         Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE \'" + cpf + "\'"));
         List<Paciente> pacientes = query.getResultList();
         
-        em.remove(pacientes.get(0)); // REMOVE O PACIENTE DO BANCO DE DADOS
+        em.remove(pacientes.get(0)); // Remove o paciente do banco de dados
         
         em.getTransaction().commit();
     }
     
     public void gerenciarMensagens() {
         /*
-        Usa o gerenciador de mensagens para gerenciar as consultas do dia seguinte.
+        Este método utiliza o GerenciadorMensagens para gerenciar mensagens e notificar
+        pacientes sobre as consultas agendadas para o dia seguinte
         */
         
         em.getTransaction().begin();
-        //RECUPERA TODAS AS CONSULTAS DA TABELA DE CONSULTAS PARA ANÁLISE DO GERENCIADOR
+        // Busca todas as consultas da tabela de consultas para análise do gerenciador
         Query query = em.createQuery("select c FROM Consulta c");
         List<Consulta> listaConsultas = query.getResultList();
         em.getTransaction().commit();
         
-        if (listaConsultas.isEmpty()) { // SE NENHUMA CONSULTA FOI RECUPERADA
+        if (listaConsultas.isEmpty()) { // Verifica se há consultas para gerenciar
             System.out.println("\nNão há consultas!\n");
         } else {
+            // Instancia o gerenciador de mensagens e envia as notificações
             GerenciadorMensagens enviar = new GerenciadorMensagens();
             enviar.gerenciarMensagens((ArrayList<Consulta>) listaConsultas);
         }
