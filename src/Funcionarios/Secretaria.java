@@ -82,7 +82,7 @@ public class Secretaria extends Funcionario {
         em.getTransaction().commit();
     }
     
-    public void atualizarPaciente(Paciente paciente, String nome, char sexo, int idade, String endereco, String telefone, String email, boolean conve) {
+    public void atualizarPaciente(Paciente paciente, String nome, char sexo, int idade, String endereco, String telefone, String email, boolean convenio) {
         /*
         Atualiza os dados atuaizáveis de um paciente -> sempre atualiza todos os campos, MESMO QUE o valor inserido não tenha sido alterado.
         Os campos não precisam ser todos atualizados obrigatóriamente, podendo manter o mesmo valor de antes da atualização.
@@ -93,7 +93,7 @@ public class Secretaria extends Funcionario {
         paciente.setEndereco(endereco);
         paciente.setTelefone(telefone);
         paciente.setEmail(email);
-        paciente.setConvenio(conve);
+        paciente.setConvenio(convenio);
     }
 
     public void removerPaciente(String cpf) {
