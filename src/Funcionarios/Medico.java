@@ -110,7 +110,7 @@ public class Medico extends Funcionario {
         Remove o prontuário de um paciente -> seta como nulo e remove do banco de dados.
         */
         em.getTransaction().begin();
-        //BUSCA O PACIENTE CORRETO NO BANCO DE DADOS
+        // Busca o paciente no banco de dados pelo CPF
         Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
         List<Paciente> pacientes = query.getResultList();
         Paciente paciente = pacientes.get(0); // 0 pois CPF é único -> apenas um paciente será retornado
@@ -141,7 +141,7 @@ public class Medico extends Funcionario {
         Gera uma declaração de acompanhamento para o paciente
         */
         em.getTransaction().begin();
-        // Busca o paciente da declaração no banco dedados pelo CPF
+        // Busca o paciente da declaração no banco de dados pelo CPF
         Query query = em.createQuery(("select p FROM Paciente p WHERE p.cpf LIKE\'" + cpf + "\'"));
         List<Paciente> pacientes = query.getResultList();
         em.getTransaction().commit();
