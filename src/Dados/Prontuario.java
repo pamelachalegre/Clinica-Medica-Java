@@ -1,27 +1,29 @@
 package Dados;
 
+// Importações necessárias
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity // Criação de uma tabela de Consulta no banco de dados com o mesmo nome da classe
 public class Prontuario {
-    /**
-     * Um POJO, com atributos e sets e gets. Específico a cada paciente, possui dados sobre o estado de saúde de um 
-     * paciente. Esses dados são atualizados pelo médico sempre que necessário.
+    /*
+     * É um POJO. Representa a análise pós consulta do estado de saúde de um paciente
+     * Esses dados são atualizados pelo médico sempre que necessário.
      */
     
+    // Identificação por chaves primárias das classes Consulta inseridas no Banco de Dados
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     
+    // Atributos
     private String sintomas;
     private String diagnostico;
     private String tratamento;
 
-    public Prontuario() {    }
-
-    //MÉTODO CONSTRUTOR
+    // Métodos Construtores
+    public Prontuario() {}
     public Prontuario(String sintomas, String diagnostico, String tratamento) {
         this.sintomas = sintomas;
         this.diagnostico = diagnostico;
