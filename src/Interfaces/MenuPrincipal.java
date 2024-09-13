@@ -92,7 +92,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         // Verificação do usuário
         String nome = JOptionPane.showInputDialog(null, "Insira o usuário:", "Identificação",JOptionPane.QUESTION_MESSAGE);
-        // Caso o usuário cancele a JOptionPane, a string nome será null.
+        // Caso o usuário cancele a JOptionPane, a string nome será null -> nada acontece.
         if (nome != null) {
             if ((sec.getNome().toUpperCase()).equals(nome.toUpperCase())) { // Se o nome da secretária estiver correto:
                 dispose(); //A tela do menu principal é invisibilizada
@@ -112,21 +112,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         */
         //Verificação do usuário
         String crm = JOptionPane.showInputDialog(null, "Insira seu CRM:", "Identificação",JOptionPane.QUESTION_MESSAGE);
-        //Caso o usuário cancele a JOptionPane, a string crm será null.
+        //Caso o usuário cancele a JOptionPane, a string crm será null -> nada acontece.
         if(crm != null) {
-            em.getTransaction().begin();
-            // BUSCA O CADASTRO DO MÉDICO DO crm INSERIDO
-            Query query = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + crm + "\'"));
-            List<CadastroMedico> medico = query.getResultList();
-            em.getTransaction().commit();
+            try{
+                em.getTransaction().begin();
+                // BUSCA O CADASTRO DO MÉDICO DO crm INSERIDO
+                Query query = em.createQuery(("select m FROM CadastroMedico m WHERE m.crm LIKE \'" + crm + "\'"));
+                List<CadastroMedico> medico = query.getResultList();
+                em.getTransaction().commit();
 
-            CadastroMedico certo = medico.get(0); // CRM é uma informação única -> será o da posição 0
-            if (certo.getCrm().equals(crm)) { // confere se é o crm correto, se é:
-                dispose();
-                //Cria um objeto médico com as informações retiradas do cadastro
-                Medico med = new Medico(certo.getNome(), certo.getCrm(), certo.getCpf(), certo.getSalario(), certo.getAtendimentos(), em);
-                new MenuMedico(med, em).setVisible(true); //vai ao menu de médicos
-            } else {// Se não:
+                CadastroMedico certo = medico.get(0); // CRM é uma informação única -> será o da posição 0
+                if (certo.getCrm().equals(crm)) { // confere se é o crm correto, se é:
+                    dispose();
+                    //Cria um objeto médico com as informações retiradas do cadastro
+                    Medico med = new Medico(certo.getNome(), certo.getCrm(), certo.getCpf(), certo.getSalario(), certo.getAtendimentos(), em);
+                    new MenuMedico(med, em).setVisible(true); //vai ao menu de médicos
+                }
+            }
+            catch(IndexOutOfBoundsException e){ //Exceção: caso o CRM inserido não seja encontrado
                 // Mostra uma mensagem de que o usuário não foi reconhecido
                 JOptionPane.showMessageDialog(null, "Usuário desconhecido! CRM inválido.", "Identificação", JOptionPane.WARNING_MESSAGE);
             }

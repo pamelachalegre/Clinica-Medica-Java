@@ -41,13 +41,15 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         cardio = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        identificaConsulta = new javax.swing.JTextField();
+        diaConsulta = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         alergias = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         cirurgias = new javax.swing.JTextArea();
+        jLabel5 = new javax.swing.JLabel();
+        horaConsulta = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinica Medica");
@@ -97,10 +99,10 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
-        jLabel2.setText("Insira a data e o horário da consulta:");
+        jLabel2.setText("Data da consulta:");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 20));
-        getContentPane().add(identificaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 180, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 20));
+        getContentPane().add(diaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 100, -1));
 
         jLabel3.setText("Cirurgias?");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, 20));
@@ -120,6 +122,10 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 310, 40));
 
+        jLabel5.setText("Hora da consulta:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, -1, 20));
+        getContentPane().add(horaConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 70, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -128,7 +134,8 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
         O medico cadastra a ficha medica do paciente em consulta com as informações dos campos.
         */
         // O OBJETO MÉCIO CADASTRA OS DADOS DA FICHA MÉDICA DO PACIENTE
-        med.cadastrarDadosPaciente((identificaConsulta.getText() + med.getCrm()), fumar.isSelected(), beber.isSelected(), colesterol.isSelected(), diabetes.isSelected(), cardio.isSelected(), cirurgias.getText(), alergias.getText());
+        // Os campos com a data e a hora são concatenadas com o CRM do medico para formar o identificador da consulta
+        med.cadastrarDadosPaciente((diaConsulta.getText() + horaConsulta.getText() + med.getCrm()), fumar.isSelected(), beber.isSelected(), colesterol.isSelected(), diabetes.isSelected(), cardio.isSelected(), cirurgias.getText(), alergias.getText());
         dispose();
     }//GEN-LAST:event_SalvarActionPerformed
 
@@ -147,14 +154,16 @@ public class CadastraDadosSaudePaciente extends javax.swing.JFrame {
     private javax.swing.JCheckBox cardio;
     private javax.swing.JTextArea cirurgias;
     private javax.swing.JCheckBox colesterol;
+    private javax.swing.JTextField diaConsulta;
     private javax.swing.JCheckBox diabetes;
     private javax.swing.JCheckBox fumar;
-    private javax.swing.JTextField identificaConsulta;
+    private javax.swing.JTextField horaConsulta;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
